@@ -32,8 +32,6 @@ const CarownerSchema = new Schema({
 })
 
 
-//12345
-
 const Carowner = mongoose.model("Carowner",CarownerSchema);
 
 module.exports = Carowner;
