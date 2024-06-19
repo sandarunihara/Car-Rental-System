@@ -58,4 +58,73 @@ async function rentcarController(req,res){
     }
 }
 
+//read
+async function carDetailscontroller(req,res){
+    try{
+        const nic=req.body
+        const user=await carrentmodel.findOne(nic)
+
+        res.status(200).json({
+            message:"car details",
+            data : user,
+            error:false,
+            success:true
+        })
+    }catch(err){
+        res.status(400).json({
+            message:err.message ||err,
+            error: true,
+            success : false
+        })
+    }
+}
+
+// update
+async function updaterentcar(req,res){
+    try{
+        const {_id,...resBody}=req.body
+
+        const updaterent=await carrentmodel.findByIdAndUpdate(_id,resBody)
+        const newdata=await carrentmodel.findById(_id)
+
+        res.status(200).json({
+            message:"Rent update Successfully",
+            data:newdata,
+            success:true,
+            error:false
+        })
+    }catch(err){
+        res.status(400).json({
+            message:err.message ||err,
+            error: true,
+            success : false
+        })
+    }
+}
+
+// delete
+async function deleterentcontroller(req,res){
+    try{
+        const pin=req.body
+
+        const deleteone=await carrentmodel.findOneAndDelete(pin)
+
+        res.status(200).json({
+            message:"Delete Successfully",
+            data:deleteone,
+            success:true,
+            error:false
+        })
+    }catch(err){
+        res.status(400).json({
+            message:err.message ||err,
+            error: true,
+            success : false
+        })
+    }
+}
+
 module.exports=rentcarController
+module.exports=carDetailscontroller
+module.exports=updaterentcar
+module.exports=deleterentcontroller
