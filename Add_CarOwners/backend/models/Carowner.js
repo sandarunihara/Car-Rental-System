@@ -31,7 +31,7 @@ const CarownerSchema = new Schema({
 
 })
 
-//imandi
+
 const Carowner = mongoose.model("Carowner",CarownerSchema);
 
 module.exports = Carowner;
