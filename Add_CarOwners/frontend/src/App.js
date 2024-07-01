@@ -15,7 +15,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Imandi dfdert
+
+
+          Imandi dfd sandaru
+
         </a>
       </header>
     </div>
