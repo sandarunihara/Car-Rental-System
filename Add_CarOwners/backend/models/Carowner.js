@@ -1,6 +1,6 @@
-const mangoose = require('mangoose');
+import mongoose from "mongoose";
 
-const Schema = mangoose.Schema;
+const Schema = mongoose.Schema;
 
 const CarownerSchema = new Schema({
 
@@ -34,4 +34,4 @@ const CarownerSchema = new Schema({
 
 const Carowner = mongoose.model("Carowner",CarownerSchema);
 
-module.exports = Carowner;
+export default Carowner;
