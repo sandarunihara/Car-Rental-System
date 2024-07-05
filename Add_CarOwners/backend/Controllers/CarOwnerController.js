@@ -1,5 +1,5 @@
-import Carowner from "../models/Carowner";
-import { errorHandler } from "../utills/error";
+import Carowner from "../models/Carowner.js";
+import { errorHandler } from "../utills/error.js";
 
  export const AddcarOwner = async(req,res,next)=>{
     const name = req.body.name;

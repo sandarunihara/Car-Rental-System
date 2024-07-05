@@ -1,7 +1,7 @@
-import Addcar from "../models/AddcarModel";
-import { errorHandler } from "../utills/error";
+import Addcar from "../models/AddcarModel.js";
+import { errorHandler } from "../utills/error.js";
 
-export const Addcar = async(req,res,next)=>{
+export const Addcars = async(req,res,next)=>{
     const{Carname,Fueltype,Carnumber,Price,Seat} = req.body;
     if(!Carname || !Fueltype || !Carnumber || !Price || !Seat){
         next(errorHandler(400,'All field are required'));

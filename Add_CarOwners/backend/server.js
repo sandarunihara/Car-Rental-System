@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoute.js"
+import AddcarRoute from "./routes/AddcarRoute.js"
 
 const app = express();
 dotenv.config();
@@ -27,6 +28,7 @@ connection.once("open", () => {
 });
 
 app.use("/api/user",authRoutes);
+app.use("/api/addcar",AddcarRoute)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
