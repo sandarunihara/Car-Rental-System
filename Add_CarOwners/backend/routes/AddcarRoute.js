@@ -1,6 +1,8 @@
 import express from 'express';
-import { Addcar } from '../Controllers/AddcarController';
+import { Addcars } from '../Controllers/AddcarController.js';
 
 const router = express.Router();
 
-router.post("/create",Addcar);
+router.post("/create",Addcars);
+
+export default router;
