@@ -22,3 +22,49 @@ export const Addcars = async(req,res,next)=>{
         next(error);
     }
 };
+
+export const getcars = async(req,res,next)=>{
+    Addcar.find().then((addcars)=>{
+        res.json(addcars);
+    }).catch((err)=>{
+        console.log(err);
+    })
+};
+
+export const updatecar = async(req,res,next)=>{
+    let carId = req.params.id;
+    const {Carname,Fueltype,Carnumber,Price,Seat}=req.body;
+    
+    const updatedcar={
+        Carname,
+        Fueltype,
+        Carnumber,
+        Price,
+        Seat
+    }
+    await Addcar.findByIdAndUpdate(carId,updatedcar).then(()=>{
+        next(errorHandler(200,"Car update successfull!"))
+    }).catch((error)=>{
+        next(error);
+    })
+};
+
+export const deletecar =async(req,res,next)=>{
+    let carId = req.params.id;
+
+    await Addcar.findByIdAndDelete(carId,).then(()=>{
+        res.json("Car delete Successfull!")
+    }).catch((err)=>{
+        console.log(err);
+    })
+};
+
+export const fetchcar = async(req,res,next)=>{
+    let carId = req.params.id;
+
+    await Addcar.findById(carId).then((addcar)=>{
+        res.json(addcar);
+    }).catch((err)=>{
+        console.log(err);
+    })
+}
