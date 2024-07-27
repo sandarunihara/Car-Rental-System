@@ -1,13 +1,13 @@
 import React from 'react'
-import logo from "../img/LogoM.png"
+import logo from "../img/1logo.png"
 
 const NavBar = () => {
   return (
     <div>
         <header className='h-[90px] shadow-md' >
         <div className='text-white h-full container mx-auto flex items-center pt-4 pr-9 pl-9  justify-between'>
-            <div className='w-24 mb-5 ml-9' >
-                <img src={logo} alt=''/>
+            <div className=' mb-5 ml-9' >
+                <img src={logo} className='w-[150px] h-[150px]' alt=''/>
             </div>
             <div className='ml-36'>
                 <a href='#' className='mx-5 font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300' >Home</a>
