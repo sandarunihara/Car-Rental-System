@@ -13,7 +13,7 @@ const Home = () => {
         <div className='text-white'>
             <h1 className='text-8xl font-bold'>Rent Cars <br/>Travel Easy</h1>
             <p className='text-2xl mt-7 w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
-            <button className='mt-5 flex bg-white text-black font-bold py-3 px-12  rounded hover:text-white hover:bg-black  transition-all duration-150 border-2 border-white'>Book Now <GrLinkNext className='mt-1 ml-5 text-xl' /></button>
+            <button className='mt-5 flex bg-white text-black font-bold py-3 px-12  rounded hover:text-white hover:bg-transparent  transition-all duration-150 border-2 border-white'>Book Now <GrLinkNext className='mt-1 ml-5 text-xl' /></button>
         </div>
         <div className='mx-auto my-auto '>
           <div className="p-4 bg-white  rounded-md shadow-2xl font-bold bg-opacity-35 hover:scale-110 transition-all duration-700">
