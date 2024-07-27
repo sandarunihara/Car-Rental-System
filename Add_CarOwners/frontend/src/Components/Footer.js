@@ -21,10 +21,10 @@ const Footer = () => {
           <p>Email :<span className='text-yellow-500'>support@sirents.lk</span></p>
         </div>
         <div className='flex ml-80 my-auto text-3xl gap-3'>
-        <FaSquareFacebook className='text-blue-700'/>
-        <FaSquareInstagram className='text-pink-700'/>
-        <FaLinkedin className='text-blue-700'/>
-        <FaSquareXTwitter />
+        <FaSquareFacebook className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
+        <FaSquareInstagram className='text-pink-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
+        <FaLinkedin className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
+        <FaSquareXTwitter className='cursor-pointer hover:scale-110 transition-all duration-500' />
         </div>
       </div>
     </div>
