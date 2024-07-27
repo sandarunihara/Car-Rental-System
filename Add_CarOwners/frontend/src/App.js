@@ -1,15 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import NavBar from './Components/NavBar';
 import Home from './Pages/Home';
-import Footer from './Components/Footer';
+import CarRentPage from './Components/CarRentPage';
 
 function App() {
   return (
-    <div>
-      <NavBar/>
-      <Home/>
-      <Footer/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/carpage" element={<CarRentPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,11 +1,14 @@
 import React from 'react'
 import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
+import NavBar from '../Components/NavBar';
+import Footer from '../Components/Footer';
 
 
 const Home = () => {
   return (
     <div>
+      <NavBar/>
       <video autoPlay  muted className="background-video">
                 <source src={`${process.env.PUBLIC_URL}/1.mp4`} type="video/mp4" />
             </video>
@@ -109,6 +112,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }
