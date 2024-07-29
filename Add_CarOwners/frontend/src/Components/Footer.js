@@ -7,8 +7,8 @@ import { PiCopyright } from "react-icons/pi";
 
 const Footer = () => {
   return (
-    <div className='h-[75px] '>
-      <div className='flex '>
+    <div className='h-[100px] '>
+      <div className='flex mt-5'>
         <div className='my-auto ml-32'>
           <p className=' mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
           <p className='flex font-thin text-sm'><PiCopyright className='mt-1'/> 2024 SI</p>
