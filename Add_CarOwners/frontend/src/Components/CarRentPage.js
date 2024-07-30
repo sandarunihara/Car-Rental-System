@@ -85,6 +85,7 @@ const CarRentPage = () => {
                             <span className='mt-2 text-lg font-semibold'>Pick Up</span>
                             <input type="date"  className="p-2  rounded-md" />
                         </div>
+                        <Link to={"/carpage"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
                         <h2 className='mt-9 text-2xl font-bold mb-3'>Extra Add</h2>
                         <div className='flex'>
                         <input type='checkbox' onChange={driver} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
@@ -118,6 +119,7 @@ const CarRentPage = () => {
                         </div>
                     </div>
                 </div>
+                
 
                 <div className='ml-14 mt-20'>                    
                     <h2 className='text-2xl font-semibold mb-7'>For Rent Vehicle</h2>
