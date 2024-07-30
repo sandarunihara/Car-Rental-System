@@ -7,27 +7,32 @@ import { PiCopyright } from "react-icons/pi";
 
 const Footer = () => {
   return (
-    <div className='h-[100px] '>
-      <div className='flex mt-5'>
-        <div className='my-auto ml-32'>
-          <p className=' mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
-          <p className='flex font-thin text-sm'><PiCopyright className='mt-1'/> 2024 SI</p>
-        </div>
-        <p className='ml-20 my-auto font-semibold hover:text-yellow-500 cursor-pointer'>Terms and Conditions</p>
-        <p className='ml-20 my-auto font-semibold hover:text-yellow-500 cursor-pointer'>Privacy Policy</p>
-        <div className='ml-20 my-auto cursor-pointer'>
-          <p className='font-semibold'>Contact</p>
-          <p>Call US :<span className='text-yellow-500'>011-2222223/011-2265331</span></p>
-          <p>Email :<span className='text-yellow-500'>support@sirents.lk</span></p>
-        </div>
-        <div className='flex ml-80 my-auto text-3xl gap-3'>
-        <FaSquareFacebook className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
-        <FaSquareInstagram className='text-pink-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
-        <FaLinkedin className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500'/>
+    <div className='h-auto md:h-[100px] bg-white'>
+  <div className='flex flex-col md:flex-row items-center justify-between p-4 md:mt-5'>
+    <div className='flex flex-col md:flex-row items-center'>
+      <div className='my-auto md:ml-32 text-center md:text-left'>
+        <p className='mt-2 md:mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
+        <p className='flex items-center justify-center md:justify-start font-thin text-sm'><PiCopyright className='mr-1' />2024 SI</p>
+      </div>
+      <p className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Terms and Conditions</p>
+      <p className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Privacy Policy</p>
+    </div>
+    <div className='flex flex-col items-center md:flex-row'>
+      <div className='mt-4 md:mt-0 md:ml-20 text-center md:text-left'>
+        <p className='font-semibold'>Contact</p>
+        <p>Call US: <span className='text-yellow-500'>011-2222223/011-2265331</span></p>
+        <p>Email: <span className='text-yellow-500'>support@sirents.lk</span></p>
+      </div>
+      <div className='flex mt-4 md:mt-0 md:ml-20 text-3xl gap-3'>
+        <FaSquareFacebook className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500' />
+        <FaSquareInstagram className='text-pink-700 cursor-pointer hover:scale-110 transition-all duration-500' />
+        <FaLinkedin className='text-blue-700 cursor-pointer hover:scale-110 transition-all duration-500' />
         <FaSquareXTwitter className='cursor-pointer hover:scale-110 transition-all duration-500' />
-        </div>
       </div>
     </div>
+  </div>
+</div>
+
   )
 }
 
