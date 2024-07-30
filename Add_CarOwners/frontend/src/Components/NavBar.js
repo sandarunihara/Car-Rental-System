@@ -15,7 +15,7 @@ const NavBar = () => {
           <div className='w-24 mb-5'>
             <img src={logo} alt='Logo' />
           </div>
-          <div className='hidden md:flex space-x-6'>
+          <div className='hidden md:flex ml-48 space-x-6'>
             <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Home</Link>
             <Link to={'/carpage'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
             <a href='#' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Rent</a>
