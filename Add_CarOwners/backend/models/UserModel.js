@@ -18,11 +18,11 @@ const UserSchema = new Schema({
   },
   nic:{
     type:String,
-    required:true
+    //required:true,
   },
   mobile:{
     type:String,
-    required:true
+    //required:true,
   }
 });
 
