@@ -4,7 +4,6 @@ import Home from './Pages/Home';
 import CarRentPage from './Components/CarRentPage';
 import SignUp from './Pages/SignUp';
 import Login from './Pages/Login';
-import Feedback from './Pages/Feedback';
 
 function App() {
   return (
@@ -14,8 +13,6 @@ function App() {
         <Route path="/carpage" element={<CarRentPage />} />
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
-        <Route path='/feedback' element={<Feedback/>}/>
-        
       </Routes>
     </Router>
   );
