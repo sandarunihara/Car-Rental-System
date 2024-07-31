@@ -2,8 +2,8 @@ import React from 'react';
 
 function AddOwner() {
   return (
-<div className="flex-grow bg-black p-6 sm:p-8 md:p-12 text-white h-screen flex justify-center items-center">
-<form className="flex flex-col w-full max-w-md">
+    <div className="flex-grow bg-black p-6 sm:p-8 md:p-12 text-white h-screen flex justify-center items-center">
+      <form className="flex flex-col w-full max-w-md">
         <label className="mb-1.5 text-lg">Name</label>
         <input 
           type="text" 
