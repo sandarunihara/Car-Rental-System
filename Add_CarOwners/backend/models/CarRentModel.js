@@ -1,22 +1,47 @@
-const mongoose=require('mongoose');
+import mongoose from 'mongoose';
 
-const rentschema=new mongoose.Schema({
-    name:String,
-    nic:String,
-    mobile:Number,
-    email:String,
-    rent_date:Date,
-    price:Number,
-    pin:Number,
-    carnumber:String,
+const rentschema = new mongoose.Schema({
+    name: String,
+    nic: String,
+    mobile: Number,
+    email: String,
+    rent_date: Number,
+    price: Number,
+    pin: Number,
+    carnumber: String,
 
-    // extra bool
-    baby_seat:Boolean,
-    need_driver:Boolean,
-//123
+    // Extra bool
+    baby_seat: Boolean,
+    need_driver: Boolean,
+});
 
-})
+const carrentmodel = mongoose.model("rent", rentschema);
 
-const carrentmodel=mongoose.model("rent",rentschema)
+export default carrentmodel;
 
-module.exports=carrentmodel
+
+
+
+
+// const mongoose=require('mongoose');
+
+// const rentschema=new mongoose.Schema({
+//     name:String,
+//     nic:String,
+//     mobile:Number,
+//     email:String,
+//     rent_date:Date,
+//     price:Number,
+//     pin:Number,
+//     carnumber:String,
+
+//     // extra bool
+//     baby_seat:Boolean,
+//     need_driver:Boolean,
+
+
+// })
+
+// const carrentmodel=mongoose.model("rent",rentschema)
+
+// module.exports=carrentmodel
