@@ -1,11 +1,13 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const app = express();
-require("dotenv").config();
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import router from './routes/FeedbackRoute.js'; // Ensure the path and extension are correct
 
+dotenv.config();
+
+const app = express();
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
@@ -20,15 +22,12 @@ mongoose.connect(URL, {
 
 const connection = mongoose.connection;
 
-connection.once("open", () => {
-    console.log("Mongodb Connection success!");
+connection.once('open', () => {
+    console.log('Mongodb Connection success!');
 });
 
-<<<<<<< HEAD
-app.use("/api/user",authRoutes);
+app.use('/api', router);
 
-=======
->>>>>>> 23d9d7a4fb0b91de0c2d51d1365e3883ff3eac53
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
@@ -43,4 +42,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server is up and running on port number : ${PORT}`);
 });
-
