@@ -23,14 +23,6 @@ const AddcarSchema = new Schema({
         type:Number,
         required:true
     },
-    Location:{
-        type:String,
-        required:true
-    },
-    Car_type:{
-        type:String,
-        required:true
-    }
 
 })
 
