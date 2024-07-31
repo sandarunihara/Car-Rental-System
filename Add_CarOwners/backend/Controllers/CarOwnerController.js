@@ -1,7 +1,7 @@
 import Carowner from "../models/Carowner.js";
 import { errorHandler } from "../utills/error.js";
 
- export const AddcarOwner = async(req,res,next)=>{
+async function AddcarOwner(req,res,next){
     const name = req.body.name;
     const nic = req.body.nic;
     const age = Number(req.body.age);
@@ -24,7 +24,7 @@ import { errorHandler } from "../utills/error.js";
 
 };
 
-export const getCarOwner = async(req,res,next)=>{
+async function getCarOwner (req,res,next){
     Carowner.find().then((carowners) =>{
         res.json(carowners)
     }).catch((err) =>{
@@ -32,7 +32,7 @@ export const getCarOwner = async(req,res,next)=>{
     })
 };
 
-export const updateCarowner = async(req,res,next)=>{
+async function updateCarowner (req,res,next){
     let userId = req.params.id;
     const {name,nic,age,gender,address} = req.body;
 
@@ -53,7 +53,7 @@ export const updateCarowner = async(req,res,next)=>{
 
 };
 
-export const deleteCarOwner = async (req,res,next)=>{
+async function deleteCarOwner (req,res,next){
     let userId = req.params.id;
     
     await Carowner.findByIdAndDelete(userId).then(() =>{
@@ -64,7 +64,7 @@ export const deleteCarOwner = async (req,res,next)=>{
     })
 }
 
-export const fetchCarOwner = async (req,res,next)=>{
+async function fetchCarOwner (req,res,next){
     let userId = req.params.id;
     await Carowner.findById(userId).then((carowner) =>{
         res.status(200).send({status : "user fetched" , carowner})
@@ -74,5 +74,11 @@ export const fetchCarOwner = async (req,res,next)=>{
     })
 }
 
+
+module.exports = AddcarOwner
+module.exports = getCarOwner
+module.exports = updateCarowner
+module.exports = deleteCarOwner
+module.exports = fetchCarOwner
 
 
