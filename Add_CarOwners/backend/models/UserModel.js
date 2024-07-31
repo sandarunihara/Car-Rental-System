@@ -16,6 +16,14 @@ password:{
     type: String,
     required: true
 },
+nic:{
+    type: String,
+    // required: true
+},
+mobile:{
+    type: String,
+    // required: true
+}
 
 
 })

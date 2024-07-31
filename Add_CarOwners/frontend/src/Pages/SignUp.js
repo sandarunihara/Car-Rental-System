@@ -1,7 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from '../Components/NavBar'
+import { useNavigate } from 'react-router-dom';
 
 const  SignUp = () => {
+
+   const [formData,setformData] = useState({});
+   const [errorMessage, setErrorMessage] = useState(null);
+   const navigate = useNavigate();
+
+    const handlechange = (e)=>{
+      setformData({...formData,[e.target.id]:e.target.value.trim()});
+    };
+
+    const handlesubmit = async (e) =>{
+         e.preventDefault();
+         if(!formData.username || !formData.email || formData.password || !formData.nic || !formData.mobile){
+            setErrorMessage("Please fill out all fields");
+         }
+         try {
+            setErrorMessage(null)
+            const res = await fetch('http://localhost:8050/api/user/signup',{
+               method:'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(formData)
+            });
+            const data = await res.json();
+            if(data.success===false){
+               return setErrorMessage(data.message)
+            }
+            if(res.ok){
+               navigate('/Login');
+            }
+         } catch (error) {
+            setErrorMessage("An error Occured. please try again");
+         }
+    }
   return (
    <>  
    <NavBar/>
@@ -13,21 +46,21 @@ const  SignUp = () => {
             <iframe src="https://lottie.host/embed/2a767f3e-cfaa-4cb2-86b3-619d6b44d4e3/1BxXxtnyEm.json" className='w-[400px] h-[400px]'></iframe>
         </div>
         <div className='bg-white flex-1 '>
-          <form className='mt-20 ml-32'>
+          <form className='mt-20 ml-32' onSubmit={handlesubmit}>
            <div className='relative my-4 mt-10'>
-              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Username *' required/>
+              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Username *' required id='username' onChange={handlechange}/>
            </div>
            <div className='relative my-4 mt-10'>
-              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='NIC *' required/>
+              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='NIC *' required id='nic' onChange={handlechange} />
            </div>
            <div className='relative my-4 mt-10'>
-              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Mobile No(+94xxxxxxxxx) *' required/>
+              <input type='text' className='block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Mobile No(+94xxxxxxxxx) *' required id='mobile' onChange={handlechange}/>
            </div>
            <div className='relative my-4 mt-10'>
-              <input type='email' className='block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Email *' required/>  
+              <input type='email' className='block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Email *' required id='email' onChange={handlechange}/>  
            </div>
            <div className='relative my-4 mt-10'>
-              <input type='password' className='block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Password *' required/> 
+              <input type='password' className='block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer' placeholder='Password *' required id='password' onChange={handlechange}/> 
            </div>
            <div>
                <label className=''>
@@ -35,7 +68,7 @@ const  SignUp = () => {
                    I Agree to the <span className='text-orange-500'>Terms and Conditions</span>
                </label>
             </div>
-            <button className='w-3/4 text-white h-10 bg-orange-500 mt-10'>SIGN UP</button>
+            <button type='submit' className='w-3/4 text-white h-10 bg-orange-500 mt-10'>SIGN UP</button>
           </form>
           
         </div>

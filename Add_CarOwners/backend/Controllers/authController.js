@@ -3,10 +3,11 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 
-export const signup = async(req,res,next)=>{
-    const {username , email ,password}=req.body;
 
-    if(!username|| !email || !password || username==='' || email==='' || password===''){
+export const signup = async(req,res,next)=>{
+    const {username , email ,password,nic,mobile}=req.body;
+
+    if(!username|| !email || !password || !nic || !mobile || username==='' || email==='' || password==='' || nic==='' || mobile===''){
         next(errorHandler(400,'All field are requrired'));
     }
     const hashedpassword = bcryptjs.hashSync(password,10);
@@ -15,6 +16,8 @@ export const signup = async(req,res,next)=>{
         username,
         email,
         password:hashedpassword,
+        nic,
+        mobile
     });
 
     try {
@@ -28,6 +31,7 @@ export const signup = async(req,res,next)=>{
 
 export const signin = async (req,res, next)=>{
     const {email, password} = req.body;
+    
   
     if(!email  || !password || email===''||  password===''){
       return next(errorHandler(400,'All fields are required'));
