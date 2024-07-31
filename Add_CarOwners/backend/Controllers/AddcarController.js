@@ -2,8 +2,8 @@ import Addcar from "../models/AddcarModel.js";
 import { errorHandler } from "../utills/error.js";
 
 async function Addcars(req,res,next){
-    const{Carname,Fueltype,Carnumber,Price,Seat} = req.body;
-    if(!Carname || !Fueltype || !Carnumber || !Price || !Seat){
+    const{Carname,Fueltype,Carnumber,Price,Seat,Location,Car_type} = req.body;
+    if(!Carname || !Fueltype || !Carnumber || !Price || !Seat || !Location || !Car_type){
         next(errorHandler(400,'All field are required'));
     }
 
@@ -13,6 +13,8 @@ async function Addcars(req,res,next){
         Carnumber,
         Price,
         Seat,
+        Location,
+        Car_type
     });
 
     try {
@@ -33,14 +35,16 @@ async function getcars(req,res,next){
 
 async function updatecar(req,res,next){
     let carId = req.params.id;
-    const {Carname,Fueltype,Carnumber,Price,Seat}=req.body;
+    const {Carname,Fueltype,Carnumber,Price,Seat,Location,Car_type}=req.body;
     
     const updatedcar={
         Carname,
         Fueltype,
         Carnumber,
         Price,
-        Seat
+        Seat,
+        Location,
+        Car_type
     }
     await Addcar.findByIdAndUpdate(carId,updatedcar).then(()=>{
         next(errorHandler(200,"Car update successfull!"))
