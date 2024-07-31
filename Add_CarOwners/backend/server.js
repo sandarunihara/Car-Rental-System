@@ -24,6 +24,11 @@ connection.once("open", () => {
     console.log("Mongodb Connection success!");
 });
 
+<<<<<<< HEAD
+app.use("/api/user",authRoutes);
+
+=======
+>>>>>>> 23d9d7a4fb0b91de0c2d51d1365e3883ff3eac53
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal Server Error';

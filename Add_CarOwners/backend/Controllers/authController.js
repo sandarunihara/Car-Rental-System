@@ -1,9 +1,9 @@
-import User from "../models/UserModel.js";
-import bcryptjs from "bcryptjs";
-import { errorHandler } from "../utills/error.js";
-import jwt from "jsonwebtoken";
+const { errorHandler } = require("../utills/error")
+const User = require("../models/UserModel")
+const  bcryptjs = require('bcryptjs');
+const jwt =require('jsonwebtoken')
 
-export const signup = async(req,res,next)=>{
+async function signup(req,res,next){
     const {username , email ,password}=req.body;
 
     if(!username|| !email || !password || username==='' || email==='' || password===''){
@@ -26,7 +26,7 @@ export const signup = async(req,res,next)=>{
 
 }
 
-export const signin = async (req,res, next)=>{
+async function signin (req,res, next){
     const {email, password} = req.body;
   
     if(!email  || !password || email===''||  password===''){
@@ -56,3 +56,6 @@ export const signin = async (req,res, next)=>{
   
    
   };
+
+  module.exports=signin
+  module.exports=signup
