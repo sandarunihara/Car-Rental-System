@@ -13,7 +13,7 @@ const rentschema=new mongoose.Schema({
     // extra bool
     baby_seat:Boolean,
     need_driver:Boolean,
-//123
+
 
 })
 

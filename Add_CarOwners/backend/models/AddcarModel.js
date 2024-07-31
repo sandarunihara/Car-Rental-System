@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
+const mongoose=require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const AddcarSchema = new Schema({
+const AddcarSchema = new mongoose.Schema({
     Carname:{
         type : String,
         required: true
@@ -36,4 +34,4 @@ const AddcarSchema = new Schema({
 
 const Addcar = mongoose.model("Addcar",AddcarSchema);
 
-export default Addcar;
+module.exports=Addcar

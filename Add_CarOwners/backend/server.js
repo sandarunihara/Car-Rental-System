@@ -28,7 +28,6 @@ connection.once("open", () => {
 });
 
 app.use("/api/user",authRoutes);
-app.use("/api/addcar",AddcarRoute)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
