@@ -1,7 +1,7 @@
 import Addcar from "../models/AddcarModel.js";
 import { errorHandler } from "../utills/error.js";
 
-export const Addcars = async(req,res,next)=>{
+async function Addcars(req,res,next){
     const{Carname,Fueltype,Carnumber,Price,Seat} = req.body;
     if(!Carname || !Fueltype || !Carnumber || !Price || !Seat){
         next(errorHandler(400,'All field are required'));
@@ -23,7 +23,7 @@ export const Addcars = async(req,res,next)=>{
     }
 };
 
-export const getcars = async(req,res,next)=>{
+async function getcars(req,res,next){
     Addcar.find().then((addcars)=>{
         res.json(addcars);
     }).catch((err)=>{
@@ -31,7 +31,7 @@ export const getcars = async(req,res,next)=>{
     })
 };
 
-export const updatecar = async(req,res,next)=>{
+async function updatecar(req,res,next){
     let carId = req.params.id;
     const {Carname,Fueltype,Carnumber,Price,Seat}=req.body;
     
@@ -49,7 +49,7 @@ export const updatecar = async(req,res,next)=>{
     })
 };
 
-export const deletecar =async(req,res,next)=>{
+async function deletecar(req,res,next){
     let carId = req.params.id;
 
     await Addcar.findByIdAndDelete(carId,).then(()=>{
@@ -58,8 +58,7 @@ export const deletecar =async(req,res,next)=>{
         console.log(err);
     })
 };
-
-export const fetchcar = async(req,res,next)=>{
+async function fetchcar(req,res,next){
     let carId = req.params.id;
 
     await Addcar.findById(carId).then((addcar)=>{
@@ -68,3 +67,9 @@ export const fetchcar = async(req,res,next)=>{
         console.log(err);
     })
 }
+
+module.exports = Addcars
+module.exports = getcars
+module.exports = updatecar
+module.exports = deletecar
+module.exports = fetchcar
