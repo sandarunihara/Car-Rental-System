@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -11,7 +11,7 @@ const CarownerSchema = new Schema({
 
     nic : {
         type : String,
-        require : true
+        required : true
     },
 
     age : {
@@ -30,8 +30,8 @@ const CarownerSchema = new Schema({
     }
 
 })
-//1234567890
+
 
 const Carowner = mongoose.model("Carowner",CarownerSchema);
 
-export default Carowner;
+module.exports = Carowner;
