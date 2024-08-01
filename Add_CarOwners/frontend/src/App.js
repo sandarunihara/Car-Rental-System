@@ -4,6 +4,13 @@ import Home from './Pages/Home';
 import CarRentPage from './Components/CarRentPage';
 import SignUp from './Pages/SignUp';
 import Login from './Pages/Login';
+import SideBar from './Components/SideBar';
+import AddOwner from './Pages/AddOwner';
+import OwnerDetails from './Pages/OwnerDetails';
+import ViewFeedback from './Pages/ViewFeedback';
+import VehicleDetails from './Pages/VehicleDetails';
+import AddVehicle from './Pages/AddVehicle';
+import AddcarDashboard from './Components/AddcarDashboard';
 
 function App() {
   return (
@@ -14,6 +21,10 @@ function App() {
         <Route path="/carpage" element={<CarRentPage />} />
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
+        
+
+        <Route path='/admin/*' element={<AdminLayout/>}/>
+        <Route path='/Addcar/*' element={<AddcarLayout/>}/>
       </Routes>
     </Router>
   );
@@ -32,6 +43,21 @@ function AdminLayout() {
       </div>
     </div>
   );
+}
+
+function AddcarLayout(){
+  return(
+    <div className='flex'>
+      <AddcarDashboard/>
+      <div className='flex-grow'>
+        <Routes>
+          <Route path='vehicle-details' element={<VehicleDetails/>}/>
+          <Route path='add-vehicle' element={<AddVehicle/>}/>
+        </Routes>
+
+      </div>
+    </div>
+  )
 }
 
 export default App;
