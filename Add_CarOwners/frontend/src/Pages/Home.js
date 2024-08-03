@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
@@ -6,6 +6,27 @@ import Footer from '../Components/Footer';
 
 
 const Home = () => {
+  const [searchvalue,setsearchvalue]=useState({
+    rent_date:"",
+    Location:"",
+    vehicletype:""
+  })
+
+  const handleChange=(e)=>{
+    e.preventDefault()
+    const {name,value}=e.target
+    setsearchvalue(pre=>{
+      return{
+        ...pre,
+        [name]:value
+      }
+    })
+  }
+  const handlesubmit=()=>{
+    console.log(searchvalue);
+  }
+
+
   return (
     <div className='bg-black'>
       <NavBar/>
@@ -20,13 +41,14 @@ const Home = () => {
           Book Now <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
         </button>
       </div>
+      {/* *****************search car*********************  */}
       <div className='mx-auto my-8 md:my-auto'>
         <div className="p-4 bg-white rounded-md shadow-2xl font-bold bg-opacity-35 hover:scale-110 transition-all duration-700">
           <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">Find Your Perfect Ride</h2>
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-4">
-              <span className="material-icons">place</span>
-              <select className="p-2 border border-gray-300 rounded-md" required>
+              <span className="material-icons">Location</span>
+              <select className="p-2 border border-gray-300 rounded-md" required id='Location' name='Location' value={searchvalue.Location} onChange={handleChange}>
                 <option>Choose a Location</option>
                 <option>Colombo</option>
                 <option>Gampaha</option>
@@ -41,29 +63,31 @@ const Home = () => {
             </div>
             
             <div className="flex items-center space-x-2 md:space-x-4">
-              <span className="material-icons">event</span>
-              <input type="date" required className="p-2 border border-gray-300 rounded-md" placeholder="Pick-up Date" />
+              <span className="material-icons">Rent Date</span>
+              <input type="date" required className="p-2 border border-gray-300 rounded-md" placeholder="Pick-up Date" id='rent_date' name='rent_date' value={searchvalue.rent_date} onChange={handleChange}/>
             </div>
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-2">
-              <span className="material-icons">directions_car</span>
-              <select className="p-2 border border-gray-300 rounded-md" required>
-                <option>Select Car</option>
+              <span className="material-icons">Vehicle Type</span>
+              <select className="p-2 border border-gray-300 rounded-md" required id='vehicletype' name='vehicletype' value={searchvalue.vehicletype} onChange={handleChange}>
+                <option>Select Type</option>
                 <option>CAR</option>
                 <option>SUV</option>
                 <option>VAN</option>
               </select>
             </div>
             
-            <button className="px-8 md:px-16 py-2 text-white bg-black rounded-md">
+            <button className="px-8 md:px-16 py-2 text-white bg-black rounded-md" onClick={handlesubmit}>
               Search
             </button>
           </div>
         </div>
       </div>
       </div> 
+
+
       <div className='text-white mt-[75px] bg-black'>
         {/* *****************ABOUT ************ */}
         <div className='flex flex-col md:flex-row justify-between w-full h-full'>
@@ -73,7 +97,7 @@ const Home = () => {
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg mt-4 md:mt-0'><br/>If you own vehicles, you can generate passive income from unused vehicles hassle-free; if you are in the mood to rent, you can find the ideal car for your needs at affordable prices.</p>
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg mt-4 md:mt-0'><br/>Whether you're after a luxury sedan for a weekend getaway or an oversized van for business use, SI Rents has all your driving needs covered! And who said earning money had to be hard work? With our easy-to-use platform, getting in control of your finances has never been simpler - what are you waiting for?</p>
           </div>
-          <img src="img/about.jpg" alt='Description of the' className='w-full md:w-[450px] h-auto md:h-[550px] rounded-2xl mt-4 md:mt-0' />
+          <img src="img/about.jpg" alt='Description of the' className='w-full md:w-[450px] h-auto md:h-[550px] hidden md:block rounded-2xl mt-4 md:mt-0' />
           <div className='bg-stone-300 h-auto md:h-[550px] w-full md:w-[150px] rounded-l-2xl mt-4 md:mt-0'>
             <div className='text-center flex flex-row md:flex-col items-center justify-center h-full space-y-0 md:space-y-6 space-x-4 md:space-x-0'>
               <img src="img/car-rent.png" className='w-[50px] md:w-[100px] h-[50px] md:h-[100px]' />
