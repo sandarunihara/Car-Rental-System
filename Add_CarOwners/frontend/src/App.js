@@ -5,8 +5,6 @@ import CarRentPage from './Components/CarRentPage';
 import SignUp from './Pages/SignUp';
 import Login from './Pages/Login';
 import Feedback from './Pages/Feedback';
-<<<<<<< HEAD
-=======
 import SideBar from './Components/SideBar';
 import OwnerDetails from './Pages/OwnerDetails';
 import AddOwner from './Pages/AddOwner';
@@ -14,7 +12,6 @@ import ViewFeedback from './Pages/ViewFeedback';
 import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
->>>>>>> ad6c7392a920482fa23f27f0537b36cf7316dc6b
 
 function App() {
   return (
@@ -26,13 +23,10 @@ function App() {
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
-<<<<<<< HEAD
-=======
         
 
         <Route path='/admin/*' element={<AdminLayout/>}/>
         <Route path='/Addcar/*' element={<AddcarLayout/>}/>
->>>>>>> ad6c7392a920482fa23f27f0537b36cf7316dc6b
       </Routes>
     </Router>
   );
