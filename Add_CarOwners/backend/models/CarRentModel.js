@@ -7,12 +7,12 @@ const rentschema = new mongoose.Schema({
     email: String,
     rent_date: Number,
     price: Number,
-    pin: Number,
-    carnumber: String,
+    // pin: Number,
+    Carnumber: String,
 
-    // Extra bool
-    baby_seat: Boolean,
-    need_driver: Boolean,
+    // // Extra bool
+    // baby_seat: Boolean,
+    // need_driver: Boolean,
 });
 
 const carrentmodel = mongoose.model("rent", rentschema);
