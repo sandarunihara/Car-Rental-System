@@ -3,6 +3,7 @@ import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
+import Carcard from '../Components/Carcard';
 
 
 const Home = () => {
@@ -111,7 +112,7 @@ const Home = () => {
         <div className='text-center'>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
           <div className='flex flex-wrap justify-center md:justify-between p-4 md:p-10'>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
+            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'><Carcard/></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
