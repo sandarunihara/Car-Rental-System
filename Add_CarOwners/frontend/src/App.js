@@ -12,6 +12,8 @@ import ViewFeedback from './Pages/ViewFeedback';
 import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
+import { DisplayFeedback } from './Pages/DisplayFeedback';
+
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path='/feedback' element={<Feedback/>}/>
         <Route path='/admin/*' element={<AdminLayout/>}/>
         <Route path='/Addcar/*' element={<AddcarLayout/>}/>
+        <Route path='/displayfeedback' element={<DisplayFeedback/>}/>
+        
       </Routes>
     </Router>
   );
