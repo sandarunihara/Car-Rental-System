@@ -2,6 +2,7 @@ import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import User from "../models/UserModel.js";
+
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 

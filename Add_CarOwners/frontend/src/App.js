@@ -12,6 +12,7 @@ import ViewFeedback from './Pages/ViewFeedback';
 import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
+import Message from './Pages/Message';
 
 function App() {
   return (
@@ -55,8 +56,8 @@ function AddcarLayout(){
         <Routes>
           <Route path='vehicle-details' element={<VehicleDetails/>}/>
           <Route path='add-vehicle' element={<AddVehicle/>}/>
+          <Route path='message' element={<Message/>}/>
         </Routes>
-
       </div>
     </div>
   )
