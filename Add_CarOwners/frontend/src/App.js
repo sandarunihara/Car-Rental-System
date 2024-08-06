@@ -12,7 +12,12 @@ import ViewFeedback from './Pages/ViewFeedback';
 import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
+<<<<<<< HEAD
 import Message from './Pages/Message';
+=======
+import { DisplayFeedback } from './Pages/DisplayFeedback';
+
+>>>>>>> f8092f780e4f3abb81d49fe8dadc038ec7df625b
 
 function App() {
   return (
@@ -24,10 +29,10 @@ function App() {
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
-        
-
         <Route path='/admin/*' element={<AdminLayout/>}/>
         <Route path='/Addcar/*' element={<AddcarLayout/>}/>
+        <Route path='/displayfeedback' element={<DisplayFeedback/>}/>
+        
       </Routes>
     </Router>
   );

@@ -2,8 +2,8 @@ import Customer_fb from "../models/Customer_fb.js";
 
 export async function addCommentcontroller(req, res) {
     try {
-        const { comment } = req.body;
-        const newComment = new Customer_fb({ comment });
+        const { comment,name,carNo } = req.body;
+        const newComment = new Customer_fb({ comment,name,carNo });
         await newComment.save();
 
         res.status(200).json({
@@ -23,8 +23,8 @@ export async function addCommentcontroller(req, res) {
 
 export async function displayCommentcontroller(req, res) {
     try {
-        const { comment } = req.body;
-        const foundComment = await Customer_fb.findOne({ comment });
+        const { comment,name,carNo } = req.body;
+        const foundComment = await Customer_fb.findOne({ comment,name,carNo });
 
         if (!foundComment) {
             return res.status(404).json({
@@ -50,11 +50,11 @@ export async function displayCommentcontroller(req, res) {
 
 export async function updateCommentcontroller(req, res) {
     try {
-        const { id, comment } = req.body;
+        const { _id, comment,name,carNo} = req.body;
 
         const updatedComment = await Customer_fb.findByIdAndUpdate(
-            id,
-            { comment },
+            _id,
+            { comment,name,carNo },
             { new: true, runValidators: true }
         );
         if (!updatedComment) {

@@ -6,7 +6,7 @@ const SideBar = () => {
   return (
     <div>
         <div>
-          <div className='w-[300px] h-[750px] bg-gray-500 mb-5'>
+          <div className='w-[300px] h-screen bg-gray-500 '>
             <div className='pt-5'>
               <Link to={'/admin'} className='flex mb-3'>
                   <MdArrowBackIos className='text-black size-7 ml-3  '/>

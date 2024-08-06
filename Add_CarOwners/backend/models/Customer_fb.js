@@ -7,10 +7,15 @@ const customer_fbSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now,
+    name: {
+        type: String,
+        required: true
+    },
+    carNo: {
+        type: String,
+        required: true
     }
+    
 });
 
 const Customer_fb = mongoose.model("Customer_fb", customer_fbSchema);
