@@ -51,7 +51,7 @@ export async function getcars(req, res, next) {
 // Update car
 export async function updatecar(req, res, next) {
   const carId = req.params.id;
-  const { Carname, Fueltype, Carnumber, Price, Seat } = req.body;
+  const { Carname, Fueltype, Carnumber, Price, Seat, Location, Car_type} = req.body;
 
   const updatedcar = {
     Carname,
@@ -59,6 +59,8 @@ export async function updatecar(req, res, next) {
     Carnumber,
     Price,
     Seat,
+    Location,
+    Car_type
   };
 
   try {
