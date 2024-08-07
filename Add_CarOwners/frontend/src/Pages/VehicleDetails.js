@@ -1,6 +1,6 @@
 import React from "react";
 import { useFetchData } from "../hooks/useFetchData";
-import {useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 
 const VehicleDetails = () => {
   // const [loading, setLoading] = useState(false);
@@ -29,14 +29,7 @@ const VehicleDetails = () => {
   if (loading || !carsData) {
     return <p>Loading...</p>;
   }
-  const handlesubmit = async (e)=>{
-    e.preventDefault();
-    try {
-      const res = await fetch('http://localhost:8050/api/updatecar/')
-    } catch (error) {
-      
-    }
-  }
+ 
   return (
     <div className=" h-3/4 bg-slate-300 ml-3 mr-3 mb-10">
       <div className="content ml-5 mr-5 mt-10 p-5">
@@ -97,10 +90,14 @@ const VehicleDetails = () => {
                   {carData.Car_type}
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                    <button className='bg-green-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-green-700 rounded-xl'>Update</button>
+                   <Link to={`/Addcar/update-vehicle/${carData._id}`}>
+                   <button className='bg-green-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-green-700 rounded-xl'>Update</button>
+                   </Link> 
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                    <Link>
                     <button className='bg-red-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-red-700 rounded-xl'>Delete</button>
+                    </Link>
                 </th>
               </tr>
             ))}

@@ -24,6 +24,9 @@ const AddcarDashboard = () => {
             <div className='ml-24 mt-5'>
                 <Link to="/Addcar/message" className='text-xl text-white hover:text-black'>Message</Link>
             </div>
+            {/* <div className='ml-24 mt-5'>
+                <Link to="/Addcar/update-vehicle" className='text-xl text-white hover:text-black'>Update Vehicle</Link>
+            </div> */}
            
           </div>
         </div>  
