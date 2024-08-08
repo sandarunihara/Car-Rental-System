@@ -36,7 +36,7 @@ const AddVehicle = () => {
         return setErrorMessage(data.message);
       }
       if (res.ok) {
-        navigate("/Addcar");
+        navigate("/Addcar/vehicle-details");
       }
     } catch (error) {
       setErrorMessage("An error Occured.please try again");
