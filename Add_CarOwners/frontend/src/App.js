@@ -12,6 +12,7 @@ import ViewFeedback from './Pages/ViewFeedback';
 import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
+import Searchpage from './Pages/Searchpage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
+        <Route path='/search' element={<Searchpage/>}/>
         <Route path='/admin/*' element={<AdminLayout/>}/>
         <Route path='/Addcar/*' element={<AddcarLayout/>}/>
       </Routes>

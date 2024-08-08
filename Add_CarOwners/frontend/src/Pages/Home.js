@@ -4,17 +4,20 @@ import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
 import Carcard from '../Components/Carcard';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
     Location:"",
-    vehicletype:""
+    Car_type:""
   })
 
+  const navigate=useNavigate()
+
   const handleChange=(e)=>{
-    e.preventDefault()
+    
     const {name,value}=e.target
     setsearchvalue(pre=>{
       return{
@@ -23,8 +26,29 @@ const Home = () => {
       }
     })
   }
-  const handlesubmit=()=>{
-    console.log(searchvalue);
+  const handlesubmit=async(e)=>{
+    e.preventDefault()
+    const response=await fetch('http://localhost:8050/api/search',{
+      method:'post',
+      headers:{
+        "content-type": "application/json"
+      },
+      body:JSON.stringify(searchvalue)
+
+    })
+
+    const responsedata=await response.json()
+    
+
+    if(responsedata.success){
+      navigate('/search',{ state: { searchResults: responsedata.data, searchDetails: searchvalue } })
+      
+      
+    }else{
+      console.log(responsedata.error);
+      
+    }
+
   }
 
 
@@ -43,14 +67,14 @@ const Home = () => {
         </button>
       </div>
       {/* *****************search car*********************  */}
-      <div className='mx-auto my-8 md:my-auto'>
+      <form className='mx-auto my-8 md:my-auto'>
         <div className="p-4 bg-white rounded-md shadow-2xl font-bold bg-opacity-35 hover:scale-110 transition-all duration-700">
           <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">Find Your Perfect Ride</h2>
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-4">
               <span className="material-icons">Location</span>
               <select className="p-2 border border-gray-300 rounded-md" required id='Location' name='Location' value={searchvalue.Location} onChange={handleChange}>
-                <option>Choose a Location</option>
+                <option value='' hidden>Choose a Location</option>
                 <option>Colombo</option>
                 <option>Gampaha</option>
                 <option>Kalutara</option>
@@ -72,20 +96,19 @@ const Home = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-2">
               <span className="material-icons">Vehicle Type</span>
-              <select className="p-2 border border-gray-300 rounded-md" required id='vehicletype' name='vehicletype' value={searchvalue.vehicletype} onChange={handleChange}>
-                <option>Select Type</option>
+              <select className="p-2 border border-gray-300 rounded-md" required id='Car_type' name='Car_type' value={searchvalue.Car_type} onChange={handleChange}>
+                <option value='' hidden>Select Type</option>
                 <option>CAR</option>
                 <option>SUV</option>
                 <option>VAN</option>
               </select>
             </div>
-            
-            <button className="px-8 md:px-16 py-2 text-white bg-black rounded-md" onClick={handlesubmit}>
+            <button type='submit' className="px-8 md:px-16 py-2 text-white bg-black rounded-md" onClick={handlesubmit}>
               Search
             </button>
           </div>
         </div>
-      </div>
+      </form>
       </div> 
 
 
@@ -112,7 +135,7 @@ const Home = () => {
         <div className='text-center'>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
           <div className='flex flex-wrap justify-center md:justify-between p-4 md:p-10'>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'><Carcard/></div>
+            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2 hover:scale-110 transition-all duration-500'><Carcard/></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
             <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
