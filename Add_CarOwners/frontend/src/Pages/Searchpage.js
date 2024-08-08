@@ -9,6 +9,8 @@ const Searchpage = () => {
     const location=useLocation();
     const { searchResults, searchDetails } = location.state;
     const results=searchResults
+    console.log(results);
+    
 
     if (!Array.isArray(searchResults) || searchResults.length === 0) {
         return <div className='bg-black text-white'>No results found.</div>;
@@ -51,7 +53,7 @@ const Searchpage = () => {
                     {chunkedResults.map((chunk, rowIndex) => (
                         <div key={rowIndex} className='grid grid-cols-5 gap-5 py-6 px-5 bg-black text-white'>
                             {chunk.map((car, index) => (
-                                <Carcard key={index} carname={car.Carname} fuel={car.Fueltype} location={car.Location} price={car.Price} />
+                                <Carcard key={index} carname={car.Carname} fuel={car.Fueltype} location={car.Location} price={car.Price} carId={car._id} date={searchDetails.rent_date}/>
                             ))}
                         </div>
                     ))}

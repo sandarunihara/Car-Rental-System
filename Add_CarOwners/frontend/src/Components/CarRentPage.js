@@ -4,7 +4,7 @@ import Footer from './Footer'
 import { IoChevronBackOutline } from "react-icons/io5";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { GiGearStickPattern } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
@@ -12,6 +12,43 @@ import { PiEngine } from "react-icons/pi";
 
 const CarRentPage = () => {
 
+    const location=useLocation();
+    const { id,rent_date } = location.state;
+
+    const [cardata,setcardata]=useState({
+        Car_type: "",
+        Carname:"",
+        Carnumber: "",
+        Fueltype: "",
+        Location:"",
+        Price:0,
+        Seat:0,
+    })
+
+    
+    const fetchdata=async()=>{
+        const response=await fetch(`http://localhost:8050/api/fetchcar/${id}`,{
+            method:'get',
+            headers:{
+                "content-type": "application/json"
+            } 
+        })
+        const responsedata=await response.json()
+        setcardata({
+            Car_type: responsedata.Car_type || "",
+            Carname: responsedata.Carname || "",
+            Carnumber: responsedata.Carnumber || "",
+            Fueltype: responsedata.Fueltype || "",
+            Location: responsedata.Location || "",
+            Price: responsedata.Price || 0,
+            Seat: responsedata.Seat || 0,
+        });    
+    }
+    useEffect(()=>{
+        fetchdata()
+    },[])
+
+    // image change
     const [ImgIndex,setImgIndex]=useState(0)
 
     const images=[
@@ -19,14 +56,6 @@ const CarRentPage = () => {
         'img/2.jpg',
         'img/3.jpg'
     ]
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-          setImgIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 3000); // Change image every 3 seconds
-    
-        return () => clearInterval(interval); // Cleanup on unmount
-      }, []);
 
     const handleNext=()=>{
         setImgIndex(pre=>(pre+1)%images.length)
@@ -36,9 +65,20 @@ const CarRentPage = () => {
         setImgIndex(pre=>(pre-1+images.length)%images.length)
     }
 
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //       setImgIndex((prevIndex) => (prevIndex + 1) % images.length);
+    //     }, 3000); // Change image every 3 seconds
+    
+    //     return () => clearInterval(interval); // Cleanup on unmount
+    //   }, []);
+
     // Price cal
-    const fixprice=14000
+    const fixprice=cardata.Price
     const [price,setprice]=useState(fixprice)
+    useEffect(()=>{
+        setprice(cardata.Price)
+    },[cardata])
 
     const driver=(e)=>{
         if(e.target.checked){
@@ -76,14 +116,14 @@ const CarRentPage = () => {
                     <div className='ml-20 '>
                         <div className='flex -ml-3'>
                             <img src='img/mustang.png'  alt='#' className='h-[50px]' />
-                            <h1 className='mt-2 ml-4 text-2xl font-bold'>Ford Mustang</h1>
+                            <h1 className='mt-2 ml-4 text-2xl font-bold'>{cardata.Carname}</h1>
                         </div>
                         <p className='text-2xl font-bold mt-3 mb-2'>Rs. {fixprice}.00 <span className='font-normal'>/DAY</span></p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>100</span> KM</span> Daily Mileage Limit</p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>150</span> LKR</span> Extra Mileage Charge <span className='text-xs'>(per km)</span></p>
                         <div className='px-2 py-2 flex justify-between border border-stone-200 rounded-lg mb-4'>
                             <span className='mt-2 text-lg font-semibold'>Pick Up</span>
-                            <input type="date"  className="p-2  rounded-md" />
+                            <input type="date"  className="p-2  rounded-md" value={rent_date} />
                         </div>
                         <Link to={"/displayfeedback"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
                         <h2 className='mt-9 text-2xl font-bold mb-3'>Extra Add</h2>
@@ -103,7 +143,7 @@ const CarRentPage = () => {
                     <div className='flex text-5xl justify-between w-[900px]'>
                         <div className='flex'>
                         <MdAirlineSeatReclineNormal/>
-                        <p className='text-xl mt-2 ml-3'>4 Seats</p>
+                        <p className='text-xl mt-2 ml-3'>{cardata.Seat} Seats</p>
                         </div>
                         <div className='flex'>
                         <GiGearStickPattern/>
@@ -111,7 +151,7 @@ const CarRentPage = () => {
                         </div>
                         <div className='flex'>
                         <BsFuelPump/>
-                        <p className='text-xl mt-2 ml-3'>patrol</p>
+                        <p className='text-xl mt-2 ml-3'>{cardata.Fueltype}</p>
                         </div>
                         <div className='flex'>
                         <PiEngine/>
@@ -151,7 +191,7 @@ const CarRentPage = () => {
 
                 <div className='bg-stone-300 rounded-b-xl flex justify-end h-[80px]'>
                     <p className='mr-20 my-auto text-2xl font-semibold'>Total : Rs.{price}.00</p>
-                    <button className='bg-black h-[45px] px-5 my-auto mr-5 rounded text-white font-semibold hover:text-black hover:bg-white hover:scale-110 hover:shadow-2xl transition-all duration-400' >Purchase Vehicle </button>
+                    <button className='bg-black h-[45px] px-5 my-auto mr-5 rounded text-white font-semibold hover:text-black hover:bg-white hover:scale-110 hover:shadow-2xl transition-all duration-400' onClick={fetchdata} >Purchase Vehicle </button>
                 </div>
 
             </div>
