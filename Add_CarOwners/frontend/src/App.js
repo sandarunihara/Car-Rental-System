@@ -15,6 +15,7 @@ import AddVehicle from "./Pages/AddVehicle";
 import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
+import { UpdateOwner } from "./Pages/UpdateOwner";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function AdminLayout() {
           <Route path="add-owner" element={<AddOwner />} />
           <Route path="owner-details" element={<OwnerDetails />} />
           <Route path="view-feedback" element={<ViewFeedback />} />
+          <Route path="update-owner/:id" element={<UpdateOwner/>} />
         </Routes>
       </div>
     </div>
