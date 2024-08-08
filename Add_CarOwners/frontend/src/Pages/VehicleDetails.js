@@ -1,38 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFetchData } from "../hooks/useFetchData";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button, Modal } from "flowbite-react";
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 const VehicleDetails = () => {
-  const navigate = useNavigate();
   const { data: carsData, loading } = useFetchData("/getcars");
   const [showAll, setShowAll] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [deletecarId, setDeletecarId] = useState('');
+  const [currentData, setCurrentData] = useState([]);
 
-  if (loading || !carsData) {
+  useEffect(() => {
+    if (carsData) {
+      setCurrentData(carsData);
+    }
+  }, [carsData]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  
-  const handleTodelete = async (id) => {
+  if (!carsData || carsData.length === 0) {
+    return <p>No data available.</p>;
+  }
+
+  const handleToDelete = async (id) => {
     try {
       const res = await fetch('http://localhost:8050/api/deletecar/' + id, {
         method: 'DELETE'
-      })
+      });
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
       } else {
-        navigate('/Addcar/vehicle-details')
+        setCurrentData((prev) =>
+          prev.filter((cd) => cd._id !== deletecarId)
+        );
+        setShowModal(false);
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const toggleShowAll = () => {
     setShowAll(prevState => !prevState);
-  }
+  };
 
-  const rowsToShow = showAll ? carsData : carsData.slice(0, 6);
+  const rowsToShow = currentData ? (showAll ? currentData : currentData.slice(0, 6)) : [];
 
   return (
     <div className="h-3/4 bg-slate-300 ml-3 mr-3 mb-10 overflow-auto">
@@ -67,7 +83,7 @@ const VehicleDetails = () => {
                   </Link>
                 </td>
                 <td className="p-3 text-sm font-semibold tracking-wide text-left">
-                  <button className='bg-red-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-red-700 rounded-xl' onClick={() => handleTodelete(carData._id)}>Delete</button>
+                  <button className='bg-red-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-red-700 rounded-xl' onClick={() => { setShowModal(true); setDeletecarId(carData._id); }}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -81,6 +97,30 @@ const VehicleDetails = () => {
           </div>
         )}
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size='md'
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className='text-center'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+              Are you sure you want to delete this post?
+            </h3>
+            <div className='flex justify-center gap-4'>
+              <Button color='failure' onClick={() => handleToDelete(deletecarId)}>
+                Yes, I'm sure
+              </Button>
+              <Button color='gray' onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
