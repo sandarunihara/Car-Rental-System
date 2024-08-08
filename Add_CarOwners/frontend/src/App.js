@@ -1,18 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Home from './Pages/Home';
-import CarRentPage from './Components/CarRentPage';
-import SignUp from './Pages/SignUp';
-import Login from './Pages/Login';
-import Feedback from './Pages/Feedback';
-import SideBar from './Components/SideBar';
-import OwnerDetails from './Pages/OwnerDetails';
-import AddOwner from './Pages/AddOwner';
-import ViewFeedback from './Pages/ViewFeedback';
-import AddcarDashboard from './Components/AddcarDashboard';
-import VehicleDetails from './Pages/VehicleDetails';
-import AddVehicle from './Pages/AddVehicle';
-import Searchpage from './Pages/Searchpage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Home from "./Pages/Home";
+import CarRentPage from "./Components/CarRentPage";
+import SignUp from "./Pages/SignUp";
+import Login from "./Pages/Login";
+import Feedback from "./Pages/Feedback";
+import SideBar from "./Components/SideBar";
+import OwnerDetails from "./Pages/OwnerDetails";
+import AddOwner from "./Pages/AddOwner";
+import ViewFeedback from "./Pages/ViewFeedback";
+import AddcarDashboard from "./Components/AddcarDashboard";
+import VehicleDetails from "./Pages/VehicleDetails";
+import AddVehicle from "./Pages/AddVehicle";
 import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
@@ -24,12 +23,10 @@ function App() {
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/carpage" element={<CarRentPage />} />
-
-        <Route path='/Signup' element={<SignUp/>}/>
-        <Route path='/Login' element={<Login/>}/>
-        <Route path='/feedback' element={<Feedback/>}/>
-        <Route path='/search' element={<Searchpage/>}/>
-        <Route path='/admin/*' element={<AdminLayout/>}/>
+        <Route path="/Signup" element={<SignUp />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/Addcar/*" element={<AddcarLayout />} />
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
       </Routes>
