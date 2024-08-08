@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home';
@@ -14,7 +13,6 @@ import AddcarDashboard from './Components/AddcarDashboard';
 import VehicleDetails from './Pages/VehicleDetails';
 import AddVehicle from './Pages/AddVehicle';
 import Searchpage from './Pages/Searchpage';
-=======
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home";
@@ -32,7 +30,6 @@ import AddVehicle from "./Pages/AddVehicle";
 import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
->>>>>>> bbd0bb3bd0496db9a71c4b3291f140edbf231252
 
 function App() {
   return (
@@ -41,21 +38,19 @@ function App() {
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/carpage" element={<CarRentPage />} />
-<<<<<<< HEAD
+
         <Route path='/Signup' element={<SignUp/>}/>
         <Route path='/Login' element={<Login/>}/>
         <Route path='/feedback' element={<Feedback/>}/>
         <Route path='/search' element={<Searchpage/>}/>
         <Route path='/admin/*' element={<AdminLayout/>}/>
         <Route path='/Addcar/*' element={<AddcarLayout/>}/>
-=======
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/Addcar/*" element={<AddcarLayout />} />
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
->>>>>>> bbd0bb3bd0496db9a71c4b3291f140edbf231252
       </Routes>
     </Router>
   );
