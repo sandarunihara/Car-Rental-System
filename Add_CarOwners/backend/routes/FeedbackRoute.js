@@ -1,77 +1,72 @@
-import express from 'express';
+import express from "express";
 
 import {
   addCommentcontroller,
   displayCommentcontroller,
   updateCommentcontroller,
-  deleteCommentcontroller
-} from '../Controllers/FeedbackController.js';
+  deleteCommentcontroller,
+} from "../Controllers/FeedbackController.js";
 
 import {
   rentcarController,
   carDetailscontroller,
   updaterentcar,
-  deleterentcontroller
-} from '../Controllers/RentcarController.js';
+  deleterentcontroller,
+} from "../Controllers/RentcarController.js";
 
 import {
   AddcarOwner,
   getCarOwner,
   updateCarowner,
   deleteCarOwner,
-  fetchCarOwner
-} from '../Controllers/CarOwnerController.js';
+  fetchCarOwner,
+} from "../Controllers/CarOwnerController.js";
 
-import { 
-  signup, 
-  signin 
-} from '../Controllers/authController.js';
+import { signup, signin } from "../Controllers/authController.js";
 
 import {
   Addcars,
   getcars,
   updatecar,
   deletecar,
-  fetchcar
-} from '../Controllers/AddcarController.js';
+  fetchcar,
+} from "../Controllers/AddcarController.js";
 
-import { 
-  searchcarController 
-} from '../Controllers/SearchCarController.js';
+import { searchcarController } from "../Controllers/SearchCarController.js";
 
 const router = express.Router();
 
 // Feedback routes
-router.post('/addfeedback', addCommentcontroller);
-router.post('/displayfeedback', displayCommentcontroller);
-router.put('/updatefeedback', updateCommentcontroller);
-router.delete('/deletefeedback', deleteCommentcontroller);
+router.post("/addfeedback", addCommentcontroller);
+router.post("/displayfeedback", displayCommentcontroller);
+router.put("/updatefeedback", updateCommentcontroller);
+router.delete("/deletefeedback", deleteCommentcontroller);
 
 // RentCar routes
-router.post('/rentcar', rentcarController);
-router.post('/displayrent', carDetailscontroller);
-router.post('/updaterent', updaterentcar);
-router.post('/deleterent', deleterentcontroller);
+router.post("/rentcar", rentcarController);
+router.post("/displayrent", carDetailscontroller);
+router.post("/updaterent", updaterentcar);
+router.post("/deleterent", deleterentcontroller);
 
 // Car owner routes
-router.post('/addowner', AddcarOwner);
-router.get('/getcar', getCarOwner);
-router.put('/update/:id', updateCarowner);
-router.delete('/delete/:id', deleteCarOwner);
-router.get('/get/:id', fetchCarOwner);
+router.post("/addowner", AddcarOwner);
+router.get("/getcar", getCarOwner);
+router.put("/update/:id", updateCarowner);
+router.delete("/delete/:id", deleteCarOwner);
+router.get("/get/:id", fetchCarOwner);
 
 // AddCustomer routes
-router.post('/signup', signup);
-router.post('/signin', signin);
+router.post("/signup", signup);
+router.post("/signin", signin);
 
 // Car routes
-router.post('/createcar', Addcars);
-router.get('/getcar', getcars);
-router.put('/updatecar/:id', updatecar);
-router.delete('/deletecar/:id', deletecar);
-router.get('/fetchcar/:id', fetchcar);
+router.post("/createcar", Addcars);
+router.get("/getcars", getcars);
+router.put("/updatecar/:id", updatecar);
+router.delete("/deletecar/:id", deletecar);
+router.get("/fetchcar/:id", fetchcar);
 
 // Search route
-router.post('/search',searchcarController)
+router.post("/search", searchcarController);
 
 export default router;

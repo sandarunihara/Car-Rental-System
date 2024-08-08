@@ -9,14 +9,16 @@ const SignUp = () => {
 
   const handlechange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
+    console.log(formData);
   };
 
   const handlesubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     if (
       !formData.username ||
       !formData.email ||
-      formData.password ||
+      !formData.password ||
       !formData.nic ||
       !formData.mobile
     ) {

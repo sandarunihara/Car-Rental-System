@@ -1,5 +1,4 @@
 import React from 'react'
-import NavBar from '../Components/NavBar';
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { Button } from "flowbite-react";

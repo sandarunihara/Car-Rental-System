@@ -85,7 +85,7 @@ const CarRentPage = () => {
                             <span className='mt-2 text-lg font-semibold'>Pick Up</span>
                             <input type="date"  className="p-2  rounded-md" />
                         </div>
-                        <Link to={"/carpage"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
+                        <Link to={"/displayfeedback"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
                         <h2 className='mt-9 text-2xl font-bold mb-3'>Extra Add</h2>
                         <div className='flex'>
                         <input type='checkbox' onChange={driver} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
@@ -128,7 +128,7 @@ const CarRentPage = () => {
                 <div className=' w-full flex  justify-center '>
                 <iframe src="https://lottie.host/embed/a4461e4c-ccad-499c-80ac-718ad5b3fdcb/mKz80XFBdM.json" className='w-[700px] h-[700px]'></iframe>
                     <div className='w-[600px] h-[480px] p-6 mt-28  bg-black rounded-lg absolute bg-opacity-95'>
-                        <form className='mt-20 text-white'>
+                        <form className='mt-20'>
                         <div className='flex justify-between gap-10 mb-8'>
                                 <label className='font-semibold'>Name</label>
                                 <input type='text' placeholder='Enter Your Name' className='p-2 w-[350px] rounded-lg'/>

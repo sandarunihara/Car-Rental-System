@@ -3,26 +3,32 @@ import { MdArrowBackIos } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 const AddcarDashboard = () => {
+
   return (
-    <div className='bg-black absolute w-full h-full '>
-        <div className='bg-white w-[1450px] mx-auto h-[750px]  mt-5'>
+    <div>
+        <div>
           <div className='w-[300px] h-[750px] bg-gray-500 mb-5'>
-            <div className=' pt-5'>
-              <Link to={'/'} className='flex mb-3'>
+            <div className='pt-5'>
+              <Link to={'/Addcar'} className='flex mb-3'>
                   <MdArrowBackIos className='text-black size-7 ml-3  '/>
                   <span className='text-xl'>BACK</span>
               </Link>
             </div>
-            <span className='text-white text-3xl font-bold ml-12 '>Vehicles</span><br/>
+            <span className='text-white text-3xl font-bold ml-12 '>Dashboard</span><br/>
             <div className='ml-24 mt-10'>
-                <span className='text-xl'>Vehicle details</span>
+                <Link to="/Addcar/vehicle-details" className='text-xl text-white hover:text-black'>Vehicle details</Link>
             </div>
             <div className='ml-24 mt-5'>
-                <span className='text-xl'>Add Vehicle</span>
+                <Link to="/Addcar/add-vehicle" className='text-xl text-white hover:text-black'>Add Vehicle</Link>
             </div>
+            <div className='ml-24 mt-5'>
+                <Link to="/Addcar/message" className='text-xl text-white hover:text-black'>Message</Link>
+            </div>
+            {/* <div className='ml-24 mt-5'>
+                <Link to="/Addcar/update-vehicle" className='text-xl text-white hover:text-black'>Update Vehicle</Link>
+            </div> */}
            
           </div>
-                
         </div>  
     </div>
   )
