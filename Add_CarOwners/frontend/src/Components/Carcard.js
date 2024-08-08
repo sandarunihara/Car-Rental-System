@@ -6,7 +6,7 @@ import { GrLinkNext } from "react-icons/gr";
 const Carcard = ({carname,fuel,location,price}) => {
 
   return (
-    <div className='h-full hover:scale-110 transition-all duration-500 '>
+    <div className='h-full hover:scale-110 transition-all duration-500 border border-gray-500'>
         <div className='bg-white text-black h-full'>
         
             <img className='w-fit h-[200px] mx-auto' src="img/img-2.jpg"/>
