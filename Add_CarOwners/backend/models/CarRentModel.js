@@ -5,7 +5,7 @@ const rentschema = new mongoose.Schema({
     nic: String,
     mobile: Number,
     email: String,
-    rent_date: Number,
+    rent_date: Date,
     price: Number,
     // pin: Number,
     Carnumber: String,
