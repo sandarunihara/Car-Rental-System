@@ -11,6 +11,7 @@ const VehicleDetails = () => {
     return <p>Loading...</p>;
   }
 
+  
   const handleTodelete = async (id) => {
     try {
       const res = await fetch('http://localhost:8050/api/deletecar/' + id, {
