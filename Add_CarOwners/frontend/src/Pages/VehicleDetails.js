@@ -9,14 +9,14 @@ const VehicleDetails = () => {
   const [showAll, setShowAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [deletecarId, setDeletecarId] = useState("");
-  const [currentData, setCurrentData] = useState({});
+  const [currentData, setCurrentData] = useState([]);
   const [showingData, setShowingData] = useState([]);
   useEffect(() => {
     if (carsData) setCurrentData(carsData.addcars);
   }, [carsData]);
 
   useEffect(() => {
-    if(!currentData) return
+    if (!currentData) return;
     if (showAll) {
       setShowingData(currentData);
     } else {
