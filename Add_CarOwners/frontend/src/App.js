@@ -19,17 +19,20 @@ import Searchpage from "./Pages/Searchpage";
 
 function App() {
   return (
+    
     <Router>
       <Routes>
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/carpage" element={<CarRentPage />} />
+        <Route path="/carpage/carrentmessage" element={<Carpurchasemessagepage />} />
         <Route path="/Signup" element={<SignUp />} />
         <Route path="/search" element={<Searchpage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="/Addcar/*" element={<AddcarLayout />} />
+        <Route path="/userdashbord/*" element={< UserLayout/>} />
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
       </Routes>
     </Router>
@@ -62,10 +65,26 @@ function AddcarLayout() {
           <Route path="add-vehicle" element={<AddVehicle />} />
           <Route path="message" element={<Message/>} />
           <Route path="update-vehicle/:id" element={<UpdateVehicle/>} />
+          <Route path="/" element={<Addcar/>}/>
         </Routes>
       </div>
     </div>
   );
+}
+
+function UserLayout(){
+  return(
+    <div className="flex">
+      <Usersidebar/>
+      <div className="flex-grow">
+        <Routes>
+            <Route path="dash" element={<UserDashboard />} />
+            <Route path="booking" element={<Bookingdashbord />} />
+            <Route path="usermsg" element={<Usermsg />} />
+          </Routes>
+      </div>
+    </div>
+  )
 }
 
 export default App;
