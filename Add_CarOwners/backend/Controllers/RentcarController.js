@@ -62,7 +62,7 @@ export async function carDetailscontroller(req, res) {
         const  nic  = req.body;
         const user = await carrentmodel.find(nic);
 
-        if (!user) {
+        if (user.length===0) {
             throw new Error("No rent");
         }
 
@@ -84,14 +84,17 @@ export async function carDetailscontroller(req, res) {
 // Update
 export async function updaterentcar(req, res) {
     try {
-        const { _id, ...resBody } = req.body;
+        const { _id,name, nic, mobile, email, rent_date,price,Carnumber } = req.body;
 
-        const updaterent = await carrentmodel.findByIdAndUpdate(_id, resBody);
-        const newdata = await carrentmodel.findById(_id);
+        const updaterentdetails = {
+            name, nic, mobile, email, rent_date,price,Carnumber
+          };
+
+        const updaterent = await carrentmodel.findByIdAndUpdate(_id, updaterentdetails);
 
         res.status(200).json({
             message: "Rent updated successfully",
-            data: newdata,
+            data: updaterent,
             success: true,
             error: false
         });
@@ -107,9 +110,9 @@ export async function updaterentcar(req, res) {
 // Delete
 export async function deleterentcontroller(req, res) {
     try {
-        const { pin } = req.body;
+        const { _id } = req.body;
 
-        const deleteone = await carrentmodel.findOneAndDelete({ pin });
+        const deleteone = await carrentmodel.findOneAndDelete({ _id });
 
         res.status(200).json({
             message: "Delete successful",

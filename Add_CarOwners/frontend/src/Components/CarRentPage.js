@@ -4,7 +4,7 @@ import Footer from './Footer'
 import { IoChevronBackOutline } from "react-icons/io5";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { GiGearStickPattern } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
@@ -14,6 +14,8 @@ const CarRentPage = () => {
 
     const location=useLocation();
     const { id,rent_date } = location.state;
+
+    const navigate=useNavigate()
 
     const [cardata,setcardata]=useState({
         Car_type: "",
@@ -25,7 +27,6 @@ const CarRentPage = () => {
         Seat:0,
     })
 
-    
     const fetchdata=async()=>{
         const response=await fetch(`http://localhost:8050/api/fetchcar/${id}`,{
             method:'get',
@@ -48,6 +49,7 @@ const CarRentPage = () => {
         fetchdata()
     },[])
 
+
     // image change
     const [ImgIndex,setImgIndex]=useState(0)
 
@@ -65,19 +67,21 @@ const CarRentPage = () => {
         setImgIndex(pre=>(pre-1+images.length)%images.length)
     }
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       setImgIndex((prevIndex) => (prevIndex + 1) % images.length);
-    //     }, 3000); // Change image every 3 seconds
-    
-    //     return () => clearInterval(interval); // Cleanup on unmount
-    //   }, []);
 
     // Price cal
     const fixprice=cardata.Price
     const [price,setprice]=useState(fixprice)
     useEffect(()=>{
         setprice(cardata.Price)
+        setrentdata({
+            price:price,
+            Carnumber:cardata.Carnumber,
+            name:"",
+            nic:"",
+            mobile:"",
+            email:"",
+            rent_date:rent_date,
+        })
     },[cardata])
 
     const driver=(e)=>{
@@ -97,8 +101,70 @@ const CarRentPage = () => {
 
     }
 
+
+    // rent data
+    const [rentdata,setrentdata]=useState({
+        name:"",
+        nic:"",
+        mobile:"",
+        email:"",
+        rent_date:rent_date,
+        price:price,
+        Carnumber:cardata.Carnumber
+    })
+
+    useEffect(()=>{
+        setrentdata(pre=>{
+            return{
+                ...pre,
+                price:price
+            }
+        })
+    },[price])
+
+    const handleChange=(e)=>{
+    
+        const {name,value}=e.target
+        setrentdata(pre=>{
+          return{
+            ...pre,
+            [name]:value
+          }
+        })
+      }
+    
+    //   fetch rent data
+    const handlesubmit=async(e)=>{
+        e.preventDefault()
+        const response=await fetch('http://localhost:8050/api/rentcar',{
+            method:'post',
+            headers:{
+                "content-type": "application/json"
+            },
+            body:JSON.stringify(rentdata)
+        })
+
+        const responsedata=await response.json()
+        console.log(responsedata);
+
+        if(responsedata.success){
+            setrentdata({
+                price:price,
+                Carnumber:cardata.Carnumber,
+                name:"",
+                nic:"",
+                mobile:"",
+                email:"",
+                rent_date:rent_date,
+            })
+            navigate('/carpage/carrentmessage')
+        }
+        
+    }
+      
   return (
     <div >
+        
         <div className='bg-black pb-20'>
             <NavBar/>
             <div className='bg-white w-[1300px]  mt-10 rounded-xl  mx-auto'>
@@ -169,31 +235,57 @@ const CarRentPage = () => {
                 <iframe src="https://lottie.host/embed/a4461e4c-ccad-499c-80ac-718ad5b3fdcb/mKz80XFBdM.json" className='w-[700px] h-[700px]'></iframe>
                     <div className='w-[600px] h-[480px] p-6 mt-28  bg-black rounded-lg absolute bg-opacity-95'>
                         <form className='mt-20'>
-                        <div className='flex justify-between gap-10 mb-8'>
-                                <label className='font-semibold'>Name</label>
-                                <input type='text' placeholder='Enter Your Name' className='p-2 w-[350px] rounded-lg'/>
+                            <div className='flex justify-between gap-10 mb-8'>
+                                <label className='font-semibold text-white'>Name</label>
+                                <input className='p-2 w-[350px] rounded-lg' 
+                                type='text' 
+                                placeholder='Enter Your Name'
+                                id='name'
+                                name='name'
+                                value={rentdata.name}
+                                onChange={handleChange}
+                                />
                             </div>
                             <div className='flex justify-between gap-10 mb-8'>
-                                <label className='font-semibold'>NIC</label>
-                                <input type='text' placeholder='Enter Your NIC' className='p-2 w-[350px] rounded-lg'/>
+                                <label className='font-semibold text-white'>NIC</label>
+                                <input className='p-2 w-[350px] rounded-lg' 
+                                type='text' 
+                                placeholder='Enter Your NIC'
+                                id='nic'
+                                name='nic'
+                                value={rentdata.nic}
+                                onChange={handleChange}
+                                />
                             </div>
                             <div className='flex justify-between gap-10 mb-8'>
-                                <label className='font-semibold'>Email</label>
-                                <input type='email' placeholder='Enter Your Email' className='p-2 w-[350px] rounded-lg'/>
+                                <label className='font-semibold text-white'>Email</label>
+                                <input className='p-2 w-[350px] rounded-lg' 
+                                type='email' 
+                                placeholder='Enter Your Email'
+                                id='email'
+                                name='email'
+                                value={rentdata.email}
+                                onChange={handleChange}
+                                />
                             </div>
                             <div className='flex justify-between gap-10 mb-8'>
-                                <label className='font-semibold'>Mobile</label>
-                                <input type='text' placeholder='Enter Your Mobile Number' className='p-2 w-[350px] rounded-lg'/>
+                                <label className='font-semibold text-white'>Mobile</label>
+                                <input className='p-2 w-[350px] rounded-lg' 
+                                type='text' 
+                                placeholder='Enter Your Mobile Number'
+                                id='mobile'
+                                name='mobile'
+                                value={rentdata.mobile}
+                                onChange={handleChange}
+                                />
                             </div>
                         </form>
                     </div>
                 </div>
-
                 <div className='bg-stone-300 rounded-b-xl flex justify-end h-[80px]'>
                     <p className='mr-20 my-auto text-2xl font-semibold'>Total : Rs.{price}.00</p>
-                    <button className='bg-black h-[45px] px-5 my-auto mr-5 rounded text-white font-semibold hover:text-black hover:bg-white hover:scale-110 hover:shadow-2xl transition-all duration-400' onClick={fetchdata} >Purchase Vehicle </button>
+                    <button className='bg-black h-[45px] px-5 my-auto mr-5 rounded text-white font-semibold hover:text-black hover:bg-white hover:scale-110 hover:shadow-2xl transition-all duration-400' onClick={handlesubmit} >Purchase Vehicle </button>
                 </div>
-
             </div>
             
         </div>
@@ -203,3 +295,16 @@ const CarRentPage = () => {
 }
 
 export default CarRentPage
+
+
+
+
+
+
+ // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //       setImgIndex((prevIndex) => (prevIndex + 1) % images.length);
+    //     }, 3000); // Change image every 3 seconds
+    
+    //     return () => clearInterval(interval); // Cleanup on unmount
+    //   }, []);
