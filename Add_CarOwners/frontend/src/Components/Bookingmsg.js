@@ -67,6 +67,7 @@ const Bookingmsg = (data,callfun) => {
     const handlesubmit=(e)=>{
       e.preventDefault()
       updatedata()
+      seteditrent(false)
     }
 
     
