@@ -10,7 +10,7 @@ const Carrentmessage = () => {
     const navigate=useNavigate()
 
     const handledone=()=>{
-    navigate('/userdashbord')
+    navigate('/userdashbord/dash')
     }
 
   return (

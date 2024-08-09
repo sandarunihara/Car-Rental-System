@@ -21,6 +21,7 @@ import Usersidebar from "./Components/Usersidebar";
 import Bookingdashbord from "./Pages/Bookingdashbord";
 import Usermsg from "./Pages/usermsg";
 import Addcar from "./Pages/Addcar";
+import UserDashboard from "./Pages/UserDashboard";
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function UserLayout(){
       <Usersidebar/>
       <div className="flex-grow">
         <Routes>
+            <Route path="dash" element={<UserDashboard />} />
             <Route path="booking" element={<Bookingdashbord />} />
             <Route path="usermsg" element={<Usermsg />} />
           </Routes>
