@@ -41,8 +41,11 @@ export async function Addcars(req, res, next) {
 export async function getcars(req, res, next) {
   try {
     const addcars = await Addcar.find();
-
-    res.json(addcars);
+    const totalcars = await Addcar.countDocuments();
+    res.json({
+      addcars,
+      totalcars
+    });
   } catch (error) {
     next(error);
   }
@@ -95,86 +98,3 @@ export async function fetchcar(req, res, next) {
   }
 }
 
-// const { errorHandler } = require("../utills/error")
-// const Addcar=require('../models/AddcarModel')
-
-// async function AddcarController(req,res,next){
-//     const {Carname,Fueltype,Carnumber,Price,Seat,Location,Car_type}=req.body
-//     if(!Carname || !Fueltype || !Carnumber || !Price || !Seat || !Location || !Car_type){
-//         next(errorHandler(400,'All field are required'))
-//     }
-
-//     const newCar =new Addcar({
-//         Carname,
-//         Fueltype,
-//         Carnumber,
-//         Price,
-//         Seat,
-//         Location,
-//         Car_type
-//     });
-
-//     try{
-//         await newCar.save();
-//         res.json('Added new car successfull!');
-//     }catch(error){
-//         next(error);
-//     }
-
-// }
-
-// // getcar
-// async function getcars(req,res,next){
-//     Addcar.find().then((addcars)=>{
-//         res.json(addcars);
-//     }).catch((err)=>{
-//         console.log(err);
-//     })
-// }
-
-// // update car
-// async function updatecar(req,res,next){
-//     let carId = req.params.id;
-//     const {Carname,Fueltype,Carnumber,Price,Seat}=req.body;
-
-//     const updatedcar={
-//         Carname,
-//         Fueltype,
-//         Carnumber,
-//         Price,
-//         Seat
-//     }
-//     await Addcar.findByIdAndUpdate(carId,updatedcar).then(()=>{
-//         next(errorHandler(200,"Car update successfull!"))
-//     }).catch((error)=>{
-//         next(error);
-//     })
-// }
-
-// // delete car
-
-// async function deletecar(res,res,next){
-//     let carId = req.params.id;
-
-//     await Addcar.findByIdAndDelete(carId,).then(()=>{
-//         res.json("Car delete Successfull!")
-//     }).catch((err)=>{
-//         console.log(err);
-//     })
-// }
-
-// async function fetchcar(req,res,next){
-//     let carId = req.params.id;
-
-//     await Addcar.findById(carId).then((addcar)=>{
-//         res.json(addcar);
-//     }).catch((err)=>{
-//         console.log(err);
-//     })
-// }
-
-// module.exports=AddcarController
-// module.exports=getcars
-// module.exports=updatecar
-// module.exports=deletecar
-// module.exports=fetchcar

@@ -3,31 +3,26 @@ import carrentmodel from "../models/CarRentModel.js";
 
 export async function searchcarController(req, res) {
     try {
-        const rent_date = req.body[0];
-        const Location = req.body[1];
-        const car_type = req.body[2];
+        const { Location, Car_type, rent_date } = req.body;
+        
 
-        const cars = await Addcar.find(Location, car_type );
-        console.log(cars);
+        const cars = await Addcar.find({ Location,Car_type});
+        
 
-        const rentcar=await carrentmodel.find(rent_date)
-        console.log(rentcar);
+        const rentcar=await carrentmodel.find({ rent_date })
+        
 
-        // Create a set of car numbers from rentcar
-        const rentcarNumbers = new Set(rentcar.map(rc => rc.Carnumber));
+         // Create a set of car numbers from rentcar
+         const rentcarNumbers = new Set(rentcar.map(rc => rc.Carnumber));
 
-       // Filter the cars array
+        // Filter the cars array
         const availableCars = cars.filter(car => !rentcarNumbers.has(car.Carnumber));
+        
 
         res.status(200).json({
             success: true,
             error: false,
-            data: availableCars,
-            searchDetails: {
-                rent_date,
-                Location,
-                car_type
-            }
+            data: availableCars
         });
     } catch (err) {
         res.status(500).json({
