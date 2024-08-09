@@ -20,8 +20,7 @@ import Carpurchasemessagepage from "./Pages/Carpurchasemessagepage";
 import Usersidebar from "./Components/Usersidebar";
 import Bookingdashbord from "./Pages/Bookingdashbord";
 import Usermsg from "./Pages/usermsg";
-
-
+import Addcar from "./Pages/Addcar";
 
 function App() {
   return (
@@ -70,6 +69,7 @@ function AddcarLayout() {
           <Route path="add-vehicle" element={<AddVehicle />} />
           <Route path="message" element={<Message/>} />
           <Route path="update-vehicle/:id" element={<UpdateVehicle/>} />
+          <Route path="/" element={<Addcar/>}/>
         </Routes>
       </div>
     </div>
