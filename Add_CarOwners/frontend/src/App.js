@@ -16,6 +16,7 @@ import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
 import Searchpage from "./Pages/Searchpage";
+import Addcar from "./Pages/Addcar";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function AddcarLayout() {
           <Route path="add-vehicle" element={<AddVehicle />} />
           <Route path="message" element={<Message/>} />
           <Route path="update-vehicle/:id" element={<UpdateVehicle/>} />
+          <Route path="/" element={<Addcar/>}/>
         </Routes>
       </div>
     </div>
