@@ -15,7 +15,7 @@ import AddVehicle from "./Pages/AddVehicle";
 import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
-import { UpdateOwner } from "./Pages/UpdateOwner";
+import Searchpage from "./Pages/Searchpage";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/carpage" element={<CarRentPage />} />
         <Route path="/Signup" element={<SignUp />} />
+        <Route path="/search" element={<Searchpage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/admin/*" element={<AdminLayout />} />

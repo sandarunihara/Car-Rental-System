@@ -4,7 +4,7 @@ export async function rentcarController(req, res) {
     try {
         const { name, nic, mobile, email, rent_date,price,Carnumber } = req.body;
 
-        const user = await carrentmodel.findOne({ rent_date });
+        const user = await carrentmodel.findOne({ rent_date,Carnumber });
 
         if (user) {
             throw new Error("Already rented this vehicle that day");

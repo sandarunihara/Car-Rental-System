@@ -1,26 +1,35 @@
 import React from 'react'
 import { GiCarWheel } from "react-icons/gi";
+import { GrLinkNext } from "react-icons/gr";
+import { useNavigate } from 'react-router-dom';
 
-const Carcard = () => {
+
+const Carcard = ({carname,fuel,location,price,carId,date}) => {
+
+  const navigate=useNavigate()
+
+  const handlesubmit=()=>{
+    navigate('/carpage',{ state: { id:carId,rent_date:date} })
+  }
+  
+
   return (
-    <div className='h-full'>
-        <div className='bg-white text-black h-full'>
+    <div className='h-full hover:scale-110 transition-all duration-500 border border-black'>
+        <div className='bg-white text-black h-full rounded'>
         
-            <img className='w-fit h-2/3 mx-auto' src="img/img-2.jpg"/>
-            <h1 className='text-2xl text-left font-bold'>Name</h1>
-            <div className='flex'>
-                <GiCarWheel className='text-xl mt-[2px]'/>
-                <p className=''>fueltype | location</p>
+            <img className='w-fit h-[200px] mx-auto' src="img/img-2.jpg"/>
+            <h1 className='text-2xl text-left font-bold'>{carname}</h1>
+            <div className='flex '>
+                <GiCarWheel className='text-xl mt-[2px] text-green-500'/>
+                <p className='ml-2'>{fuel} | {location}</p>
             </div>
-            <div className='text-left '>
-                <p className=''>RS prices</p>
-                <p className=''>fueltype </p>
-            </div>
-
+            <p className='text-left text-lg'>RS:{price}/<span className='font-bold'>DAY</span></p>
             
-        
-
-    </div>
+            <button className='mt-2 ml-10 md:flex bg-orange-500 text-black font-bold py-3 px-6   hidden rounded  hover:bg-orange-700 transition-all duration-150 border-2 border-white' onClick={handlesubmit}>
+            Book Now <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
+            </button>
+            
+        </div>
     </div>
   )
 }
