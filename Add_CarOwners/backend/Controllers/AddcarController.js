@@ -41,8 +41,11 @@ export async function Addcars(req, res, next) {
 export async function getcars(req, res, next) {
   try {
     const addcars = await Addcar.find();
-
-    res.json(addcars);
+    const totalcars = await Addcar.countDocuments();
+    res.json({
+      addcars,
+      totalcars
+    });
   } catch (error) {
     next(error);
   }
