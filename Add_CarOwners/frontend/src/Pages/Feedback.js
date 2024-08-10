@@ -43,7 +43,6 @@ const Feedback = () => {
                   <textarea className='w-full px-3 py-2 border border-gray-300 rounded-md' id='feedback' name='feedback' rows='5' required></textarea>
                 </div>
                 <div className='flex justify-center'>
-                  
                   <Button gradientDuoTone="purpleToBlue" type='submit' className='px-8 py-1 rounded-xl mt-4'>Done</Button>
                 </div>
             </form>

@@ -16,14 +16,13 @@ import { DisplayFeedback } from "./Pages/DisplayFeedback";
 import Message from "./Pages/Message";
 import { UpdateVehicle } from "./Pages/UpdateVehicle";
 import Searchpage from "./Pages/Searchpage";
-
-import Searchpage from "./Pages/Searchpage";
 import Carpurchasemessagepage from "./Pages/Carpurchasemessagepage";
 import Usersidebar from "./Components/Usersidebar";
 import Bookingdashbord from "./Pages/Bookingdashbord";
 import Usermsg from "./Pages/usermsg";
 import Addcar from "./Pages/Addcar";
 import UserDashboard from "./Pages/UserDashboard";
+import { UpdateOwner } from "./Pages/UpdateOwner";
 
 
 function App() {
