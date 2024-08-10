@@ -26,9 +26,19 @@ export async function getCarOwner(req, res, next) {
     try {
         const carowners = await Carowner.find();
         const totalowners = await Carowner.countDocuments();
+        const now = new Date();
+        const oneMonthAgo = new Date(
+          now.getFullYear(),
+          now.getMonth() - 1,
+          now.getDate()
+        );
+        const lastMonthowners = await Carowner.countDocuments({
+          createdAt: { $gte: oneMonthAgo },
+        });
         res.json({
             carowners,
-            totalowners
+            totalowners,
+            lastMonthowners
         });
         
         

@@ -42,9 +42,19 @@ export async function getcars(req, res, next) {
   try {
     const addcars = await Addcar.find();
     const totalcars = await Addcar.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+    const lastMonthcars = await Addcar.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
     res.json({
       addcars,
-      totalcars
+      totalcars,
+      lastMonthcars
     });
   } catch (error) {
     next(error);
