@@ -25,7 +25,13 @@ export async function AddcarOwner(req, res, next) {
 export async function getCarOwner(req, res, next) {
     try {
         const carowners = await Carowner.find();
-        res.json(carowners);
+        const totalowners = await Carowner.countDocuments();
+        res.json({
+            carowners,
+            totalowners
+        });
+        
+        
     } catch (err) {
         next(errorHandler(500, err.message));
     }
