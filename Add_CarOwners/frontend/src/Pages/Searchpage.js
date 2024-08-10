@@ -49,9 +49,9 @@ const Searchpage = () => {
             </div>
         </div>
         <div className='flex-grow flex justify-center'>
-                <div className='w-screen'>
+                <div className='w-screen bg-black py-7'>
                     {chunkedResults.map((chunk, rowIndex) => (
-                        <div key={rowIndex} className='grid grid-cols-5 gap-5 py-6 px-5 bg-black text-white'>
+                        <div key={rowIndex} className='grid grid-cols-4  py-6 px-6 bg-black text-white'>
                             {chunk.map((car, index) => (
                                 <Carcard key={index} carname={car.Carname} fuel={car.Fueltype} location={car.Location} price={car.Price} carId={car._id} date={searchDetails.rent_date}/>
                             ))}
