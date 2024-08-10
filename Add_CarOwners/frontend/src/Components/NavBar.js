@@ -6,6 +6,7 @@ import { GrMenu, GrClose } from 'react-icons/gr';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const role="user"
 
 
   return (
@@ -17,9 +18,18 @@ const NavBar = () => {
           </div>
           <div className='hidden md:flex ml-48 space-x-6'>
             <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Home</Link>
-            <Link to={'/carpage'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
+            <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
             <a href='#' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Rent</a>
             <a href='#' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>About</a>
+            {
+              role==='Admin'?(
+                <Link to={'/admin'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Admin Panel</Link>
+              ):role === 'CarOwner' ? (
+                <Link to='/Addcar' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Dashboard</Link>
+              ):(
+                <Link to='/userdashbord/dash' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>My Rents</Link>
+              )
+            }
           </div>
           <div className='hidden md:flex space-x-5'>
             <Link to={'/Login'}><button className='mx-5 py-3 px-7 font-bold rounded border border-white hover:text-black hover:bg-white hover:scale-110 transition-all duration-150'>login</button></Link>

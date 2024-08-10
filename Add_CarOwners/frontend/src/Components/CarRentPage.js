@@ -76,6 +76,7 @@ const CarRentPage = () => {
         setrentdata({
             price:price,
             Carnumber:cardata.Carnumber,
+            Carname:cardata.Carname,
             name:"",
             nic:"",
             mobile:"",
@@ -110,7 +111,8 @@ const CarRentPage = () => {
         email:"",
         rent_date:rent_date,
         price:price,
-        Carnumber:cardata.Carnumber
+        Carnumber:cardata.Carnumber,
+        Carname:cardata.Carname
     })
 
     useEffect(()=>{
@@ -156,6 +158,7 @@ const CarRentPage = () => {
                 mobile:"",
                 email:"",
                 rent_date:rent_date,
+                Carname:cardata.Carname
             })
             navigate('/carpage/carrentmessage')
         }
