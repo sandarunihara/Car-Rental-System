@@ -15,6 +15,10 @@ const CarownerSchema = new Schema({
         type: Number,
         required: true
     },
+    // male:{
+    //     type:String,
+    //     required:true
+    // },
     gender: {
         type: String,
         required: true
