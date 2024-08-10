@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFetchData } from "../hooks/useFetchData";
 import { Link } from "react-router-dom";
 
 function OwnerDetails() {
 
   const { data: ownersData, loading } = useFetchData("/getowners");
+  const [formData,setformData] = useState([]);
+
+  useEffect(()=>{
+    if(!ownersData) return
+    if(ownersData) setformData(ownersData.carowners)
+  },[ownersData])
 
   if (loading || !ownersData) {
     return <p>Loading...</p>;
@@ -40,30 +46,33 @@ function OwnerDetails() {
             </tr>
           </thead>
           <tbody>
-            {ownersData.map((ownerData, i) => (
+            {formData.map((ownerData, i) => (
               <tr key={i}>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  {ownerData.Ownername}
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  {ownerData.OwnerNIC}
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  {ownerData.Ownerage}
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  {ownerData.Owneraddress}
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  {ownerData.name}
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  {ownerData.nic}
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  {ownerData.age}
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  {ownerData.gender}
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  {ownerData.address}
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
                    <Link to={`/admin/update-owner/${ownerData._id}`}>
                    <button className='bg-green-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-green-700 rounded-xl'>Update</button>
                    </Link> 
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                </td>
+                <td className="p-3 text-sm font-semibold tracking-wide text-left">
                     <Link>
                     <button className='bg-red-700 text-white font-semibold border-8 border-r-[25px] border-l-[25px] border-red-700 rounded-xl'>Delete</button>
                     </Link>
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>

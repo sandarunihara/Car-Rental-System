@@ -3,7 +3,7 @@ import { useFetchData } from "../hooks/useFetchData";
 import { HiAnnotation, HiArrowNarrowUp, HiDocumentText, HiOutlineUserGroup } from "react-icons/hi";
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
-//import AddcarDashboard from '../Components/AddcarDashboard';
+
 
 const Addcar = () => {
   const [totalcars, setTotalcars] = useState(0);
