@@ -38,7 +38,7 @@ const router = express.Router();
 
 // Feedback routes
 router.post("/addfeedback", addCommentcontroller);
-router.post("/displayfeedback", displayCommentcontroller);
+router.get("/displayfeedback", displayCommentcontroller);
 router.put("/updatefeedback", updateCommentcontroller);
 router.delete("/deletefeedback", deleteCommentcontroller);
 
