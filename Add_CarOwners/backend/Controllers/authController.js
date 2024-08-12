@@ -2,6 +2,7 @@ import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import User from "../models/UserModel.js";
+import Carowner from "../models/Carowner.js";
 
 export const signup = async (req, res, next) => {
   const { username, email, password,nic,mobile } = req.body;
@@ -25,6 +26,7 @@ export const signup = async (req, res, next) => {
     nic,
     mobile,
     password: hashedpassword,
+    role:"User"
   });
 
   try {
@@ -46,18 +48,42 @@ export const signin = async (req, res, next) => {
     }
 
     const validUser = await User.findOne({ email });
-    if (!validUser) {
-      throw new Error( "User not found");
+    const validOwner=await Carowner.findOne({email})
+    // if (!validUser || !validOwner) {
+    //   throw new Error( "User not found");
+    // }
+
+    let validPassword = false;
+    let tokendata = null;
+    let userData = null;
+
+    if (validUser) {
+      validPassword = bcryptjs.compareSync(password, validUser.password);
+
+       tokendata={
+        id:validUser._id,
+        email:validUser.email
+      }
+
+      userData=validUser
+
+    } else if (validOwner) {
+      validPassword = bcryptjs.compareSync(password, validOwner.password);
+
+       tokendata={
+        id:validOwner._id,
+        email:validOwner.email
+      }
+
+      userData=validOwner
+
     }
-    const validPassword = bcryptjs.compareSync(password, validUser.password);
+
     if (!validPassword) {
       throw new Error("Invalid password");
     }
 
-    const tokendata={
-      id:validUser._id,
-      email:validUser.email
-    }
+    
 
     const token = jwt.sign(tokendata, process.env.JWT_SECRET);
     // const { password: pass, ...rest } = validUser._doc;
@@ -69,7 +95,8 @@ export const signin = async (req, res, next) => {
 
     res.status(200).cookie("access_token", token, tokenOption).json({
       message:"Login successfully",
-      data:validUser,
+      token:token,
+      data:userData,
       success:true,
       error:false
   });

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
+  const {login}=useContext(AuthContext)
   const [formData, setformData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
@@ -30,9 +32,10 @@ const Login = () => {
       if (data.success) {
         console.log(data);
         navigate("/");
+        login(data.token,data.data)
         
       }else{
-        console.log(data);
+        console.log(data.message);
         
       }
     } catch (error) {
