@@ -21,32 +21,37 @@ export async function addCommentcontroller(req, res) {
     }
 }
 
+
+
 export async function displayCommentcontroller(req, res) {
     try {
-        const { comment,name,carNo } = req.body;
-        const foundComment = await Customer_fb.findOne({ comment,name,carNo });
+        
+        const foundComments = await Customer_fb.find();
 
-        if (!foundComment) {
+        if (!foundComments || foundComments.length === 0) {
             return res.status(404).json({
-                message: "Comment not found",
+                message: "No comments found",
                 error: true,
                 success: false
             });
         }
+        
         res.status(200).json({
-            message: "Display Comment",
+            message: "Comments retrieved successfully",
             error: false,
             success: true,
-            data: foundComment
+            data: foundComments
         });
     } catch (err) {
-        res.status(400).json({
+        res.status(500).json({
             message: err.message || err,
             error: true,
             success: false
         });
     }
 }
+
+
 
 export async function updateCommentcontroller(req, res) {
     try {
