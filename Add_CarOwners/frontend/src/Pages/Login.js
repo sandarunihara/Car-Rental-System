@@ -9,7 +9,7 @@ const Login = () => {
 
   const handlechange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handlesubmit = async (e) => {
@@ -27,11 +27,13 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (data.success === false) {
-        return setErrorMessage(data.message);
-      }
-      if (res.ok) {
+      if (data.success) {
+        console.log(data);
         navigate("/");
+        
+      }else{
+        console.log(data);
+        
       }
     } catch (error) {
       setErrorMessage("An error Occured.Please try again");

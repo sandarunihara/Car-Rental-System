@@ -6,7 +6,7 @@ import { GrMenu, GrClose } from 'react-icons/gr';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const role="user"
+  const role="CarOwner"
 
 
   return (
