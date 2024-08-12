@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Bookingmsg from '../Components/Bookingmsg'
+import { AuthContext } from '../Context/AuthContext'
 
 const Bookingdashbord = () => {
-  const nic=200132602948
+
+  let nic=''
+  const {authState} =useContext(AuthContext)
+  if(authState.user){
+    nic=authState.user.nic
+  }
+   
   const [rentdata,setrentdata]=useState([])
 
   const fetchdata=async()=>{

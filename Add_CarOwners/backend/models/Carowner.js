@@ -15,7 +15,6 @@ const CarownerSchema = new Schema({
         type: Number,
         required: true
     },
-    // 
     gender: {
         type: String,
         required: true
@@ -23,6 +22,18 @@ const CarownerSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    role:{
+        type:String,
+        required:true
     }
 });
 
