@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
@@ -48,8 +48,29 @@ const Home = () => {
       console.log(responsedata.error);
       
     }
+  }
+
+  // fetch data for RENT section
+  const [cardata,setcardata]=useState([])
+
+  const cardetails=async()=>{
+    const response=await fetch('http://localhost:8050/api/getcars',{
+      method:'get',
+      headers:{
+        "content-type": "application/json"
+      }
+    })
+
+    const responsedata=await response.json()
+    setcardata(responsedata.addcars)
+    console.log(cardata);
+    
 
   }
+
+  useEffect(()=>{
+    cardetails()
+  },[])
 
 
   return (
@@ -134,11 +155,21 @@ const Home = () => {
         {/* ***************RENT ********** */}
         <div className='text-center'>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
-          <div className='flex flex-wrap justify-center md:justify-between p-4 md:p-10'>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2 hover:scale-110 transition-all duration-500'><Carcard/></div>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
-            <div className='bg-stone-300 h-[300px] md:h-[450px] w-[200px] md:w-[300px] m-2'></div>
+          <div className=' md:justify-between p-4 md:p-10'>
+            <div className='flex flex-wrap justify-between m-2'>
+            {cardata.slice(0, 4).map((car, index) => (
+                <Carcard 
+                  key={index} 
+                  carname={car.Carname} 
+                  fuel={car.Fueltype} 
+                  location={car.Location} 
+                  price={car.Price} 
+                  carId={car._id} 
+                  date={Date} 
+                />
+              ))}
+
+            </div>
           </div>
         </div>
         {/* **************Service********** */}
@@ -161,8 +192,10 @@ const Home = () => {
             </div>
           </div>
         </div>
+        
       </div>
       <Footer/>
+
     </div>
   )
 }

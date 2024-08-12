@@ -7,8 +7,8 @@ const rentschema = new mongoose.Schema({
     email: String,
     rent_date: Date,
     price: Number,
-    // pin: Number,
     Carnumber: String,
+    Carname:String,
 
     // // Extra bool
     // baby_seat: Boolean,

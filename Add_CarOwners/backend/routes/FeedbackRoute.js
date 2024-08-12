@@ -50,10 +50,10 @@ router.post("/deleterent", deleterentcontroller);
 
 // Car owner routes
 router.post("/addowner", AddcarOwner);
-router.get("/getcar", getCarOwner);
-router.put("/update/:id", updateCarowner);
-router.delete("/delete/:id", deleteCarOwner);
-router.get("/get/:id", fetchCarOwner);
+router.get("/getowners", getCarOwner);
+router.put("/updateowner/:id", updateCarowner);
+router.delete("/deleteowner/:id", deleteCarOwner);
+router.get("/fetchowner/:id", fetchCarOwner);
 
 // AddCustomer routes
 router.post("/signup", signup);
