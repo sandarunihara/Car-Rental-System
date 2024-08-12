@@ -1,6 +1,7 @@
 import React from 'react'
-import { GiCarWheel } from "react-icons/gi";
-import { GrLinkNext } from "react-icons/gr";
+import { MdAirlineSeatReclineNormal } from "react-icons/md";
+import { BsFuelPump } from "react-icons/bs";
+import { IoLocationOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -14,21 +15,25 @@ const Carcard = ({carname,fuel,location,price,carId,date}) => {
   
 
   return (
-    <div className='h-full hover:scale-110 transition-all duration-500 border border-black'>
-        <div className='bg-white text-black h-full rounded'>
+    <div className='relative h-[460px] w-[330px]  cursor-pointer rounded-3xl mb-8 '>
+        <div className='relative bg-black h-full group overflow-hidden rounded-3xl' onClick={handlesubmit}>
         
-            <img className='w-fit h-[200px] mx-auto' src="img/img-2.jpg"/>
-            <h1 className='text-2xl text-left font-bold'>{carname}</h1>
-            <div className='flex '>
-                <GiCarWheel className='text-xl mt-[2px] text-green-500'/>
-                <p className='ml-2'>{fuel} | {location}</p>
-            </div>
-            <p className='text-left text-lg'>RS:{price}/<span className='font-bold'>DAY</span></p>
+            <img className='absolute inset-0 h-full w-full object-cover transform transition-transform duration-1000 group-hover:scale-105 rounded-2xl' src="img/8.jpg"/>
             
-            <button className='mt-2 ml-10 md:flex bg-orange-500 text-black font-bold py-3 px-6   hidden rounded  hover:bg-orange-700 transition-all duration-150 border-2 border-white' onClick={handlesubmit}>
-            Book Now <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
-            </button>
-            
+              <div className='absolute bottom-0 w-[100px] h-[100px] rounded-tr-[50px] text-white bg-black'>
+                <div className='relative mt-3  w-[85px] h-[85px] rounded-full border-2 bg-black border-amber-400 transform transition-transform duration-1000 group-hover:bg-amber-400'>
+                <p className='text-sm flex flex-col justify-center text-center mt-5 items-center text-amber-400 group-hover:text-black'>RS:{price}<br/><span className='font-bold text-white'>DAY</span></p>
+                </div>
+              </div>
+              <div className='absolute  bottom-0 right-0 p-4 text-white'>
+                <h1 className='text-2xl text-left font-bold'>{carname}</h1>
+                <div className='flex '>
+                    <BsFuelPump className='text-xl mt-[2px] text-amber-400'/>
+                    <p className='ml-2'>{fuel}  </p>
+                    <IoLocationOutline className='text-xl mt-[2px] text-amber-400 ml-2'/>
+                    <p className='ml-1'>{location}</p>
+                </div>
+              </div>
         </div>
     </div>
   )

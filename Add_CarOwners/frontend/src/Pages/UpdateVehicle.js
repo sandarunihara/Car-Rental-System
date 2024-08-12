@@ -56,7 +56,7 @@ export const UpdateVehicle = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div className=" w-full flex  justify-center ">
+    <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 ">
       <div className="w-[600px] p-6 mt-12  bg-black rounded-lg absolute bg-opacity-95">
         <form className="mt-20 text-white" onSubmit={handlesubmit}>
           <div className="flex justify-between gap-10 mb-8">

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const AddVehicle = () => {
   const [formData, setformData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
+  const [file,setfile] = useState();
   const navigate = useNavigate();
 
   const handlechange = (e) => {
@@ -13,6 +14,7 @@ const AddVehicle = () => {
     e.preventDefault();
 
     if (
+      
       !formData.Carname ||
       !formData.Fueltype ||
       !formData.Carnumber ||
@@ -22,14 +24,14 @@ const AddVehicle = () => {
       !formData.Car_type
     ) {
       setErrorMessage("All fields required");
-      console.log(formData);
+      console.log(formData,file);
     }
     try {
       setErrorMessage(null);
       const res = await fetch("http://localhost:8050/api/createcar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData,file),
       });
       const data = await res.json();
       if (data.success === false) {
@@ -42,10 +44,27 @@ const AddVehicle = () => {
       setErrorMessage("An error Occured.please try again");
     }
   };
+
+    // const getfile = (e)=>{
+    //   setfile(URL.createObjectURL(e.target.files[0]));
+    // }
   return (
-    <div className=" w-full flex  justify-center ">
+    <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
       <div className="w-[600px] p-6 mt-12  bg-black rounded-lg absolute bg-opacity-95">
-        <form className="mt-20 text-white" onSubmit={handlesubmit}>
+        <form className="mt-4 text-white overflow-auto" onSubmit={handlesubmit}>
+        {/* <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Car Image</label>
+            <input
+              type="file"
+              className="p-2 w-[350px] rounded-lg text-white"
+              id="CarImage"
+              name="car_photo"
+              onChange={getfile}
+              required
+              
+            />
+            <img src={file} className="w-[100px] h-[100px] bg-white"/>
+          </div> */}
           <div className="flex justify-between gap-10 mb-8">
             <label className="font-semibold">Car Name</label>
             <input

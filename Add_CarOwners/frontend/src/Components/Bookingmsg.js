@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { Button, Label, Modal, TextInput } from "flowbite-react";
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
-const Bookingmsg = (data,callfun) => {
+const Bookingmsg = (data,{callfun}) => {
     const rentdata=data.data
     const _id=rentdata._id
     
@@ -20,8 +20,9 @@ const Bookingmsg = (data,callfun) => {
             body:JSON.stringify({_id})
         })
 
-        if (response.success) {
-          callfun()
+        const responsedata=await response.json()
+
+        if (responsedata.success) {
           setShowModal(false)
         }
     }
@@ -36,7 +37,8 @@ const Bookingmsg = (data,callfun) => {
       name:rentdata.name,
       nic:rentdata.nic,
       price:rentdata.price,
-      rent_date:rentdata.rent_date
+      rent_date:rentdata.rent_date,
+      Carname:rentdata.Carname
     })
     
 
@@ -74,7 +76,7 @@ const Bookingmsg = (data,callfun) => {
   return (
     <div className='bg-white w-[900px]  p-4 rounded-lg shadow-2xl transition-all duration-700 hover:scale-105 mb-5'>
         <div className='flex justify-between'>
-            <p className='text-3xl font-semibold'>Honda Vezel<span className='text-sm'>({rentdata.Carnumber})</span></p>
+            <p className='text-3xl font-semibold'>{rentdata.Carname}<span className='text-sm'>({rentdata.Carnumber})</span></p>
             <div className='flex text-2xl gap-4 items-center'>
                 <div className='hover:bg-gradient-to-r from-green-300 to-green-800 rounded-full p-2 cursor-pointer' onClick={()=>{seteditrent(true)}}>
                 <MdModeEdit />

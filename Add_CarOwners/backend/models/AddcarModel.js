@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const AddcarSchema = new mongoose.Schema({
+    // CarImage:{
+    //     type:String,
+    //     default:'https://thumbs.dreamstime.com/b/art-illustration-326303269.jpg',
+    // },
     Carname: {
         type: String,
         required: true

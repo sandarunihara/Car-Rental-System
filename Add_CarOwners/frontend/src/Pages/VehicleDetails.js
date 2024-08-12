@@ -54,11 +54,14 @@ const VehicleDetails = () => {
   };
 
   return (
-    <div className="h-3/4 bg-slate-300 ml-3 mr-3 mb-10 overflow-auto">
+    <div className=" bg-slate-300 ml-3 mr-3 mb-10 h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
       <div className="content ml-5 mr-5 mt-10 p-5">
         <table className="w-full">
           <thead className="bg-gray-50 border-b-2 border-gray-200">
             <tr>
+              {/* <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                Car Image
+              </th> */}
               <th className="p-3 text-sm font-semibold tracking-wide text-left">
                 Car Name
               </th>
@@ -91,6 +94,9 @@ const VehicleDetails = () => {
           <tbody>
             {showingData.map((carData, i) => (
               <tr key={i}>
+                {/* <td className="p-3 text-sm font-semibold tracking-wide text-left">
+                  <img src={carData.CarImage} className="w-[50px] h-[50px]"/>
+                </td> */}
                 <td className="p-3 text-sm font-semibold tracking-wide text-left">
                   {carData.Carname}
                 </td>

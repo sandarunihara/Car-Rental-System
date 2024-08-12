@@ -1,13 +1,15 @@
 import { errorHandler } from "../utills/error.js";
 import Addcar from "../models/AddcarModel.js";
 
+
+
 // Add new car
 export async function Addcars(req, res, next) {
   console.log(req.body);
-
   const { Carname, Fueltype, Carnumber, Price, Seat, Location, Car_type } =
     req.body;
   if (
+    
     !Carname ||
     !Fueltype ||
     !Carnumber ||
@@ -20,6 +22,7 @@ export async function Addcars(req, res, next) {
   }
 
   const newCar = new Addcar({
+  
     Carname,
     Fueltype,
     Carnumber,
@@ -42,9 +45,19 @@ export async function getcars(req, res, next) {
   try {
     const addcars = await Addcar.find();
     const totalcars = await Addcar.countDocuments();
+    const now = new Date();
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+    const lastMonthcars = await Addcar.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
     res.json({
       addcars,
-      totalcars
+      totalcars,
+      lastMonthcars
     });
   } catch (error) {
     next(error);
