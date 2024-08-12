@@ -18,23 +18,27 @@ export const DisplayFeedback = () => {
   }, []);
 
   return (
-    <div className='bg-white w-screen mx-auto h-screen flex flex-col items-center'>
-      <h1 className='text-3xl font-bold my-10'>User Feedbacks</h1>
-      <div className='w-3/4'>
+    <div className='min-h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex flex-col items-center py-10'>
+      <h1 className='text-4xl font-extrabold text-gray-800 mb-8'>User Feedbacks</h1>
+      <div className='w-full max-w-4xl mx-auto space-y-6'>
         {feedbacks.length > 0 ? (
           feedbacks.map((feedback, index) => (
-            <div key={index} className='p-5 mb-4 border rounded-lg shadow-md'>
-              <h2 className='text-xl font-bold'>{feedback.name}</h2>
-              <p className='text-gray-600'>{feedback.carNo}</p>
-              <p className='mt-2'>{feedback.comment}</p>
+            <div 
+              key={index} 
+              className='bg-white p-6 rounded-lg shadow-lg transform transition '
+            >
+              <h2 className='text-2xl font-semibold text-gray-800'>{feedback.name}</h2>
+              <p className='text-gray-600 mt-2'>Car Number: <span className='font-medium text-gray-700'>{feedback.carNo}</span></p>
+              <p className='text-gray-700 mt-4'>{feedback.comment}</p>
             </div>
           ))
         ) : (
-          <p className='text-gray-500'>No feedbacks available.</p>
+          <p className='text-gray-500 text-xl'>No feedbacks available.</p>
         )}
       </div>
     </div>
   );
 };
+
 
 
