@@ -1,15 +1,20 @@
 import { errorHandler } from "../utills/error.js";
 import Addcar from "../models/AddcarModel.js";
 
-
-
 // Add new car
 export async function Addcars(req, res, next) {
   console.log(req.body);
-  const { Carname, Fueltype, Carnumber, Price, Seat, Location, Car_type } =
-    req.body;
+  const {
+    Carname,
+    Fueltype,
+    Carnumber,
+    Price,
+    Seat,
+    Location,
+    Car_type,
+    CarImage,
+  } = req.body;
   if (
-    
     !Carname ||
     !Fueltype ||
     !Carnumber ||
@@ -22,7 +27,7 @@ export async function Addcars(req, res, next) {
   }
 
   const newCar = new Addcar({
-  
+    CarImage,
     Carname,
     Fueltype,
     Carnumber,
@@ -57,7 +62,7 @@ export async function getcars(req, res, next) {
     res.json({
       addcars,
       totalcars,
-      lastMonthcars
+      lastMonthcars,
     });
   } catch (error) {
     next(error);
@@ -67,7 +72,8 @@ export async function getcars(req, res, next) {
 // Update car
 export async function updatecar(req, res, next) {
   const carId = req.params.id;
-  const { Carname, Fueltype, Carnumber, Price, Seat, Location, Car_type} = req.body;
+  const { Carname, Fueltype, Carnumber, Price, Seat, Location, Car_type } =
+    req.body;
 
   const updatedcar = {
     Carname,
@@ -76,7 +82,7 @@ export async function updatecar(req, res, next) {
     Price,
     Seat,
     Location,
-    Car_type
+    Car_type,
   };
 
   try {
@@ -110,4 +116,3 @@ export async function fetchcar(req, res, next) {
     next(error);
   }
 }
-
