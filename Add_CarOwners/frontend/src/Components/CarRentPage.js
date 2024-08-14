@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NavBar from './NavBar'
 import Footer from './Footer'
 import { IoChevronBackOutline } from "react-icons/io5";
@@ -9,6 +9,7 @@ import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { GiGearStickPattern } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
 import { PiEngine } from "react-icons/pi";
+import { AuthContext } from '../Context/AuthContext';
 
 const CarRentPage = () => {
 
@@ -104,6 +105,9 @@ const CarRentPage = () => {
 
 
     // rent data
+    const {authState}=useContext(AuthContext)
+    
+
     const [rentdata,setrentdata]=useState({
         name:"",
         nic:"",
@@ -125,7 +129,6 @@ const CarRentPage = () => {
     },[price])
 
     const handleChange=(e)=>{
-    
         const {name,value}=e.target
         setrentdata(pre=>{
           return{
@@ -133,6 +136,7 @@ const CarRentPage = () => {
             [name]:value
           }
         })
+        
       }
     
     //   fetch rent data
@@ -145,7 +149,10 @@ const CarRentPage = () => {
             },
             body:JSON.stringify(rentdata)
         })
-
+        console.log(rentdata);
+        // console.log(authState.user);
+        
+        
         const responsedata=await response.json()
         console.log(responsedata);
 
@@ -253,7 +260,7 @@ const CarRentPage = () => {
                                 <label className='font-semibold text-white'>NIC</label>
                                 <input className='p-2 w-[350px] rounded-lg' 
                                 type='text' 
-                                placeholder='Enter Your NIC'
+                                placeholder='NIC(Pleace provide same NIC use to login)'
                                 id='nic'
                                 name='nic'
                                 value={rentdata.nic}
@@ -302,12 +309,3 @@ export default CarRentPage
 
 
 
-
-
- // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       setImgIndex((prevIndex) => (prevIndex + 1) % images.length);
-    //     }, 3000); // Change image every 3 seconds
-    
-    //     return () => clearInterval(interval); // Cleanup on unmount
-    //   }, []);

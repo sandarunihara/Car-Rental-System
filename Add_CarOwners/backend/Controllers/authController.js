@@ -2,9 +2,10 @@ import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import User from "../models/UserModel.js";
+import Carowner from "../models/Carowner.js";
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password,nic,mobile } = req.body;
 
   if (
     !username ||
@@ -22,7 +23,10 @@ export const signup = async (req, res, next) => {
   const newUser = new User({
     username,
     email,
+    nic,
+    mobile,
     password: hashedpassword,
+    role:"User"
   });
 
   try {
@@ -33,93 +37,76 @@ export const signup = async (req, res, next) => {
   }
 };
 
-export const signin = async (req, res, next) => {
-  const { email, password } = req.body;
+// Sign In
 
-  if (!email || !password || email === "" || password === "") {
-    return next(errorHandler(400, "All fields are required"));
+export const signin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password || email === "" || password === "") {
+    throw new Error( "All fields are required");
+    }
+
+    const validUser = await User.findOne({ email });
+    const validOwner=await Carowner.findOne({email})
+    // if (!validUser || !validOwner) {
+    //   throw new Error( "User not found");
+    // }
+
+    let validPassword = false;
+    let tokendata = null;
+    let userData = null;
+
+    if (validUser) {
+      validPassword = bcryptjs.compareSync(password, validUser.password);
+
+       tokendata={
+        id:validUser._id,
+        email:validUser.email
+      }
+
+      userData=validUser
+
+    } else if (validOwner) {
+      validPassword = bcryptjs.compareSync(password, validOwner.password);
+
+       tokendata={
+        id:validOwner._id,
+        email:validOwner.email
+      }
+
+      userData=validOwner
+
+    }
+
+    if (!validPassword) {
+      throw new Error("Invalid password");
+    }
+
+    
+
+    const token = jwt.sign(tokendata, process.env.JWT_SECRET);
+    // const { password: pass, ...rest } = validUser._doc;
+
+    const tokenOption ={
+      httpOnly:true,
+      secure:true
   }
 
-  try {
-    const validUser = await User.findOne({ email });
-    if (!validUser) {
-      return next(errorHandler(404, "User not found"));
-    }
-    const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!validPassword) {
-      return next(errorHandler(404, "Invalid password"));
-    }
+    res.status(200).cookie("access_token", token, tokenOption).json({
+      message:"Login successfully",
+      token:token,
+      data:userData,
+      success:true,
+      error:false
+  });
 
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    const { password: pass, ...rest } = validUser._doc;
-
-    res
-      .status(200)
-      .cookie("access_token", token, {
-        httpOnly: true,
-      })
-      .json(rest);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.json({
+      message: err.message || err,
+      error:true,
+      success:false,
+    })
   }
 };
 
-// const { errorHandler } = require("../utills/error")
-// const User = require("../models/UserModel")
-// const  bcryptjs = require('bcryptjs');
-// const jwt =require('jsonwebtoken')
-
-// async function signup(req,res,next){
-//     const {username , email ,password}=req.body;
-
-//     if(!username|| !email || !password || username==='' || email==='' || password===''){
-//         next(errorHandler(400,'All field are requrired'));
-//     }
-//     const hashedpassword = bcryptjs.hashSync(password,10);
-
-//     const newUser = new User({
-//         username,
-//         email,
-//         password:hashedpassword,
-//     });
-
-//     try {
-//         await newUser.save();
-//     res.json('sign up sucessfull');
-//     } catch (error) {
-//         next(error);
-//     }
-
-// }
-
-// async function signin (req,res, next){
-//     const {email, password} = req.body;
-
-//     if(!email  || !password || email===''||  password===''){
-//       return next(errorHandler(400,'All fields are required'));
-
-//     }
-
-//     try{
-//     const validUser = await User.findOne({email});
-//     if (!validUser){
-//       return next(errorHandler(404, 'user not found'));
-//     }
-//     const validPassword = bcryptjs.compareSync(password,validUser.password);
-//     if(!validPassword){
-//       return next(errorHandler(404, 'invalid password'));
-//     }
-
-//     const token = jwt.sign({id:validUser._id,  }, process.env.JWT_SECRET);
-//     const {password: pass, ...rest} =validUser._doc;
-
-//     res.status(200).cookie('access_token', token, {
-//      httpOnly:true}).json(rest);
-//     }catch(error){
-//       next(error);
-//     }
-
-//   };
-
-//   module.exports=signin
-//   module.exports=signup

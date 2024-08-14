@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
 import Carcard from '../Components/Carcard';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 
 const Home = () => {
+  const {authState}=useContext(AuthContext)
+
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
     Location:"",
@@ -72,6 +75,8 @@ const Home = () => {
     cardetails()
   },[])
 
+  
+
 
   return (
     <div className='bg-black'>
@@ -88,8 +93,10 @@ const Home = () => {
         </button>
       </div>
       {/* *****************search car*********************  */}
-      <form className='mx-auto my-8 md:my-auto'>
-        <div className="p-4 bg-white rounded-md shadow-2xl font-bold bg-opacity-35 hover:scale-110 transition-all duration-700">
+      {
+        authState.user?(
+          <div className='mx-auto my-8 md:my-auto'>
+          <div className="p-4 bg-white rounded-md shadow-2xl font-bold bg-opacity-35 hover:scale-110 transition-all duration-700">
           <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">Find Your Perfect Ride</h2>
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-4">
@@ -129,7 +136,12 @@ const Home = () => {
             </button>
           </div>
         </div>
-      </form>
+      </div>
+        ):(
+          <div></div>
+        )
+      }
+      
       </div> 
 
 

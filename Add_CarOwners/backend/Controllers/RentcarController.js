@@ -25,13 +25,6 @@ export async function rentcarController(req, res) {
             throw new Error("Please provide rent date");
         }
 
-        // Create pin
-        // let numStr = nic.toString();
-        // let firstTwoDigits = numStr.slice(0, 2);
-        // let lastDigit = numStr.slice(-1);
-        // let randomDigit = Math.floor(Math.random() * 100);
-        // let pin = firstTwoDigits + lastDigit + randomDigit;
-
         const payload = {
             ...req.body
             // pin: pin
