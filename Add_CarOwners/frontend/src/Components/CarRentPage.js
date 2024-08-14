@@ -129,7 +129,6 @@ const CarRentPage = () => {
     },[price])
 
     const handleChange=(e)=>{
-    
         const {name,value}=e.target
         setrentdata(pre=>{
           return{
@@ -137,6 +136,7 @@ const CarRentPage = () => {
             [name]:value
           }
         })
+        
       }
     
     //   fetch rent data
@@ -149,7 +149,10 @@ const CarRentPage = () => {
             },
             body:JSON.stringify(rentdata)
         })
-
+        console.log(rentdata);
+        // console.log(authState.user);
+        
+        
         const responsedata=await response.json()
         console.log(responsedata);
 
@@ -249,7 +252,7 @@ const CarRentPage = () => {
                                 placeholder='Enter Your Name'
                                 id='name'
                                 name='name'
-                                value={authState.user.username}
+                                value={rentdata.name}
                                 onChange={handleChange}
                                 />
                             </div>
@@ -257,10 +260,10 @@ const CarRentPage = () => {
                                 <label className='font-semibold text-white'>NIC</label>
                                 <input className='p-2 w-[350px] rounded-lg' 
                                 type='text' 
-                                placeholder='Enter Your NIC'
+                                placeholder='NIC(Pleace provide same NIC use to login)'
                                 id='nic'
                                 name='nic'
-                                value={authState.user.nic}
+                                value={rentdata.nic}
                                 onChange={handleChange}
                                 />
                             </div>
@@ -271,7 +274,7 @@ const CarRentPage = () => {
                                 placeholder='Enter Your Email'
                                 id='email'
                                 name='email'
-                                value={authState.user.email}
+                                value={rentdata.email}
                                 onChange={handleChange}
                                 />
                             </div>
@@ -282,7 +285,7 @@ const CarRentPage = () => {
                                 placeholder='Enter Your Mobile Number'
                                 id='mobile'
                                 name='mobile'
-                                value={authState.user.mobile}
+                                value={rentdata.mobile}
                                 onChange={handleChange}
                                 />
                             </div>

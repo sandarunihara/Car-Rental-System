@@ -17,8 +17,8 @@ const Searchpage = () => {
     }
 
     const chunkedResults = [];
-    for (let i = 0; i < results.length; i += 5) {
-        chunkedResults.push(results.slice(i, i + 5));
+    for (let i = 0; i < results.length; i += 4) {
+        chunkedResults.push(results.slice(i, i + 4));
     }
     
 
