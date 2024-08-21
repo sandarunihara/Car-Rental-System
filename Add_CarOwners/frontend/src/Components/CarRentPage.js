@@ -26,6 +26,7 @@ const CarRentPage = () => {
         Location:"",
         Price:0,
         Seat:0,
+        carimage:""
     })
 
     const fetchdata=async()=>{
@@ -44,6 +45,7 @@ const CarRentPage = () => {
             Location: responsedata.Location || "",
             Price: responsedata.Price || 0,
             Seat: responsedata.Seat || 0,
+            carimage:responsedata.CarImage || ""
         });    
     }
     useEffect(()=>{
@@ -55,7 +57,7 @@ const CarRentPage = () => {
     const [ImgIndex,setImgIndex]=useState(0)
 
     const images=[
-        'img/1.jpg',
+        cardata.carimage,
         'img/2.jpg',
         'img/3.jpg'
     ]
@@ -149,12 +151,12 @@ const CarRentPage = () => {
             },
             body:JSON.stringify(rentdata)
         })
-        console.log(rentdata);
+        // console.log(rentdata);
         // console.log(authState.user);
         
         
         const responsedata=await response.json()
-        console.log(responsedata);
+        // console.log(responsedata);
 
         if(responsedata.success){
             setrentdata({
@@ -184,12 +186,12 @@ const CarRentPage = () => {
                 </Link>
 
                 <div className='flex ml-14 mt-10'>
-                    <div className='w-[550px] h-[400px] flex group '>
-                    <img src={images[ImgIndex]}  alt='#' className='w-full h-full rounded object-cover' />
+                    <div className='w-[550px] h-[550px] flex group'>
+                    <img src={images[ImgIndex]}  alt='#' className='w-full h-full rounded-xl object-cover' />
                     <GrNext onClick={handleNext} className='absolute font-bold ml-[515px] mt-[200px] text-4xl cursor-pointer opacity-0 group-hover:opacity-100 hover:scale-125 transition-all'/>
                     <GrPrevious onClick={handlePrevious} className='absolute  mt-[200px]  text-4xl cursor-pointer opacity-0 group-hover:opacity-100 hover:scale-125 transition-all'/>
                     </div>
-                    <div className='ml-20 '>
+                    <div className='ml-20 bg-gradient-to-r from-gray-200 to-blue-200 w-[550px] h-[550px] px-6 py-5 rounded-xl'>
                         <div className='flex -ml-3'>
                             <img src='img/mustang.png'  alt='#' className='h-[50px]' />
                             <h1 className='mt-2 ml-4 text-2xl font-bold'>{cardata.Carname}</h1>
@@ -197,12 +199,12 @@ const CarRentPage = () => {
                         <p className='text-2xl font-bold mt-3 mb-2'>Rs. {fixprice}.00 <span className='font-normal'>/DAY</span></p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>100</span> KM</span> Daily Mileage Limit</p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>150</span> LKR</span> Extra Mileage Charge <span className='text-xs'>(per km)</span></p>
-                        <div className='px-2 py-2 flex justify-between border border-stone-200 rounded-lg mb-4'>
-                            <span className='mt-2 text-lg font-semibold'>Pick Up</span>
-                            <input type="date"  className="p-2  rounded-md" value={rent_date} />
-                        </div>
                         <Link to={"/displayfeedback"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
-                        <h2 className='mt-9 text-2xl font-bold mb-3'>Extra Add</h2>
+                        <div className='py-2 flex mb-4 border-none'>
+                            <span className='mt-2 mr-5 text-lg font-semibold'>Pick Up</span>
+                            <input type="date"  className="p-2 rounded-md" value={rent_date} />
+                        </div>
+                        <h2 className='mt-5 text-2xl font-bold mb-3'>Extra Add</h2>
                         <div className='flex'>
                         <input type='checkbox' onChange={driver} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
                         <p className='ml-4 text-xl '> Driver</p>
@@ -211,12 +213,15 @@ const CarRentPage = () => {
                         <input type='checkbox' onChange={babyseat} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
                         <p className='ml-4 text-xl '> Baby Seat</p>
                         </div>
+                        <div className='flex'>
+                        <iframe className='w-[200px] h-[200px]' src="https://lottie.host/embed/883987f4-3677-41d7-a7e0-845b5480160a/Hxru9uqwcR.json"></iframe>
+                        </div>
                     </div>
                 </div>
                 
-                <div className='mt-8 ml-14'>
-                    <h2 className='text-2xl font-semibold mb-7'>Options</h2>
-                    <div className='flex text-5xl justify-between w-[900px]'>
+                <div className='mt-8 bg-gradient-to-r from-gray-200 to-blue-200 pb-9 mx-auto'>
+                    <h2 className='text-2xl font-semibold mb-7 ml-14'>Options</h2>
+                    <div className='flex text-5xl justify-between w-[900px] ml-14'>
                         <div className='flex'>
                         <MdAirlineSeatReclineNormal/>
                         <p className='text-xl mt-2 ml-3'>{cardata.Seat} Seats</p>
@@ -237,7 +242,7 @@ const CarRentPage = () => {
                 </div>
                 
 
-                <div className='ml-14 mt-20'>                    
+                <div className='ml-14 mt-4'>                    
                     <h2 className='text-2xl font-semibold mb-7'>For Rent Vehicle</h2>
                 </div>
             
