@@ -10,6 +10,7 @@ import { AuthContext } from '../Context/AuthContext';
 
 const Home = () => {
   const {authState}=useContext(AuthContext)
+  
 
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",

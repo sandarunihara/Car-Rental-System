@@ -5,6 +5,7 @@ import {
   displayCommentcontroller,
   updateCommentcontroller,
   deleteCommentcontroller,
+  displayfeedbackIDcontroller,
 } from "../Controllers/FeedbackController.js";
 
 import {
@@ -39,6 +40,7 @@ const router = express.Router();
 // Feedback routes
 router.post("/addfeedback", addCommentcontroller);
 router.get("/displayfeedback", displayCommentcontroller);
+router.post("/displayfeedbackid", displayfeedbackIDcontroller);
 router.put("/updatefeedback", updateCommentcontroller);
 router.delete("/deletefeedback", deleteCommentcontroller);
 
