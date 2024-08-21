@@ -9,6 +9,8 @@ const rentschema = new mongoose.Schema({
     price: Number,
     Carnumber: String,
     Carname:String,
+    OwnerId:String,
+    userId:String
 
     // // Extra bool
     // baby_seat: Boolean,

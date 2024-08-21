@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getDownloadURL,
@@ -10,9 +10,12 @@ import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Button } from "flowbite-react";
+import { AuthContext } from "../Context/AuthContext";
 
 const AddVehicle = () => {
-  const [formData, setformData] = useState({});
+  const {authState}=useContext(AuthContext)
+
+  const [formData, setformData] = useState({OwnerId:authState.user._id});
   const [errorMessage, setErrorMessage] = useState(null);
   const [file, setfile] = useState();
   const [imageUploadProgress, setImageUploadProgress] = useState(null);

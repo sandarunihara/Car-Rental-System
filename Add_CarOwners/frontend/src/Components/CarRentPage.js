@@ -12,7 +12,8 @@ import { PiEngine } from "react-icons/pi";
 import { AuthContext } from '../Context/AuthContext';
 
 const CarRentPage = () => {
-
+    
+    const {authState}=useContext(AuthContext)
     const location=useLocation();
     const { id,rent_date } = location.state;
 
@@ -26,7 +27,8 @@ const CarRentPage = () => {
         Location:"",
         Price:0,
         Seat:0,
-        carimage:""
+        carimage:"",
+        OwnerId:""
     })
 
     const fetchdata=async()=>{
@@ -45,7 +47,8 @@ const CarRentPage = () => {
             Location: responsedata.Location || "",
             Price: responsedata.Price || 0,
             Seat: responsedata.Seat || 0,
-            carimage:responsedata.CarImage || ""
+            carimage:responsedata.CarImage || "",
+            OwnerId:responsedata.OwnerId || ""
         });    
     }
     useEffect(()=>{
@@ -85,6 +88,8 @@ const CarRentPage = () => {
             mobile:"",
             email:"",
             rent_date:rent_date,
+            OwnerId:cardata.OwnerId,
+            userId:authState.user._id
         })
     },[cardata])
 
@@ -107,7 +112,6 @@ const CarRentPage = () => {
 
 
     // rent data
-    const {authState}=useContext(AuthContext)
     
 
     const [rentdata,setrentdata]=useState({
@@ -118,7 +122,9 @@ const CarRentPage = () => {
         rent_date:rent_date,
         price:price,
         Carnumber:cardata.Carnumber,
-        Carname:cardata.Carname
+        Carname:cardata.Carname,
+        OwnerId:cardata.OwnerId,
+        userId:authState.user._id
     })
 
     useEffect(()=>{
@@ -167,7 +173,9 @@ const CarRentPage = () => {
                 mobile:"",
                 email:"",
                 rent_date:rent_date,
-                Carname:cardata.Carname
+                Carname:cardata.Carname,
+                OwnerId:cardata.OwnerId,
+                userId:authState.user._id
             })
             navigate('/carpage/carrentmessage')
         }
@@ -199,7 +207,7 @@ const CarRentPage = () => {
                         <p className='text-2xl font-bold mt-3 mb-2'>Rs. {fixprice}.00 <span className='font-normal'>/DAY</span></p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>100</span> KM</span> Daily Mileage Limit</p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>150</span> LKR</span> Extra Mileage Charge <span className='text-xs'>(per km)</span></p>
-                        <Link to={"/displayfeedback"} className='mb-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-1 px-4 rounded-lg shadow-lg hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300'>FeedBacks </Link>
+                        <Link to={"/displayfeedback"} state={{ Carnumber: cardata.Carnumber }}  className='mb-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-1 px-4 rounded-lg shadow-lg hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300'>FeedBacks </Link>
                         <div className='py-2 flex mb-4 border-none'>
                             <span className='mt-2 mr-5 text-lg font-semibold'>Pick Up</span>
                             <input type="date"  className="p-2 rounded-md" value={rent_date} />

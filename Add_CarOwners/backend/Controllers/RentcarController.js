@@ -2,7 +2,7 @@ import carrentmodel from "../models/CarRentModel.js";
 
 export async function rentcarController(req, res) {
     try {
-        const { name, nic, mobile, email, rent_date,price,Carnumber,Carname } = req.body;
+        const { name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId } = req.body;
 
         const user = await carrentmodel.findOne({ rent_date,Carnumber });
 
@@ -77,10 +77,10 @@ export async function carDetailscontroller(req, res) {
 // Update
 export async function updaterentcar(req, res) {
     try {
-        const { _id,name, nic, mobile, email, rent_date,price,Carnumber } = req.body;
+        const { _id,name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId } = req.body;
 
         const updaterentdetails = {
-            name, nic, mobile, email, rent_date,price,Carnumber,Carname
+            name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId
           };
 
         const updaterent = await carrentmodel.findByIdAndUpdate(_id, updaterentdetails);

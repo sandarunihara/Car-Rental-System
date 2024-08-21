@@ -11,7 +11,7 @@ const customer_fbSchema = new Schema({
         type: String,
         required: true
     },
-    carNo: {
+    Carnumber: {
         type: String,
         required: true
     }
