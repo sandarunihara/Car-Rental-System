@@ -53,7 +53,7 @@ const Searchpage = () => {
                     {chunkedResults.map((chunk, rowIndex) => (
                         <div key={rowIndex} className='grid grid-cols-4  py-6 px-6 bg-black text-white'>
                             {chunk.map((car, index) => (
-                                <Carcard key={index} carname={car.Carname} fuel={car.Fueltype} location={car.Location} price={car.Price} carId={car._id} date={searchDetails.rent_date}/>
+                                <Carcard key={index} carimage={car.CarImage} carname={car.Carname} fuel={car.Fueltype} location={car.Location} price={car.Price} carId={car._id} date={searchDetails.rent_date}/>
                             ))}
                         </div>
                     ))}

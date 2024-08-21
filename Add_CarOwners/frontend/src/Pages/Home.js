@@ -172,6 +172,7 @@ const Home = () => {
             {cardata.slice(0, 4).map((car, index) => (
                 <Carcard 
                   key={index} 
+                  carimage={car.CarImage}
                   carname={car.Carname} 
                   fuel={car.Fueltype} 
                   location={car.Location} 
