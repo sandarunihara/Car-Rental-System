@@ -180,10 +180,10 @@ const CarRentPage = () => {
         <div className='bg-black pb-20'>
             <NavBar/>
             <div className='bg-white w-[1300px]  mt-10 rounded-xl  mx-auto'>
-                <Link to={'/'} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
+                <button onClick={()=>navigate(-1)} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
                     <IoChevronBackOutline className='text-2xl mt-[1px]'/>
                     <span className='font-semibold m'>BACK</span>
-                </Link>
+                </button>
 
                 <div className='flex ml-14 mt-10'>
                     <div className='w-[550px] h-[550px] flex group'>
@@ -193,13 +193,13 @@ const CarRentPage = () => {
                     </div>
                     <div className='ml-20 bg-gradient-to-r from-gray-200 to-blue-200 w-[550px] h-[550px] px-6 py-5 rounded-xl'>
                         <div className='flex -ml-3'>
-                            <img src='img/mustang.png'  alt='#' className='h-[50px]' />
+                        <iframe className='h-[50px] w-[50px]' src="https://lottie.host/embed/2668bf62-2ffc-4c6c-b569-5d9b6d472058/4VCBa7euBe.json"></iframe>
                             <h1 className='mt-2 ml-4 text-2xl font-bold'>{cardata.Carname}</h1>
                         </div>
                         <p className='text-2xl font-bold mt-3 mb-2'>Rs. {fixprice}.00 <span className='font-normal'>/DAY</span></p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>100</span> KM</span> Daily Mileage Limit</p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>150</span> LKR</span> Extra Mileage Charge <span className='text-xs'>(per km)</span></p>
-                        <Link to={"/displayfeedback"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
+                        <Link to={"/displayfeedback"} className='mb-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-1 px-4 rounded-lg shadow-lg hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300'>FeedBacks </Link>
                         <div className='py-2 flex mb-4 border-none'>
                             <span className='mt-2 mr-5 text-lg font-semibold'>Pick Up</span>
                             <input type="date"  className="p-2 rounded-md" value={rent_date} />
