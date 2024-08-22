@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
+  const {login}=useContext(AuthContext)
   const [formData, setformData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
   const handlechange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handlesubmit = async (e) => {
@@ -27,11 +29,14 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (data.success === false) {
-        return setErrorMessage(data.message);
-      }
-      if (res.ok) {
+      if (data.success) {
+        console.log(data);
         navigate("/");
+        login(data.token,data.data)
+        
+      }else{
+        console.log(data.message);
+        
       }
     } catch (error) {
       setErrorMessage("An error Occured.Please try again");

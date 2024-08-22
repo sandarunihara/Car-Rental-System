@@ -1,30 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 const AddcarDashboard = () => {
+
+  const [clickedButton,setClickedButton] = useState(null);
+
+  const handleClick = (button) =>{
+    setClickedButton(button)
+  }
+
   return (
-    <div className='bg-black absolute w-full h-full '>
-        <div className='bg-white w-[1450px] mx-auto h-[750px]  mt-5'>
-          <div className='w-[300px] h-[750px] bg-gray-500 mb-5'>
-            <div className=' pt-5'>
-              <Link to={'/'} className='flex mb-3'>
-                  <MdArrowBackIos className='text-black size-7 ml-3  '/>
-                  <span className='text-xl'>BACK</span>
+    <div className='fixed'>
+          <div className='w-[300px] h-screen bg-white shadow-2xl rounded-r-2xl'>
+            
+            <Link to={'/'} className='flex mb-3 pt-5 group w-fit'>
+                  <MdArrowBackIos className='text-black size-7 ml-3 group-hover:text-blue-600'/>
+                  <p className='text-xl group-hover:text-blue-600'>BACK</p>
               </Link>
-            </div>
-            <span className='text-white text-3xl font-bold ml-12 '>Vehicles</span><br/>
-            <div className='ml-24 mt-10'>
-                <span className='text-xl'>Vehicle details</span>
-            </div>
-            <div className='ml-24 mt-5'>
-                <span className='text-xl'>Add Vehicle</span>
-            </div>
+              <div className='text-center mt-10'>
+                <Link to='/Addcar' className=' text-3xl font-bold text-center  cursor-pointer'  onClick={() => handleClick('Dashbord')}>DashBoard</Link>
+              </div>
+              <div className='mt-16'>
+                <div className='text-center'>
+                <Link to="/Addcar/vehicle-details" className={`text-xl ${clickedButton === 'VehicleDatails' ? 'bg-gradient-to-r from-purple-500 to-blue-500  purple-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-20 rounded-lg font-semibold`} onClick={() => handleClick('VehicleDatails')}>Vehicle Datails</Link>
+                </div>
+                <div className='text-center mt-10'>
+                  <Link to="/Addcar/add-vehicle" className={`text-xl ${clickedButton === 'AddVehicle' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-24 rounded-lg font-semibold`} onClick={() => handleClick('AddVehicle')}>Add vehicle</Link>
+                </div>
+                <div className='text-center mt-10'>
+                  <Link to="/Addcar/message" className={`text-xl ${clickedButton === 'Message' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-24 rounded-lg font-semibold`} onClick={() => handleClick('Message')}>Message</Link>
+                </div>
+              </div>
+            
+            
            
           </div>
-                
-        </div>  
-    </div>
+      </div>  
   )
 }
 

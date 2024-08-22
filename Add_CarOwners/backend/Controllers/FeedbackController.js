@@ -2,8 +2,8 @@ import Customer_fb from "../models/Customer_fb.js";
 
 export async function addCommentcontroller(req, res) {
     try {
-        const { comment,name,carNo } = req.body;
-        const newComment = new Customer_fb({ comment,name,carNo });
+        const { comment,name,Carnumber } = req.body;
+        const newComment = new Customer_fb({ comment,name,Carnumber });
         await newComment.save();
 
         res.status(200).json({
@@ -21,26 +21,29 @@ export async function addCommentcontroller(req, res) {
     }
 }
 
+
+
 export async function displayCommentcontroller(req, res) {
     try {
-        const { comment,name,carNo } = req.body;
-        const foundComment = await Customer_fb.findOne({ comment,name,carNo });
+        
+        const foundComments = await Customer_fb.find();
 
-        if (!foundComment) {
+        if (!foundComments || foundComments.length === 0) {
             return res.status(404).json({
-                message: "Comment not found",
+                message: "No comments found",
                 error: true,
                 success: false
             });
         }
+        
         res.status(200).json({
-            message: "Display Comment",
+            message: "Comments retrieved successfully",
             error: false,
             success: true,
-            data: foundComment
+            data: foundComments
         });
     } catch (err) {
-        res.status(400).json({
+        res.status(500).json({
             message: err.message || err,
             error: true,
             success: false
@@ -48,13 +51,15 @@ export async function displayCommentcontroller(req, res) {
     }
 }
 
+
+
 export async function updateCommentcontroller(req, res) {
     try {
-        const { _id, comment,name,carNo} = req.body;
+        const { _id, comment,name,Carnumber} = req.body;
 
         const updatedComment = await Customer_fb.findByIdAndUpdate(
             _id,
-            { comment,name,carNo },
+            { comment,name,Carnumber },
             { new: true, runValidators: true }
         );
         if (!updatedComment) {
@@ -107,124 +112,27 @@ export async function deleteCommentcontroller(req, res) {
 }
 
 
+// fetch feedback using car number
+export async function displayfeedbackIDcontroller(req, res) {
+    try {
+        const {Carnumber}=req.body
+        
+        const foundComments = await Customer_fb.find({Carnumber});
+        
+        res.status(200).json({
+            message: "Comments retrieved successfully",
+            error: false,
+            success: true,
+            data: foundComments
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: err.message || err,
+            error: true,
+            success: false
+        });
+    }
+}
 
 
 
-
-
-
-// const Customer_fb = require("../models/Customer_fb");
-
-// async function addCommentcontroller(req,res){
-//     try{
-//         const { comment } = req.body;
-//         const newComment = new Customer_fb({ comment });
-//         await newComment.save();
-
-//         res.status(200).json({
-//             message:"Comment Added",
-//             error: false,
-//             success: true,
-//             data: newComment
-//         })
-//     }catch (err) {
-//         res.status(400).json({
-//             message:err.message || err,
-//             error: true,
-//             success: false
-//         })
-//     }
-// }
-
-
-// async function displayCommentcontroller(req,res){
-//     try{
-//         const { comment } =req.body;
-//         const foundComment = await Customer_fb.findOne({ comment });
-
-//         if (!foundComment) {
-//             return res.status(404).json({
-//                 message: "Comment not found",
-//                 error: true,
-//                 success: false
-//             });
-//         }
-//         res.status(200).json({
-//             message: "Display Comment",
-//             error: false,
-//             success: true,
-//             data: foundComment
-//         });
-
-//     }catch (err) {
-//         res.status(400).json({
-//             message: err.message || err,
-//             error: true,
-//             success: false
-//         });
-//     }
-// }
-
-
-// async function updateCommentcontroller(req,res){
-//     try{
-//         const { id,comment } = req.body;
-
-//         const updatedComment = await Customer_fb.findByIdAndUpdate(
-//             id,
-//             { comment },
-//             { new: true, runValidators: true }
-//         );
-//         if (!updatedComment) {
-//             return res.status(404).json({
-//                 message: "Comment not found",
-//                 error: true,
-//                 success: false,
-//             });
-//         }
-//         res.status(200).json({
-//             message: "Comment Updated",
-//             error: false,
-//             success: true,
-//             data: updatedComment
-//         });
-//     } catch (err) {
-//         res.status(400).json({
-//             message: err.message || err,
-//             error: true,
-//             success: false,
-//         });
-//     }
-// }
-
-// async function deleteCommentcontroller(req,res) {
-//     try{
-//         const { id } = req.body;
-//         const deletedComment = await Customer_fb.findByIdAndDelete(id);
-
-//         if (!deletedComment) {
-//             return res.status(404).json({
-//                 message: "Comment not found",
-//                 error: true,
-//                 success: false,
-//             });
-//         }
-//         res.status(200).json({
-//             message: "Comment Deleted",
-//             error: false,
-//             success: true,
-//             data: deletedComment,
-//         });
-//     } catch (err) {
-//         res.status(400).json({
-//             message: err.message || err,
-//             error: true,
-//             success: false,
-//         });
-//     }
-// }
-
-// module.exports = addCommentcontroller
-// module.exports = displayCommentcontroller;
-// module.exports = updateCommentcontroller;
-// module.exports = deleteCommentcontroller;

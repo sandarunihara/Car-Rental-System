@@ -2,9 +2,9 @@ import carrentmodel from "../models/CarRentModel.js";
 
 export async function rentcarController(req, res) {
     try {
-        const { name, nic, mobile, email, rent_date,price,Carnumber } = req.body;
+        const { name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId } = req.body;
 
-        const user = await carrentmodel.findOne({ rent_date });
+        const user = await carrentmodel.findOne({ rent_date,Carnumber });
 
         if (user) {
             throw new Error("Already rented this vehicle that day");
@@ -24,13 +24,6 @@ export async function rentcarController(req, res) {
         if (!rent_date) {
             throw new Error("Please provide rent date");
         }
-
-        // Create pin
-        // let numStr = nic.toString();
-        // let firstTwoDigits = numStr.slice(0, 2);
-        // let lastDigit = numStr.slice(-1);
-        // let randomDigit = Math.floor(Math.random() * 100);
-        // let pin = firstTwoDigits + lastDigit + randomDigit;
 
         const payload = {
             ...req.body
@@ -62,7 +55,7 @@ export async function carDetailscontroller(req, res) {
         const  nic  = req.body;
         const user = await carrentmodel.find(nic);
 
-        if (!user) {
+        if (user.length===0) {
             throw new Error("No rent");
         }
 
@@ -84,14 +77,17 @@ export async function carDetailscontroller(req, res) {
 // Update
 export async function updaterentcar(req, res) {
     try {
-        const { _id, ...resBody } = req.body;
+        const { _id,name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId } = req.body;
 
-        const updaterent = await carrentmodel.findByIdAndUpdate(_id, resBody);
-        const newdata = await carrentmodel.findById(_id);
+        const updaterentdetails = {
+            name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId
+          };
+
+        const updaterent = await carrentmodel.findByIdAndUpdate(_id, updaterentdetails);
 
         res.status(200).json({
             message: "Rent updated successfully",
-            data: newdata,
+            data: updaterent,
             success: true,
             error: false
         });
@@ -107,9 +103,9 @@ export async function updaterentcar(req, res) {
 // Delete
 export async function deleterentcontroller(req, res) {
     try {
-        const { pin } = req.body;
+        const { _id } = req.body;
 
-        const deleteone = await carrentmodel.findOneAndDelete({ pin });
+        const deleteone = await carrentmodel.findOneAndDelete({ _id });
 
         res.status(200).json({
             message: "Delete successful",
