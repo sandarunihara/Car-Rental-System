@@ -3,12 +3,13 @@ import React, { useState } from 'react'
 import { FcSimCardChip } from "react-icons/fc";
 import { SiCardano } from "react-icons/si";
 import { SiVisa } from "react-icons/si";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Paymentpage = () => {
     const navigate=useNavigate()
+
     const [paydetails,setpaydetails]=useState({
         name:"",
         email:"",
@@ -37,7 +38,7 @@ const Paymentpage = () => {
         })
         toast.success("Payment Succesfull")
         toast.success("Car Rent is Succesfull")
-        navigate('/userdashbord')
+        navigate('/userdashbord/usermsg')
 
     }
 

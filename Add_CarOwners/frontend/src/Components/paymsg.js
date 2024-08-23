@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Paymsg = ({data}) => {
   const [pay, setPay] = useState(false);
@@ -12,8 +13,18 @@ const Paymsg = ({data}) => {
   const [showDetails, setShowDetails] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [feedbackId, setFeedbackId] = useState('');
+  const [isPaid, setIsPaid] = useState(false);
+
+  // useEffect(() => {
+  //   // Check if the payment has been made before
+  //   let paymentStatus = localStorage.getItem(`paymentStatus-${data.Carnumber}`);
+  //   if (paymentStatus === 'true') {
+  //     setIsPaid(true);
+  //   }
+  // }, );
 
 
+  const navigate=useNavigate()
   const [ownerdata,setownerdata]=useState({})
 
   const fetchdata=async()=>{
@@ -96,6 +107,8 @@ const Paymsg = ({data}) => {
         setFeedback(feedback);
         setCarnumber(Carnumber);
         setShowDetails(false);
+        // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
+        navigate('/payment');
       } else {
         alert('Failed to update feedback');
       }
@@ -104,6 +117,12 @@ const Paymsg = ({data}) => {
       alert('An error occurred while updating feedback');
     }
   };
+
+  const handlesubmit2=()=>{
+    setShowDetails(false)
+    // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
+    navigate('/payment');
+  }
 
 
 
@@ -131,6 +150,19 @@ const Paymsg = ({data}) => {
           >
             Pay Now
           </Button>
+          {/* {isPaid ? (
+            <Button gradientDuoTone="greenToBlue" className="px-8 py-3 rounded-full text-white text-lg font-medium" disabled>
+              Paid
+            </Button>
+          ) : (
+            <Button
+              gradientDuoTone="pinkToOrange"
+              className="px-8 py-3 rounded-full text-white text-lg font-medium"
+              onClick={() => setPay(true)}
+            >
+              Pay Now
+            </Button>
+          )} */}
         </div>
       </div>
 
@@ -280,7 +312,7 @@ const Paymsg = ({data}) => {
                   </button>
                   <button
                     className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
-                    onClick={() => setShowDetails(false)}
+                    onClick={handlesubmit2}
                   >
                     Submit
                   </button>
