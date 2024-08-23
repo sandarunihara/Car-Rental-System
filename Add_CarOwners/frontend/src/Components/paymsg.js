@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import React, { useEffect, useState } from 'react'
 
 const Paymsg = ({data}) => {
-    const [pay, setPay] = useState(false);
+  const [pay, setPay] = useState(false);
   const [name, setName] = useState(data.name);
   const [feedback, setFeedback] = useState('');
   const [Carnumber, setCarnumber] = useState(data.Carnumber);
@@ -44,7 +44,6 @@ const Paymsg = ({data}) => {
         Carnumber,
       });
       if (response.data.success) {
-        alert('Feedback submitted successfully');
         setName(name);
         setFeedback(feedback);
         setCarnumber(Carnumber);
@@ -70,7 +69,7 @@ const Paymsg = ({data}) => {
         setShowDetails(false); // Close the details modal
         // Clear the form fields
         setName(name);
-        setFeedback(feedback);
+        setFeedback('');
         setCarnumber(Carnumber);
       } else {
         alert('Failed to delete feedback');
