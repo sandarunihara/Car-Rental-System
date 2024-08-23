@@ -42,7 +42,7 @@ const Usermsg = () => {
 
   return (
     <div className="h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex flex-col overflow-auto  justify-center items-center">
-      <div className='mt-[750px]'>
+      <div className=''>
       {
          rentdata.map(car=>(
            <Paymsg data={car}/>

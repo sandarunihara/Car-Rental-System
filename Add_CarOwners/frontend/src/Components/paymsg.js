@@ -44,7 +44,6 @@ const Paymsg = ({data}) => {
         Carnumber,
       });
       if (response.data.success) {
-        alert('Feedback submitted successfully');
         setName(name);
         setFeedback(feedback);
         setCarnumber(Carnumber);
