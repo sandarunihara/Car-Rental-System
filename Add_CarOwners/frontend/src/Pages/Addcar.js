@@ -35,7 +35,7 @@ const Addcar = () => {
 
   return <div className="w-full flex h-screen bg-gradient-to-r from-gray-300 to-blue-200">
     <div className='p-3 md:mx-auto'>
-      <div className='flex-wrap flex gap-4 justify-center'>
+      <div className='flex-wrap flex gap-4 justify-center items-center h-screen'>
         <div className='flex flex-col p-3 bg-white gap-4 md:w-72 w-full rounded-md shadow-md'>
           <div className='flex justify-between'>
             <div className=''>

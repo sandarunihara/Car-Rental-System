@@ -2,8 +2,8 @@ import Customer_fb from "../models/Customer_fb.js";
 
 export async function addCommentcontroller(req, res) {
     try {
-        const { comment,name,carNo } = req.body;
-        const newComment = new Customer_fb({ comment,name,carNo });
+        const { comment,name,Carnumber } = req.body;
+        const newComment = new Customer_fb({ comment,name,Carnumber });
         await newComment.save();
 
         res.status(200).json({
@@ -55,11 +55,11 @@ export async function displayCommentcontroller(req, res) {
 
 export async function updateCommentcontroller(req, res) {
     try {
-        const { _id, comment,name,carNo} = req.body;
+        const { _id, comment,name,Carnumber} = req.body;
 
         const updatedComment = await Customer_fb.findByIdAndUpdate(
             _id,
-            { comment,name,carNo },
+            { comment,name,Carnumber },
             { new: true, runValidators: true }
         );
         if (!updatedComment) {
@@ -107,6 +107,29 @@ export async function deleteCommentcontroller(req, res) {
             message: err.message || err,
             error: true,
             success: false,
+        });
+    }
+}
+
+
+// fetch feedback using car number
+export async function displayfeedbackIDcontroller(req, res) {
+    try {
+        const {Carnumber}=req.body
+        
+        const foundComments = await Customer_fb.find({Carnumber});
+        
+        res.status(200).json({
+            message: "Comments retrieved successfully",
+            error: false,
+            success: true,
+            data: foundComments
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: err.message || err,
+            error: true,
+            success: false
         });
     }
 }

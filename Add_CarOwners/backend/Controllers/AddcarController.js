@@ -13,6 +13,7 @@ export async function Addcars(req, res, next) {
     Location,
     Car_type,
     CarImage,
+    OwnerId
   } = req.body;
   if (
     !Carname ||
@@ -35,6 +36,7 @@ export async function Addcars(req, res, next) {
     Seat,
     Location,
     Car_type,
+    OwnerId
   });
 
   try {

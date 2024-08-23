@@ -10,6 +10,7 @@ import { AuthContext } from '../Context/AuthContext';
 
 const Home = () => {
   const {authState}=useContext(AuthContext)
+  
 
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
@@ -172,6 +173,7 @@ const Home = () => {
             {cardata.slice(0, 4).map((car, index) => (
                 <Carcard 
                   key={index} 
+                  carimage={car.CarImage}
                   carname={car.Carname} 
                   fuel={car.Fueltype} 
                   location={car.Location} 
