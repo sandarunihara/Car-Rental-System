@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [formData, setformData] = useState({});
@@ -34,12 +35,15 @@ const SignUp = () => {
       const data = await res.json();
       if (data.success === false) {
         return setErrorMessage(data.message);
+        toast.error(errorMessage)
       }
       if (res.ok) {
         navigate("/Login");
+        toast.success("Sign up successful")
       }
     } catch (error) {
       setErrorMessage("An error Occured. please try again");
+      toast.error(errorMessage)
     }
   };
   return (

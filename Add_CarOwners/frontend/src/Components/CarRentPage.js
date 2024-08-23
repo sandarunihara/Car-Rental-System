@@ -10,6 +10,7 @@ import { GiGearStickPattern } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
 import { PiEngine } from "react-icons/pi";
 import { AuthContext } from '../Context/AuthContext';
+import { toast } from 'react-toastify';
 
 const CarRentPage = () => {
     
@@ -178,6 +179,7 @@ const CarRentPage = () => {
                 userId:authState.user._id
             })
             navigate('/carpage/carrentmessage')
+            
         }
         
     }

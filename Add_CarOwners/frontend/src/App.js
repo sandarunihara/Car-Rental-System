@@ -23,6 +23,7 @@ import Usermsg from "./Pages/usermsg";
 import Addcar from "./Pages/Addcar";
 import UserDashboard from "./Pages/UserDashboard";
 import { UpdateOwner } from "./Pages/UpdateOwner";
+import Paymentpage from "./Pages/Paymentpage";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/Addcar/*" element={<AddcarLayout />} />
         <Route path="/userdashbord/*" element={< UserLayout/>} />
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
+        <Route path="/payment" element={<Paymentpage />} />
       </Routes>
     </Router>
   );
