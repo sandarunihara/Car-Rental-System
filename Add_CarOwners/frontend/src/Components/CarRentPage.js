@@ -10,7 +10,6 @@ import { GiGearStickPattern } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
 import { PiEngine } from "react-icons/pi";
 import { AuthContext } from '../Context/AuthContext';
-import { toast } from 'react-toastify';
 
 const CarRentPage = () => {
     
@@ -185,10 +184,8 @@ const CarRentPage = () => {
     }
       
   return (
-    <div >
-        
-        <div className='bg-black pb-20'>
-            <NavBar/>
+    <div className=''>
+        <div className='bg-black pb-20 pt-12'>
             <div className='bg-white w-[1300px]  mt-10 rounded-xl  mx-auto'>
                 <button onClick={()=>navigate(-1)} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
                     <IoChevronBackOutline className='text-2xl mt-[1px]'/>

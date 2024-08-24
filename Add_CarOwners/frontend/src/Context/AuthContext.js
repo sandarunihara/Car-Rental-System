@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -8,7 +7,7 @@ export const AuthProvider = ({ children }) => {
     user: null,
   });
 
-//   const navigate = useNavigate();
+  //  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if there's a token in localStorage
@@ -26,14 +25,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('access_token', token);
     localStorage.setItem('user_data', JSON.stringify(user));
     setAuthState({ token, user });
-    // navigate('/'); // Redirect to home after login
+    //  navigate('/'); // Redirect to home after login
   };
 
   const logout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user_data');
     setAuthState({ token: null, user: null });
-    // navigate('/');// Redirect to login after logout
+    //  navigate('/');// Redirect to login after logout
   };
 
   return (
