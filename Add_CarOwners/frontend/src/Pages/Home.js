@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './Home.css';
 import { GrLinkNext } from "react-icons/gr";
 import NavBar from '../Components/NavBar';
@@ -10,7 +10,9 @@ import { AuthContext } from '../Context/AuthContext';
 
 const Home = () => {
   const {authState}=useContext(AuthContext)
-  
+  const bottomRef = useRef(null);
+  const aboutRef = useRef(null);
+  const rentRef = useRef(null);
 
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
@@ -76,16 +78,27 @@ const Home = () => {
     cardetails()
   },[])
 
-  
+  const handleCarCardClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling
+    });
+    // You can also navigate to a detailed view or perform other actions here
+    
+  };
 
 
   return (
     <div className='bg-black cursor-default'>
-      <NavBar/>
+      <NavBar 
+        scrollToBottom={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}
+        scrollToabout={() => aboutRef.current.scrollIntoView({ behavior: 'smooth' })}
+        scrollTorent={() => rentRef.current.scrollIntoView({ behavior: 'smooth' })}
+      />
       <video autoPlay  muted className="background-video">
                 <source src={`${process.env.PUBLIC_URL}/1.mp4`} type="video/mp4" />
             </video>
-      <div className='pt-16 md:pt-32 pl-4 md:pl-9 ml-0 md:ml-9 flex flex-col md:flex-row z-10 relative'>
+      <div className='pt-16 md:pt-56 pl-4 md:pl-9 ml-0 md:ml-9 flex flex-col md:flex-row z-10 relative'>
       <div className='text-white'>
         <h1 className='text-4xl md:text-8xl font-bold'>Rent Cars <br/>Travel Easy</h1>
         <p className='text-lg md:text-2xl mt-5 md:mt-7 w-full md:w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
@@ -148,9 +161,9 @@ const Home = () => {
       </div> 
 
 
-      <div className='text-white mt-[150px] bg-black'>
+      <div className='text-white mt-[150px] bg-black' ref={aboutRef}>
         {/* *****************ABOUT ************ */}
-        <div className='flex flex-col md:flex-row justify-between w-full h-full'>
+        <div className='flex flex-col md:flex-row justify-between w-full h-full' >
           <div className='bg-stone-300 w-full md:w-[800px] h-auto md:h-[550px] rounded-r-2xl text-black p-4 md:p-0'>
             <h2 className='font-bold text-2xl md:text-4xl text-center p-4 md:p-14'>Not your typical rental car</h2>
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg'>Forget expensive, impersonal rental car companies - SI Rents offers a revolutionary new way to rent out and hire vehicles. Our peer-to-peer platform revolutionises the industry, offering personalised options that established car rental companies don't.</p>
@@ -170,10 +183,11 @@ const Home = () => {
           </div>
       </div>
         {/* ***************RENT ********** */}
-        <div className='text-center'>
+        <div className='text-center' ref={rentRef}>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
           <div className=' md:justify-between p-4 md:p-10'>
-            <div className='flex flex-wrap justify-between m-2'>
+            <div onClick={handleCarCardClick}>
+            <div className='flex flex-wrap justify-between m-2' >
             {cardata.slice(0, 4).map((car, index) => (
                 <Carcard 
                   key={index} 
@@ -188,10 +202,11 @@ const Home = () => {
               ))}
 
             </div>
+            </div>
           </div>
         </div>
         {/* **************Service********** */}
-        <div className='text-center cursor-default'>
+        <div className='text-center cursor-default' ref={bottomRef}>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Name Eco System</h2>
           <div className='flex flex-col md:flex-row justify-center md:justify-between p-4 md:p-10 space-y-6 md:space-y-0 md:space-x-6'>
             <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row group overflow-hidden'>

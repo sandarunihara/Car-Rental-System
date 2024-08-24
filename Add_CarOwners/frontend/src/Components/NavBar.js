@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logo from "../img/1logo.png"
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { GrMenu, GrClose } from 'react-icons/gr';
 import { AuthContext } from '../Context/AuthContext';
 
 
-const NavBar = () => {
+const NavBar = ({scrollToBottom,scrollToabout,scrollTorent}) => {
+  const navigate=useNavigate()
+  const location = useLocation();
   const {authState,logout}=useContext(AuthContext)
   const [isOpen, setIsOpen] = useState(false);
   let role=""
@@ -14,19 +16,36 @@ const NavBar = () => {
   }
   
 
+  const [bgColor, setBgColor] = useState('bg-transparent');
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) { // Adjust this value to change when the background color should change
+      setBgColor('bg-black ');
+    } else {
+      setBgColor('bg-transparent');
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   return (
-    <div className='relative z-10'>
-      <header className='h-[90px] shadow-md'>
+    <div className='fixed w-full z-20'>
+      <header className={`h-[90px]  ${bgColor}  shadow-md transition-colors duration-300`}>
         <div className='text-white h-full container mx-auto flex items-center justify-between px-4 md:px-9'>
           <div className='w-24 mb-5'>
             <img src={logo} alt='Logo' />
           </div>
           <div className='hidden md:flex ml-48 space-x-6'>
             <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Home</Link>
-            <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
-            <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>About</Link>
-            <a href='#' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Rent</a>
+            <Link onClick={scrollToabout} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>About</Link>
+            <Link onClick={scrollTorent} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Rent</Link>
+            <Link onClick={scrollToBottom} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
             { 
               role==='Admin'?(
                 <Link to={'/admin'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Admin Panel</Link>
@@ -42,7 +61,16 @@ const NavBar = () => {
             {
               authState.user ?(
                 <div className='hidden md:flex space-x-5'>
-                <Link onClick={logout} ><button className='mx-5 py-3 px-7 font-bold rounded border border-white hover:text-black hover:bg-white hover:scale-110 transition-all duration-150'>Logout</button></Link>
+                <div className='rounded-full h-[50px] w-[50px] overflow-hidden cursor-pointer' onClick={()=>navigate('/userpro')}>
+                  <img src='img/po.jpg' className="h-full w-full object-fill"/>
+                </div>
+                {
+                  location.pathname === '/'?(
+                    <Link onClick={logout} ><button className='ml-5 py-3 px-7 font-bold rounded border border-white hover:text-black hover:bg-white hover:scale-110 transition-all duration-150'>Logout</button></Link>
+                  ):(
+                    <div></div>
+                  )
+                }
                 </div>
               ):(
                 <div className='hidden md:flex space-x-5'>

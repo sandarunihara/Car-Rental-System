@@ -23,12 +23,12 @@ const Searchpage = () => {
     
 
   return (
-    <div className='h-screen'>
-        <div className='bg-black'>
+    <div className='h-screen '>
         <NavBar/>
+        <div className='bg-black pt-24'>
         </div>
         
-        <div className='p-2 w-full flex justify-around' style={{ backgroundColor: '#c9c9c9' }}>
+        <div className='p-2 w-full flex justify-around ' style={{ backgroundColor: '#c9c9c9' }}>
             <div>
             <p className='text-sm absolute   ml-3 ' style={{ backgroundColor: '#c9c9c9' }}>Location</p>
             <div className='mt-3 w-[300px]  p-1.5 border border-dashed border-black'>
