@@ -80,7 +80,7 @@ const Home = () => {
 
 
   return (
-    <div className='bg-black'>
+    <div className='bg-black cursor-default'>
       <NavBar/>
       <video autoPlay  muted className="background-video">
                 <source src={`${process.env.PUBLIC_URL}/1.mp4`} type="video/mp4" />
@@ -89,10 +89,7 @@ const Home = () => {
       <div className='text-white'>
         <h1 className='text-4xl md:text-8xl font-bold'>Rent Cars <br/>Travel Easy</h1>
         <p className='text-lg md:text-2xl mt-5 md:mt-7 w-full md:w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
-        <button className='mt-5 flex bg-white text-black font-bold py-3 px-6 md:px-12 rounded hover:text-white hover:bg-black transition-all duration-150 border-2 border-white'>
-          Book Now <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
-        </button>
-      </div>
+        </div>
       {/* *****************search car*********************  */}
       {
         authState.user?(
@@ -102,7 +99,7 @@ const Home = () => {
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-4">
               <span className="material-icons">Location</span>
-              <select className="p-2 border border-gray-300 rounded-md" required id='Location' name='Location' value={searchvalue.Location} onChange={handleChange}>
+              <select className="p-2 border border-gray-300 rounded-md cursor-pointer" required id='Location' name='Location' value={searchvalue.Location} onChange={handleChange}>
                 <option value='' hidden>Choose a Location</option>
                 <option>Colombo</option>
                 <option>Gampaha</option>
@@ -118,35 +115,40 @@ const Home = () => {
             
             <div className="flex items-center space-x-2 md:space-x-4">
               <span className="material-icons">Rent Date</span>
-              <input type="date" required className="p-2 border border-gray-300 rounded-md" placeholder="Pick-up Date" id='rent_date' name='rent_date' value={searchvalue.rent_date} onChange={handleChange}/>
+              <input type="date" required className="p-2 border border-gray-300 rounded-md cursor-pointer" placeholder="Pick-up Date" id='rent_date' name='rent_date' value={searchvalue.rent_date} onChange={handleChange}/>
             </div>
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 p-3">
             <div className="flex items-center space-x-2 md:space-x-2">
               <span className="material-icons">Vehicle Type</span>
-              <select className="p-2 border border-gray-300 rounded-md" required id='Car_type' name='Car_type' value={searchvalue.Car_type} onChange={handleChange}>
+              <select className="p-2 border border-gray-300 rounded-md cursor-pointer" required id='Car_type' name='Car_type' value={searchvalue.Car_type} onChange={handleChange}>
                 <option value='' hidden>Select Type</option>
                 <option>CAR</option>
                 <option>SUV</option>
                 <option>VAN</option>
               </select>
             </div>
-            <button type='submit' className="px-8 md:px-16 py-2 text-white bg-black rounded-md" onClick={handlesubmit}>
+            <button type='submit' className="px-8 md:px-16 py-2 text-white bg-black rounded-md cursor-pointer" onClick={handlesubmit}>
               Search
             </button>
           </div>
         </div>
       </div>
         ):(
-          <div></div>
+          <div className='mx-auto'>
+            <iframe src="https://lottie.host/embed/54770a8b-cd0b-4fbd-b3ee-f6691531f713/fCh8LioHgT.json" className='h-[200px] w-[250px]'></iframe>
+            <Link to={'/Login'} className=' flex bg-gradient-to-b from-transparent to-green-500 text-black font-bold py-3 px-6 md:px-12 rounded hover:text-white hover:bg-gradient-to-b hover:from-green-500 hover:to-transparent transition-all duration-1000 '>
+            Explore More <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
+            </Link>
+          </div>
         )
       }
       
       </div> 
 
 
-      <div className='text-white mt-[75px] bg-black'>
+      <div className='text-white mt-[150px] bg-black'>
         {/* *****************ABOUT ************ */}
         <div className='flex flex-col md:flex-row justify-between w-full h-full'>
           <div className='bg-stone-300 w-full md:w-[800px] h-auto md:h-[550px] rounded-r-2xl text-black p-4 md:p-0'>
@@ -155,7 +157,9 @@ const Home = () => {
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg mt-4 md:mt-0'><br/>If you own vehicles, you can generate passive income from unused vehicles hassle-free; if you are in the mood to rent, you can find the ideal car for your needs at affordable prices.</p>
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg mt-4 md:mt-0'><br/>Whether you're after a luxury sedan for a weekend getaway or an oversized van for business use, SI Rents has all your driving needs covered! And who said earning money had to be hard work? With our easy-to-use platform, getting in control of your finances has never been simpler - what are you waiting for?</p>
           </div>
-          <img src="img/about.jpg" alt='Description of the' className='w-full md:w-[450px] h-auto md:h-[550px] hidden md:block rounded-2xl mt-4 md:mt-0' />
+          <div className='overflow-hidden rounded-2xl'>
+          <img src="img/about.jpg" alt='Description of the' className='w-full md:w-[450px] h-auto md:h-[550px] hidden md:block rounded-2xl mt-4 md:mt-0 transform transition-transform duration-700 hover:scale-110 ' />
+          </div>
           <div className='bg-stone-300 h-auto md:h-[550px] w-full md:w-[150px] rounded-l-2xl mt-4 md:mt-0'>
             <div className='text-center flex flex-row md:flex-col items-center justify-center h-full space-y-0 md:space-y-6 space-x-4 md:space-x-0'>
               <img src="img/car-rent.png" className='w-[50px] md:w-[100px] h-[50px] md:h-[100px]' />
@@ -187,22 +191,22 @@ const Home = () => {
           </div>
         </div>
         {/* **************Service********** */}
-        <div className='text-center'>
+        <div className='text-center cursor-default'>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Name Eco System</h2>
           <div className='flex flex-col md:flex-row justify-center md:justify-between p-4 md:p-10 space-y-6 md:space-y-0 md:space-x-6'>
-            <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row'>
-              <img src="img/img-2.jpg" alt='Hirer' className='w-full md:w-[300px] h-[200px] md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover' />
+            <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row group overflow-hidden'>
+              <img src="img/img-2.jpg" alt='Hirer' className='w-full md:w-[300px] h-[200px] md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover transform transition-transform duration-700 group-hover:scale-110' />
               <p className='text-black p-4 md:p-10 flex flex-col justify-center'>
-                <span className='text-xl font-semibold'>SI Rents Hirers</span><br/><br/>
-                Once you are registered on SI Rents, congrats, you are now a SI Rents member, and you can start choosing from thousands of vehicles and find your perfect match!
+                <span className='text-xl font-semibold'>SIMAS Rents Hirers</span><br/><br/>
+                Once you are registered on SIMAS Rents, congrats, you are now a SIMAS Rents member, and you can start choosing from thousands of vehicles and find your perfect match!
               </p>
             </div>
-            <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row'>
+            <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row group overflow-hidden'>
               <p className='text-black p-4 md:p-10 flex flex-col justify-center'>
-                <span className='text-xl font-semibold'>SI Rents Hosts</span><br/><br/>
-                SI Rents Hosts are made up of countless vehicle owners. SI Rents members can easily sign up to be SI Rents hosts and start earning from their vehicles. Conditions apply.
+                <span className='text-xl font-semibold'>SIMAS Rents Hosts</span><br/><br/>
+                SIMAS Rents Hosts are made up of countless vehicle owners. SIMAS Rents members can easily sign up to be SIMAS Rents hosts and start earning from their vehicles. Conditions apply.
               </p>
-              <img src="img/img-3.jpg" alt='Host' className='w-full md:w-[300px] h-[200px] md:h-full rounded-b-lg md:rounded-r-lg md:rounded-b-none object-cover' />
+              <img src="img/img-3.jpg" alt='Host' className='w-full md:w-[300px] h-[200px] md:h-full rounded-b-lg md:rounded-r-lg md:rounded-b-none object-cover transform transition-transform duration-700 group-hover:scale-110' />
             </div>
           </div>
         </div>

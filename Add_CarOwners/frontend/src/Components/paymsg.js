@@ -107,7 +107,6 @@ const Paymsg = ({data}) => {
         setFeedback(feedback);
         setCarnumber(Carnumber);
         setShowDetails(false);
-        
         // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
         navigate('/payment');
       } else {
