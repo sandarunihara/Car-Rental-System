@@ -33,16 +33,27 @@ const NavBar = ({scrollToBottom,scrollToabout,scrollTorent}) => {
     };
   }, []);
 
+  const handlehomeClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling
+    });
+    // You can also navigate to a detailed view or perform other actions here
+    
+  };
+
 
   return (
     <div className='fixed w-full z-20'>
-      <header className={`h-[90px]  ${bgColor}  shadow-md transition-colors duration-300`}>
+      <header className={`h-[90px]  ${bgColor} shadow-2xl transition-colors duration-300`}>
         <div className='text-white h-full container mx-auto flex items-center justify-between px-4 md:px-9'>
           <div className='w-24 mb-5'>
             <img src={logo} alt='Logo' />
           </div>
-          <div className='hidden md:flex ml-48 space-x-6'>
-            <Link to={'/'} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Home</Link>
+          {
+            location.pathname==='/'?(
+              <div className='hidden md:flex ml-48 space-x-6'>
+            <Link to={'/'} onClick={handlehomeClick} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Home</Link>
             <Link onClick={scrollToabout} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>About</Link>
             <Link onClick={scrollTorent} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Rent</Link>
             <Link onClick={scrollToBottom} className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Service</Link>
@@ -58,6 +69,10 @@ const NavBar = ({scrollToBottom,scrollToabout,scrollTorent}) => {
               )
             }
           </div>
+            ):(
+              <div></div>
+            )
+          }
             {
               authState.user ?(
                 <div className='hidden md:flex space-x-5'>
