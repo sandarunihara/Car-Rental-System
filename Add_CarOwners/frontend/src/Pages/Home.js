@@ -13,6 +13,7 @@ const Home = () => {
   const bottomRef = useRef(null);
   const aboutRef = useRef(null);
   const rentRef = useRef(null);
+  
 
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
@@ -78,14 +79,7 @@ const Home = () => {
     cardetails()
   },[])
 
-  const handleCarCardClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // Smooth scrolling
-    });
-    // You can also navigate to a detailed view or perform other actions here
-    
-  };
+  
 
 
   return (
@@ -163,7 +157,7 @@ const Home = () => {
 
       <div className='text-white mt-[150px] bg-black' ref={aboutRef}>
         {/* *****************ABOUT ************ */}
-        <div className='flex flex-col md:flex-row justify-between w-full h-full' >
+        <div className='flex flex-col md:flex-row justify-between w-full h-full pt-24' >
           <div className='bg-stone-300 w-full md:w-[800px] h-auto md:h-[550px] rounded-r-2xl text-black p-4 md:p-0'>
             <h2 className='font-bold text-2xl md:text-4xl text-center p-4 md:p-14'>Not your typical rental car</h2>
             <p className='text-center w-full md:w-[700px] mx-auto text-sm md:text-lg'>Forget expensive, impersonal rental car companies - SI Rents offers a revolutionary new way to rent out and hire vehicles. Our peer-to-peer platform revolutionises the industry, offering personalised options that established car rental companies don't.</p>
@@ -183,10 +177,10 @@ const Home = () => {
           </div>
       </div>
         {/* ***************RENT ********** */}
-        <div className='text-center' ref={rentRef}>
+        <div className='text-center pt-10' ref={rentRef}>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
           <div className=' md:justify-between p-4 md:p-10'>
-            <div onClick={handleCarCardClick}>
+            <div>
             <div className='flex flex-wrap justify-between m-2' >
             {cardata.slice(0, 4).map((car, index) => (
                 <Carcard 
@@ -207,7 +201,7 @@ const Home = () => {
         </div>
         {/* **************Service********** */}
         <div className='text-center cursor-default' ref={bottomRef}>
-          <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Name Eco System</h2>
+          <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>SIMAS Eco System</h2>
           <div className='flex flex-col md:flex-row justify-center md:justify-between p-4 md:p-10 space-y-6 md:space-y-0 md:space-x-6'>
             <div className='bg-stone-300 h-auto md:h-[320px] w-full md:w-[650px] rounded-lg flex flex-col md:flex-row group overflow-hidden'>
               <img src="img/img-2.jpg" alt='Hirer' className='w-full md:w-[300px] h-[200px] md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none object-cover transform transition-transform duration-700 group-hover:scale-110' />

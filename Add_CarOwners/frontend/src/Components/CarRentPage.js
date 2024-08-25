@@ -185,7 +185,8 @@ const CarRentPage = () => {
       
   return (
     <div className=''>
-        <div className='bg-black pb-20 pt-12'>
+            <NavBar/>
+        <div className='bg-black pb-20 pt-14'>
             <div className='bg-white w-[1300px]  mt-10 rounded-xl  mx-auto'>
                 <button onClick={()=>navigate(-1)} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
                     <IoChevronBackOutline className='text-2xl mt-[1px]'/>
