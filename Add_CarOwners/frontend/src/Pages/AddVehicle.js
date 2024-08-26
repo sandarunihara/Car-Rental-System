@@ -17,8 +17,8 @@ const AddVehicle = () => {
 
   const [formData, setformData] = useState({OwnerId:authState.user._id});
   const [errorMessage, setErrorMessage] = useState(null);
-  const [files, setFiles] = useState([]);
-  const [imageUploadProgress, setImageUploadProgress] = useState([]);
+  const [file, setfile] = useState();
+  const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const navigate = useNavigate();
 
@@ -36,16 +36,13 @@ const AddVehicle = () => {
       !formData.Price ||
       !formData.Seat ||
       !formData.Location ||
-      !formData.Car_type ||
-      !formData.CarImage||
-      formData.CarImage.length === 0
+      !formData.Car_type
     ) {
-      setErrorMessage("All fields are required");
-      return;
+      setErrorMessage("All fields required");
+      console.log(formData);
     }
-
     try {
-      await handleUploadImages();
+      await handleUploadImage();
 
       setErrorMessage(null);
       const res = await fetch("http://localhost:8050/api/createcar", {
@@ -55,118 +52,74 @@ const AddVehicle = () => {
       });
       const data = await res.json();
       if (data.success === false) {
+        console.log({ formData });
         return setErrorMessage(data.message);
       }
       if (res.ok) {
+        console.log(formData);
+
         navigate("/Addcar/vehicle-details");
       }
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
+      setErrorMessage("An error Occured.please try again");
     }
   };
-
-  const handleUploadImages = async () => {
-    if (files.length === 0) {
-      setImageUploadError("Please select images");
-      return;
-    }
-    if (files.length > 3) {
-      setImageUploadError("You can upload a maximum of 3 images");
-      return;
-    }
-
+  const handleUploadImage = async () => {
+    //     service firebase.storage {
+    //   match /b/{bucket}/o {
+    //     match /{allPaths=**} {
+    //       allow read;
+    //       allow write: if
+    //       request.resource.size< 5*1024*1024 &&
+    //       request.resource.contentType.matches('image/.*')
+    //     }
+    //   }
+    // }
     try {
+      if (!file) {
+        setImageUploadError("Please select an image");
+        return;
+      }
       setImageUploadError(null);
       const storage = getStorage(app);
-      const promises = [];
-      const progressArray = [];
+      const fileName = new Date().getTime() + "-" + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setImageUploadProgress(progress.toFixed(0));
+        },
+        (error) => {
+          setImageUploadError("Image upload failed");
+          setImageUploadProgress(null);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageUploadProgress(null);
+            setImageUploadError(null);
+            setformData({ ...formData, CarImage: downloadURL });
+            console.log(downloadURL);
 
-      files.forEach((file, index) => {
-        const fileName = new Date().getTime() + "-" + file.name;
-        const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-
-        promises.push(
-          new Promise((resolve, reject) => {
-            uploadTask.on(
-              "state_changed",
-              (snapshot) => {
-                const progress =
-                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                progressArray[index] = progress.toFixed(0);
-                setImageUploadProgress([...progressArray]);
-              },
-              (error) => {
-                reject(error);
-              },
-              () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                  resolve(downloadURL);
-                });
-              }
-            );
-          })
-        );
-      });
-
-      const downloadURLs = await Promise.all(promises);
-      setformData({ ...formData, CarImage: downloadURLs });
-      setImageUploadProgress([]);
+            console.log(formData.CarImage);
+          });
+        }
+      );
     } catch (error) {
       setImageUploadError("Image upload failed");
-      setImageUploadProgress([]);
+      setImageUploadProgress(null);
+      console.log(error);
     }
   };
 
   return (
-
-    <div className="w-full flex justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
-      <div className="w-[600px] p-6 mt-12 bg-black rounded-lg absolute bg-opacity-95">
-        <form className="mt-4 text-white overflow-auto" onSubmit={handlesubmit}>
-          <div className="flex flex-col mb-8">
-            <label className="font-semibold">Car Images</label>
-            <input
-              type="file"
-              className="p-2 rounded-lg text-white"
-              id="CarImages"
-              multiple
-              accept="image/*"
-              onChange={(e) => setFiles(Array.from(e.target.files))}
-              required
-            />
-            {formData.CarImage && (
-              <div className="flex mt-4">
-                {formData.CarImage.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`Car ${index}`}
-                    className="w-[100px] h-[100px] bg-white mr-4"
-                  />
-                ))}
-              </div>
-            )}
-            <button
-              className={`flex justify-center items-center bg-white text-xl rounded-2xl border-r-[25px] border-l-[25px] text-black border-white mt-5 ${
-                imageUploadProgress.length > 0 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleUploadImages}
-              disabled={imageUploadProgress.length > 0}
-            >
-              {imageUploadProgress.length > 0 ? (
-                imageUploadProgress.map((progress, index) => (
-                  <div key={index} className="w-12 h-12 mx-2">
-                    <CircularProgressbar value={progress} text={`${progress || 0}%`} />
-                  </div>
-                ))
-              ) : (
-                "Upload"
-              )}
-            </button>
-            {imageUploadError && (
-              <div className="text-red-500 mt-2">{imageUploadError}</div>
-            )}
-
+    <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
+      <div className=" p-10 mt-12 ml-72  bg-black rounded-lg absolute bg-opacity-95">
+        <form className="mt-4 text-white" onSubmit={handlesubmit}>
+          <div className="flex justify-between">
+          <div>
           <div className="flex justify-between gap-10 mb-8">
             <label className="font-semibold">Car Name</label>
             <input
@@ -256,14 +209,14 @@ const AddVehicle = () => {
               className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
               id="CarImage"
               accept="image/*"
-              onChange={(e) => setFiles(e.target.files[0])}
+              onChange={(e) => setfile(e.target.files[0])}
               required
             />
             <button
               className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
                 imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={handleUploadImages}
+              onClick={handleUploadImage}
               disabled={imageUploadProgress > 0}
             >
               {imageUploadProgress ? (
@@ -288,7 +241,7 @@ const AddVehicle = () => {
             )}
 
             
-         
+          </div>
           </div>
             <Button
               gradientMonochrome="success"
