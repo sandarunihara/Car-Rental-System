@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getDownloadURL,
@@ -9,9 +9,13 @@ import {
 import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Button } from "flowbite-react";
+import { AuthContext } from "../Context/AuthContext";
 
 const AddVehicle = () => {
-  const [formData, setformData] = useState({});
+  const {authState}=useContext(AuthContext)
+
+  const [formData, setformData] = useState({OwnerId:authState.user._id});
   const [errorMessage, setErrorMessage] = useState(null);
   const [files, setFiles] = useState([]);
   const [imageUploadProgress, setImageUploadProgress] = useState([]);
@@ -115,52 +119,41 @@ const AddVehicle = () => {
   };
 
   return (
-    <div className="w-full flex justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
-      <div className="w-[600px] p-6 mt-12 bg-black rounded-lg absolute bg-opacity-95">
+    <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
+      <div className="w-[600px] p-6 mt-12  bg-black rounded-lg absolute bg-opacity-95">
         <form className="mt-4 text-white overflow-auto" onSubmit={handlesubmit}>
-          <div className="flex flex-col mb-8">
-            <label className="font-semibold">Car Images</label>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Car Image</label>
             <input
               type="file"
-              className="p-2 rounded-lg text-white"
-              id="CarImages"
-              multiple
+              className="p-2 w-[350px] rounded-lg text-white"
+              id="CarImage"
               accept="image/*"
-              onChange={(e) => setFiles(Array.from(e.target.files))}
+              onChange={(e) => setfile(e.target.files[0])}
               required
             />
-            {formData.CarImage && (
-              <div className="flex mt-4">
-                {formData.CarImage.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`Car ${index}`}
-                    className="w-[100px] h-[100px] bg-white mr-4"
-                  />
-                ))}
-              </div>
-            )}
+            <img
+              src={formData.CarImage}
+              className="w-[100px] h-[100px] bg-white"
+            />
             <button
               className={`flex justify-center items-center bg-white text-xl rounded-2xl border-r-[25px] border-l-[25px] text-black border-white mt-5 ${
-                imageUploadProgress.length > 0 ? "opacity-50 cursor-not-allowed" : ""
+                imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={handleUploadImages}
-              disabled={imageUploadProgress.length > 0}
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress > 0}
             >
-              {imageUploadProgress.length > 0 ? (
-                imageUploadProgress.map((progress, index) => (
-                  <div key={index} className="w-12 h-12 mx-2">
-                    <CircularProgressbar value={progress} text={`${progress || 0}%`} />
-                  </div>
-                ))
+              {imageUploadProgress ? (
+                <div className="w-12 h-12">
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
               ) : (
                 "Upload"
               )}
             </button>
-            {imageUploadError && (
-              <div className="text-red-500 mt-2">{imageUploadError}</div>
-            )}
           </div>
           <div className="flex justify-between gap-10 mb-8">
             <label className="font-semibold">Car Name</label>
@@ -239,14 +232,60 @@ const AddVehicle = () => {
               required
             />
           </div>
-          <div className="mt-16">
+          
+          
+          </div>
+          <div className="  text-center w-[600px]">
+            <div className=" flex justify-around">
+            <label className="font-semibold">Car Image</label>
+            <div className="group">
+            <input
+              type="file"
+              className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
+              id="CarImage"
+              accept="image/*"
+              onChange={(e) => setfile(e.target.files[0])}
+              required
+            />
             <button
-              className="bg-white text-xl ml-64 rounded-2xl border-r-[25px] border-l-[25px] text-black border-white"
+              className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
+                imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress > 0}
+            >
+              {imageUploadProgress ? (
+                <div className="">
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
+              ) : (
+                "Upload"
+              )}
+            </button>
+            </div>
+            </div>
+            {formData.CarImage && (
+              <img
+                src={formData.CarImage}
+                className="w-[100px] h-[100px] mx-auto mt-5"
+                alt="Car"
+              />
+            )}
+
+            
+          </div>
+          </div>
+            <Button
+              gradientMonochrome="success"
+              className=" py-3 px-16 rounded-lg w-full"
               type="submit"
             >
               Add Vehicle
-            </button>
-          </div>
+            </Button>
+          
         </form>
       </div>
     </div>

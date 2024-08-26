@@ -12,7 +12,8 @@ import { PiEngine } from "react-icons/pi";
 import { AuthContext } from '../Context/AuthContext';
 
 const CarRentPage = () => {
-
+    
+    const {authState}=useContext(AuthContext)
     const location=useLocation();
     const { id,rent_date } = location.state;
 
@@ -26,6 +27,8 @@ const CarRentPage = () => {
         Location:"",
         Price:0,
         Seat:0,
+        carimage:"",
+        OwnerId:""
     })
 
     const fetchdata=async()=>{
@@ -44,6 +47,8 @@ const CarRentPage = () => {
             Location: responsedata.Location || "",
             Price: responsedata.Price || 0,
             Seat: responsedata.Seat || 0,
+            carimage:responsedata.CarImage || "",
+            OwnerId:responsedata.OwnerId || ""
         });    
     }
     useEffect(()=>{
@@ -55,7 +60,7 @@ const CarRentPage = () => {
     const [ImgIndex,setImgIndex]=useState(0)
 
     const images=[
-        'img/1.jpg',
+        cardata.carimage,
         'img/2.jpg',
         'img/3.jpg'
     ]
@@ -83,6 +88,8 @@ const CarRentPage = () => {
             mobile:"",
             email:"",
             rent_date:rent_date,
+            OwnerId:cardata.OwnerId,
+            userId:authState.user._id
         })
     },[cardata])
 
@@ -105,7 +112,6 @@ const CarRentPage = () => {
 
 
     // rent data
-    const {authState}=useContext(AuthContext)
     
 
     const [rentdata,setrentdata]=useState({
@@ -116,7 +122,9 @@ const CarRentPage = () => {
         rent_date:rent_date,
         price:price,
         Carnumber:cardata.Carnumber,
-        Carname:cardata.Carname
+        Carname:cardata.Carname,
+        OwnerId:cardata.OwnerId,
+        userId:authState.user._id
     })
 
     useEffect(()=>{
@@ -149,12 +157,12 @@ const CarRentPage = () => {
             },
             body:JSON.stringify(rentdata)
         })
-        console.log(rentdata);
+        // console.log(rentdata);
         // console.log(authState.user);
         
         
         const responsedata=await response.json()
-        console.log(responsedata);
+        // console.log(responsedata);
 
         if(responsedata.success){
             setrentdata({
@@ -165,44 +173,46 @@ const CarRentPage = () => {
                 mobile:"",
                 email:"",
                 rent_date:rent_date,
-                Carname:cardata.Carname
+                Carname:cardata.Carname,
+                OwnerId:cardata.OwnerId,
+                userId:authState.user._id
             })
             navigate('/carpage/carrentmessage')
+            
         }
         
     }
       
   return (
-    <div >
-        
-        <div className='bg-black pb-20'>
+    <div className=''>
             <NavBar/>
+        <div className='bg-black pb-20 pt-14'>
             <div className='bg-white w-[1300px]  mt-10 rounded-xl  mx-auto'>
-                <Link to={'/'} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
+                <button onClick={()=>navigate(-1)} className='pt-3 pl-2 flex w-[75px] transition-all  hover:text-red-500'>
                     <IoChevronBackOutline className='text-2xl mt-[1px]'/>
                     <span className='font-semibold m'>BACK</span>
-                </Link>
+                </button>
 
                 <div className='flex ml-14 mt-10'>
-                    <div className='w-[550px] h-[400px] flex group '>
-                    <img src={images[ImgIndex]}  alt='#' className='w-full h-full rounded object-cover' />
+                    <div className='w-[550px] h-[550px] flex group'>
+                    <img src={images[ImgIndex]}  alt='#' className='w-full h-full rounded-xl object-cover' />
                     <GrNext onClick={handleNext} className='absolute font-bold ml-[515px] mt-[200px] text-4xl cursor-pointer opacity-0 group-hover:opacity-100 hover:scale-125 transition-all'/>
                     <GrPrevious onClick={handlePrevious} className='absolute  mt-[200px]  text-4xl cursor-pointer opacity-0 group-hover:opacity-100 hover:scale-125 transition-all'/>
                     </div>
-                    <div className='ml-20 '>
+                    <div className='ml-20 bg-gradient-to-r from-gray-200 to-blue-200 w-[550px] h-[550px] px-6 py-5 rounded-xl'>
                         <div className='flex -ml-3'>
-                            <img src='img/mustang.png'  alt='#' className='h-[50px]' />
+                        <iframe className='h-[50px] w-[50px]' src="https://lottie.host/embed/2668bf62-2ffc-4c6c-b569-5d9b6d472058/4VCBa7euBe.json"></iframe>
                             <h1 className='mt-2 ml-4 text-2xl font-bold'>{cardata.Carname}</h1>
                         </div>
                         <p className='text-2xl font-bold mt-3 mb-2'>Rs. {fixprice}.00 <span className='font-normal'>/DAY</span></p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>100</span> KM</span> Daily Mileage Limit</p>
                         <p className='mb-2'><span className='bg-yellow-400 px-2 rounded font-bold '><span className='text-white'>150</span> LKR</span> Extra Mileage Charge <span className='text-xs'>(per km)</span></p>
-                        <div className='px-2 py-2 flex justify-between border border-stone-200 rounded-lg mb-4'>
-                            <span className='mt-2 text-lg font-semibold'>Pick Up</span>
-                            <input type="date"  className="p-2  rounded-md" value={rent_date} />
+                        <Link to={"/displayfeedback"} state={{ Carnumber: cardata.Carnumber }}  className='mb-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold py-1 px-4 rounded-lg shadow-lg hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300'>FeedBacks </Link>
+                        <div className='py-2 flex mb-4 border-none'>
+                            <span className='mt-2 mr-5 text-lg font-semibold'>Pick Up</span>
+                            <input type="date"  className="p-2 rounded-md" value={rent_date} />
                         </div>
-                        <Link to={"/displayfeedback"} className='text-red-500 hover:text-red-800'>FeedBack </Link>
-                        <h2 className='mt-9 text-2xl font-bold mb-3'>Extra Add</h2>
+                        <h2 className='mt-5 text-2xl font-bold mb-3'>Extra Add</h2>
                         <div className='flex'>
                         <input type='checkbox' onChange={driver} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
                         <p className='ml-4 text-xl '> Driver</p>
@@ -211,12 +221,15 @@ const CarRentPage = () => {
                         <input type='checkbox' onChange={babyseat} id='driver' className='w-6 h-6 mt-[3px] cursor-pointer' />
                         <p className='ml-4 text-xl '> Baby Seat</p>
                         </div>
+                        <div className='flex'>
+                        <iframe className='w-[200px] h-[200px]' src="https://lottie.host/embed/883987f4-3677-41d7-a7e0-845b5480160a/Hxru9uqwcR.json"></iframe>
+                        </div>
                     </div>
                 </div>
                 
-                <div className='mt-8 ml-14'>
-                    <h2 className='text-2xl font-semibold mb-7'>Options</h2>
-                    <div className='flex text-5xl justify-between w-[900px]'>
+                <div className='mt-8 bg-gradient-to-r from-gray-200 to-blue-200 pb-9 mx-auto'>
+                    <h2 className='text-2xl font-semibold mb-7 ml-14'>Options</h2>
+                    <div className='flex text-5xl justify-between w-[900px] ml-14'>
                         <div className='flex'>
                         <MdAirlineSeatReclineNormal/>
                         <p className='text-xl mt-2 ml-3'>{cardata.Seat} Seats</p>
@@ -237,7 +250,7 @@ const CarRentPage = () => {
                 </div>
                 
 
-                <div className='ml-14 mt-20'>                    
+                <div className='ml-14 mt-4'>                    
                     <h2 className='text-2xl font-semibold mb-7'>For Rent Vehicle</h2>
                 </div>
             

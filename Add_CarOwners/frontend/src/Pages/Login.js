@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const {login}=useContext(AuthContext)
@@ -20,6 +21,7 @@ const Login = () => {
     // return;
     if (!formData.email || !formData.password) {
       setErrorMessage("Please fill out all fields");
+      toast.error(errorMessage)
     }
     try {
       setErrorMessage(null);
@@ -33,13 +35,13 @@ const Login = () => {
         console.log(data);
         navigate("/");
         login(data.token,data.data)
-        
+        toast.success(data.message)
       }else{
-        console.log(data.message);
-        
+        toast.error(data.message)
       }
     } catch (error) {
       setErrorMessage("An error Occured.Please try again");
+      toast.error(errorMessage)
     }
   };
   return (

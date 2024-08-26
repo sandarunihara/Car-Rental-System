@@ -11,7 +11,7 @@ const AddcarDashboard = () => {
   }
 
   return (
-    <div className=''>
+    <div className='fixed'>
           <div className='w-[300px] h-screen bg-white shadow-2xl rounded-r-2xl'>
             
             <Link to={'/'} className='flex mb-3 pt-5 group w-fit'>

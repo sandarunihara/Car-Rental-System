@@ -32,6 +32,10 @@ const AddcarSchema = new mongoose.Schema({
     Car_type: {
         type: String,
         required: true
+    },
+    OwnerId:{
+        type: String,
+        required: true
     }
 });
 

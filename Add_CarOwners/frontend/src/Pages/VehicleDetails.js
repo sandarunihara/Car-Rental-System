@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useFetchData } from "../hooks/useFetchData";
+import { AuthContext } from "../Context/AuthContext";
 
 const VehicleDetails = () => {
+  const {authState}=useContext(AuthContext)
   const { data: carsData, loading } = useFetchData("/getcars");
   const [showAll, setShowAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +14,10 @@ const VehicleDetails = () => {
   const [currentData, setCurrentData] = useState([]);
   const [showingData, setShowingData] = useState([]);
   useEffect(() => {
-    if (carsData) setCurrentData(carsData.addcars);
+    if (carsData ) {
+      const filteredCars = carsData.addcars.filter(car => car.OwnerId === authState.user._id);
+      setCurrentData(filteredCars);
+    }
   }, [carsData]);
 
   useEffect(() => {
@@ -21,6 +26,8 @@ const VehicleDetails = () => {
       setShowingData(currentData);
     } else {
       setShowingData(currentData.slice(0, 6));
+      console.log(showingData);
+      
     }
   }, [showAll, currentData]);
 
@@ -54,8 +61,8 @@ const VehicleDetails = () => {
   };
 
   return (
-    <div className=" bg-slate-300 ml-3 mr-3 mb-10 h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
-      <div className="content ml-5 mr-5 mt-10 p-5">
+    <div className="  h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
+      <div className="content ml-80 mr-5 mt-10 p-5">
         <table className="w-full">
           <thead className="bg-gray-50 border-b-2 border-gray-200">
             <tr>
