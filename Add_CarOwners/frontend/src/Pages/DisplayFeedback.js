@@ -37,8 +37,7 @@ export const DisplayFeedback = () => {
           feedbacks.map((feedback, index) => (
             <div 
               key={index} 
-              className='bg-white p-6 rounded-lg shadow-lg transform transition '
-            >
+              className='bg-white p-6 rounded-lg shadow-lg transform transition '>
               <h2 className='text-2xl font-semibold text-gray-800'>{feedback.name}</h2>
               <p className='text-gray-600 mt-2'>Car Number: <span className='font-medium text-gray-700'>{feedback.Carnumber}</span></p>
               <p className='text-gray-700 mt-4'>{feedback.comment}</p>
