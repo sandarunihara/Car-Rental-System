@@ -119,42 +119,54 @@ const AddVehicle = () => {
   };
 
   return (
-    <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
-      <div className="w-[600px] p-6 mt-12  bg-black rounded-lg absolute bg-opacity-95">
+
+    <div className="w-full flex justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
+      <div className="w-[600px] p-6 mt-12 bg-black rounded-lg absolute bg-opacity-95">
         <form className="mt-4 text-white overflow-auto" onSubmit={handlesubmit}>
-          <div className="flex justify-between gap-10 mb-8">
-            <label className="font-semibold">Car Image</label>
+          <div className="flex flex-col mb-8">
+            <label className="font-semibold">Car Images</label>
             <input
               type="file"
-              className="p-2 w-[350px] rounded-lg text-white"
-              id="CarImage"
+              className="p-2 rounded-lg text-white"
+              id="CarImages"
+              multiple
               accept="image/*"
-              onChange={(e) => setfile(e.target.files[0])}
+              onChange={(e) => setFiles(Array.from(e.target.files))}
               required
             />
-            <img
-              src={formData.CarImage}
-              className="w-[100px] h-[100px] bg-white"
-            />
+            {formData.CarImage && (
+              <div className="flex mt-4">
+                {formData.CarImage.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`Car ${index}`}
+                    className="w-[100px] h-[100px] bg-white mr-4"
+                  />
+                ))}
+              </div>
+            )}
             <button
               className={`flex justify-center items-center bg-white text-xl rounded-2xl border-r-[25px] border-l-[25px] text-black border-white mt-5 ${
-                imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
+                imageUploadProgress.length > 0 ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={handleUploadImage}
-              disabled={imageUploadProgress > 0}
+              onClick={handleUploadImages}
+              disabled={imageUploadProgress.length > 0}
             >
-              {imageUploadProgress ? (
-                <div className="w-12 h-12">
-                  <CircularProgressbar
-                    value={imageUploadProgress}
-                    text={`${imageUploadProgress || 0}%`}
-                  />
-                </div>
+              {imageUploadProgress.length > 0 ? (
+                imageUploadProgress.map((progress, index) => (
+                  <div key={index} className="w-12 h-12 mx-2">
+                    <CircularProgressbar value={progress} text={`${progress || 0}%`} />
+                  </div>
+                ))
               ) : (
                 "Upload"
               )}
             </button>
-          </div>
+            {imageUploadError && (
+              <div className="text-red-500 mt-2">{imageUploadError}</div>
+            )}
+
           <div className="flex justify-between gap-10 mb-8">
             <label className="font-semibold">Car Name</label>
             <input
@@ -244,14 +256,14 @@ const AddVehicle = () => {
               className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
               id="CarImage"
               accept="image/*"
-              onChange={(e) => setfile(e.target.files[0])}
+              onChange={(e) => setFiles(e.target.files[0])}
               required
             />
             <button
               className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
                 imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={handleUploadImage}
+              onClick={handleUploadImages}
               disabled={imageUploadProgress > 0}
             >
               {imageUploadProgress ? (
@@ -276,7 +288,7 @@ const AddVehicle = () => {
             )}
 
             
-          </div>
+         
           </div>
             <Button
               gradientMonochrome="success"
