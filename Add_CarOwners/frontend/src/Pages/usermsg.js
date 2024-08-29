@@ -41,9 +41,9 @@ const Usermsg = () => {
  
 
   return (
-    <div className="h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex flex-col overflow-auto  justify-center items-center">
+    <div className="h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex pt-8 overflow-auto ">
 
-      <div className=''>
+      <div className='ml-72'>
       {
          rentdata.map(car=>(
            <Paymsg data={car}/>
