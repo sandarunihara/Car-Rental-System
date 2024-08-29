@@ -6,6 +6,7 @@ import bcryptjs from "bcryptjs";
 export async function AddcarOwner(req, res, next) {
     const { name, nic, age, gender, address,email } = req.body;
 
+    
     const hashedpassword=bcryptjs.hashSync(nic,10)
 
 

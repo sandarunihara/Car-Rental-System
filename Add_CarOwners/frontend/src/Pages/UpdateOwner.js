@@ -9,7 +9,7 @@ export const UpdateOwner = () => {
     const navigate = useNavigate();
     
     
-    const {data:ownerData,loading} = useFetchData('/get/'+id);
+    const {data:ownerData,loading} = useFetchData('/fetchowner/'+id);
     
      const handlechange = (e)=>{
             setformData({...formData,[e.target.id]:e.target.value.trim()})
@@ -17,19 +17,23 @@ export const UpdateOwner = () => {
 
      const handlesubmit = async (e) =>{
         e.preventDefault();
+        console.log(formData);
+        
         if (
             !formData.name ||
             !formData.nic ||
             !formData.age ||
             !formData.gender ||
-            !formData.address 
+            !formData.address ||
+            !formData.email ||
+            !formData.password
           ) {
             setErrorMessage("All fields required");
             
           }
           try {
             setErrorMessage(null);
-            const res = await fetch("http://localhost:8050/api/updateCarowner/"+id, {
+            const res = await fetch("http://localhost:8050/api/updateowner/"+id, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(formData),
@@ -65,7 +69,7 @@ export const UpdateOwner = () => {
             type="text"
             placeholder="Enter Owner Name"
             className="p-2 w-[350px] rounded-lg text-black"
-            id="Ownername"
+            id="name"
             onChange={handlechange}
             value={formData.name}
             required
@@ -78,7 +82,7 @@ export const UpdateOwner = () => {
             type="text"
             placeholder="Enter Owner NIC"
             className="p-2 w-[350px] rounded-lg text-black"
-            id="OwnerNIC"
+            id="nic"
             onChange={handlechange}
             value={formData.nic}
             required
@@ -90,7 +94,7 @@ export const UpdateOwner = () => {
             type="text"
             placeholder="Enter Owner Age"
             className="p-2 w-[350px] rounded-lg text-black"
-            id="OwnerAge"
+            id="age"
             onChange={handlechange}
             value={formData.age}
             required
@@ -102,7 +106,7 @@ export const UpdateOwner = () => {
             type="text"
             placeholder="Enter Owner gender "
             className="p-2 w-[350px] rounded-lg text-black"
-            id="OwnerGender"
+            id="gender"
             onChange={handlechange}
             value={formData.gender}
             required
@@ -114,9 +118,33 @@ export const UpdateOwner = () => {
             type="text"
             placeholder="Enter Owner Address "
             className="p-2 w-[350px] rounded-lg text-black"
-            id="OwnerAddress"
+            id="address"
             onChange={handlechange}
             value={formData.address}
+            required
+          />
+        </div>
+        <div className="flex justify-between gap-10 mb-8">
+          <label className="font-semibold">Owner Email</label>
+          <input
+            type="email"
+            placeholder="Enter Owner Email "
+            className="p-2 w-[350px] rounded-lg text-black"
+            id="email"
+            onChange={handlechange}
+            value={formData.email}
+            required
+          />
+        </div>
+        <div className="flex justify-between gap-10 mb-8">
+          <label className="font-semibold">Owner Password</label>
+          <input
+            type="password"
+            placeholder="Enter Owner Address "
+            className="p-2 w-[350px] rounded-lg text-black"
+            id="password"
+            onChange={handlechange}
+            value={formData.password}
             required
           />
         </div>
