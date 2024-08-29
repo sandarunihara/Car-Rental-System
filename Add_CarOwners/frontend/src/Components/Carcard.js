@@ -16,13 +16,13 @@ const Carcard = ({carname,fuel,location,price,carId,date,carimage}) => {
 
   return (
     <div className='relative h-[460px] w-[330px]  cursor-pointer rounded-3xl mb-8'>
-        <div className='relative bg-black h-full group overflow-hidden rounded-3xl' onClick={handlesubmit}>
+        <div className='relative  h-full group overflow-hidden rounded-3xl' onClick={handlesubmit}>
         
             <img className='absolute inset-0 h-full w-full object-fit transform transition-transform duration-1000 group-hover:scale-105 rounded-2xl' src={carimage}/>
             
               <div className='absolute bottom-0 w-[100px] h-[100px] rounded-tr-[50px] text-white bg-black'>
                 <div className='relative mt-3  w-[85px] h-[85px] rounded-full border-2 bg-black border-amber-400 transform transition-transform duration-1000 group-hover:bg-amber-400'>
-                <p className='text-sm flex flex-col justify-center text-center mt-5 items-center text-amber-400 group-hover:text-black'>RS:{price}<br/><span className='font-bold text-white'>DAY</span></p>
+                  <p className='text-sm flex flex-col justify-center text-center mt-5 items-center text-amber-400 group-hover:text-black'>RS:{price}<br/><span className='font-bold text-white'>DAY</span></p>
                 </div>
               </div>
               <div className='absolute  bottom-0 right-0 p-4 text-white'>
