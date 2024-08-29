@@ -29,6 +29,7 @@ export async function rentcarController(req, res) {
             ...req.body
             // pin: pin
         };
+        
 
         const rentData = new carrentmodel(payload);
         const saveData = await rentData.save();
@@ -65,7 +66,7 @@ export async function carDetailscontroller(req, res) {
             error: false,
             success: true
         });
-    } catch (err) {
+    } catch (err){
         res.status(400).json({
             message: err.message || err,
             error: true,
