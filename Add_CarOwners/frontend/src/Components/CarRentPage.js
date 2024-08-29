@@ -84,7 +84,7 @@ const CarRentPage = () => {
             Carnumber:cardata.Carnumber,
             Carname:cardata.Carname,
             name:"",
-            nic:"",
+            nic:authState.user.nic,
             mobile:"",
             email:"",
             rent_date:rent_date,
@@ -116,7 +116,7 @@ const CarRentPage = () => {
 
     const [rentdata,setrentdata]=useState({
         name:"",
-        nic:"",
+        nic:authState.user.nic,
         mobile:"",
         email:"",
         rent_date:rent_date,
@@ -305,7 +305,7 @@ const CarRentPage = () => {
                         </form>
                     </div>
                 </div>
-                <div className='bg-stone-300 rounded-b-xl flex justify-end h-[80px]'>
+                <div className='bg-gradient-to-r from-white to-red-300 rounded-b-xl flex justify-end h-[80px]'>
                     <p className='mr-20 my-auto text-2xl font-semibold'>Total : Rs.{price}.00</p>
                     <button className='bg-black h-[45px] px-5 my-auto mr-5 rounded text-white font-semibold hover:text-black hover:bg-white hover:scale-110 hover:shadow-2xl transition-all duration-400' onClick={handlesubmit} >Purchase Vehicle </button>
                 </div>
