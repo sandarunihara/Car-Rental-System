@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchData } from '../hooks/useFetchData';
 
 export const UpdateOwner = () => {
     const [formData,setformData] = useState({});
-    const [errorMessage,setErrorMessage] = useState(false)
+    const [errorMessage,setErrorMessage] = useState(false);
     const {id} = useParams();
     const navigate = useNavigate();
     
@@ -17,7 +17,7 @@ export const UpdateOwner = () => {
 
      const handlesubmit = async (e) =>{
         e.preventDefault();
-        console.log(formData);
+        
         
         if (
             !formData.name ||
@@ -59,6 +59,8 @@ export const UpdateOwner = () => {
      if (loading || !ownerData) {
         return <p>Loading...</p>;
      };
+     
+     
   return (
     <div className=" w-full flex  justify-center ">
     <div className="w-[600px] p-6 mt-12  bg-black rounded-lg absolute bg-opacity-95">
