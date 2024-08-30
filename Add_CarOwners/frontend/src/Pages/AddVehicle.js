@@ -36,7 +36,8 @@ const AddVehicle = () => {
       !formData.Price ||
       !formData.Seat ||
       !formData.Location ||
-      !formData.Car_type
+      !formData.Car_type ||
+      !formData.CarImage
     ) {
       setErrorMessage("All fields required");
       console.log(formData);
@@ -101,7 +102,7 @@ const AddVehicle = () => {
             setImageUploadProgress(null);
             setImageUploadError(null);
             setformData({ ...formData, CarImage: downloadURL });
-            console.log(downloadURL);
+            
 
             console.log(formData.CarImage);
           });
@@ -117,7 +118,7 @@ const AddVehicle = () => {
   return (
     <div className=" w-full flex  justify-center h-screen bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto">
       <div className=" p-10 mt-12 ml-72  bg-black rounded-lg absolute bg-opacity-95">
-        <form className="mt-4 text-white" onSubmit={handlesubmit}>
+        <form className="mt-4 text-white" onSubmit={handlesubmit} encType="multipart/form-data">
           <div className="flex justify-between">
           <div>
           <div className="flex justify-between gap-10 mb-8">
@@ -209,6 +210,7 @@ const AddVehicle = () => {
               className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
               id="CarImage"
               accept="image/*"
+              multiple
               onChange={(e) => setfile(e.target.files[0])}
               required
             />

@@ -61,9 +61,9 @@ export async function getCarOwner(req, res, next) {
 // Update car owner
 export async function updateCarowner(req, res, next) {
     const userId = req.params.id;
-    const { name, nic, age, gender, address,email } = req.body;
+    const { name, nic, age, gender, address,email,password } = req.body;
 
-    const updateCarowner = { name, nic, age: Number(age), gender, address,email };
+    const updateCarowner = { name, nic, age: Number(age), gender, address,email,password };
 
     try {
         await Carowner.findByIdAndUpdate(userId, updateCarowner);
