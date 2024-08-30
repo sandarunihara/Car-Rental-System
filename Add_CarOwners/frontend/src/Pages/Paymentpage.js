@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Paymentpage = () => {
     const navigate=useNavigate()
+    const location=useLocation()
+    const rentid = location.state?.rentid;
+    
 
     const [paydetails,setpaydetails]=useState({
         name:"",
@@ -32,23 +35,32 @@ const Paymentpage = () => {
             [name]: value
         });
     }
-    const handlesubmit=()=>{
+
+    const data1={_id:rentid,Ownerresponce:'4'}
+
+    const handlesubmit=async(e)=>{
+      e.preventDefault()
+      const response=await fetch('http://localhost:8050/api/updaterent',{
+        method:'post',
+        headers:{
+            "content-type": "application/json"
+        },
+        body:JSON.stringify(data1)
+      })
+      const responsedata=await response.json()
+
         setpaydetails({
             name:"",email:"",address:"",city:"",province:"",postalcode:"",nameoncard:"",cardnumber:"",expmonth:"", expyear:"",cvv:""
         })
         toast.success("Payment Succesfull")
         toast.success("Car Rent is Succesfull")
         navigate('/userdashbord/usermsg')
-
     }
-
-    
-
 
   return (
     <div className='h-screen bg-gradient-to-r from-gray-200 to-blue-200'>
         <div className='flex justify-around '>
-        <form className='w-fit h-fit bg-slate-300 p-5' onSubmit={handlesubmit}>
+        <form className='w-fit h-fit bg-slate-300 p-5 ml-10 mt-24 rounded-lg' onSubmit={handlesubmit}>
             <div className='flex justify-between  space-x-5 '>
             <div className='space-y-4'>
                 <h1 className='text-xl font-bold '>BILLING ADDRESS</h1>
@@ -193,7 +205,7 @@ const Paymentpage = () => {
             <Button type='submit' gradientMonochrome="success" className='w-full mt-6'>Procced to Checkout</Button>
         </form>
         <div className='w-[750px] relative flex items-center ml-10'>
-            <div className='justify-around flex flex-col bg-gradient-to-r from-[#010101] via-[#3b1810] to-[#e95d3c] w-[470px] h-[270px] rounded-lg absolute z-20 top-20 shadow-2xl'>
+            <div className='justify-around flex flex-col bg-gradient-to-r from-[#010101] via-[#3b1810] to-[#e95d3c] w-[470px] h-[270px] rounded-lg absolute z-20 top-32 shadow-2xl'>
                 <div className='flex justify-between px-7'>
                 <SiCardano className='text-white text-4xl mt-4'/>
                 <SiVisa className='text-white text-7xl'/>
