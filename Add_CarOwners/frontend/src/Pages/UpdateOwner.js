@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, } from 'react-router-dom';
 import { useFetchData } from '../hooks/useFetchData';
 
 export const UpdateOwner = () => {
@@ -10,6 +10,7 @@ export const UpdateOwner = () => {
     
     
     const {data:ownerData,loading} = useFetchData('/fetchowner/'+id);
+    
     
      const handlechange = (e)=>{
             setformData({...formData,[e.target.id]:e.target.value.trim()})
@@ -52,7 +53,9 @@ export const UpdateOwner = () => {
 
      useEffect(()=>{
         if (ownerData) {
-            setformData(ownerData);
+            setformData(ownerData.carowner);
+            
+            
         }
      },[ownerData])
 
@@ -97,8 +100,8 @@ export const UpdateOwner = () => {
             placeholder="Enter Owner Age"
             className="p-2 w-[350px] rounded-lg text-black"
             id="age"
-            onChange={handlechange}
             value={formData.age}
+            onChange={handlechange}
             required
           />
         </div>
@@ -109,8 +112,8 @@ export const UpdateOwner = () => {
             placeholder="Enter Owner gender "
             className="p-2 w-[350px] rounded-lg text-black"
             id="gender"
-            onChange={handlechange}
             value={formData.gender}
+            onChange={handlechange}
             required
           />
         </div>
@@ -121,8 +124,8 @@ export const UpdateOwner = () => {
             placeholder="Enter Owner Address "
             className="p-2 w-[350px] rounded-lg text-black"
             id="address"
-            onChange={handlechange}
             value={formData.address}
+            onChange={handlechange}
             required
           />
         </div>
@@ -133,8 +136,8 @@ export const UpdateOwner = () => {
             placeholder="Enter Owner Email "
             className="p-2 w-[350px] rounded-lg text-black"
             id="email"
-            onChange={handlechange}
             value={formData.email}
+            onChange={handlechange}
             required
           />
         </div>
@@ -145,8 +148,8 @@ export const UpdateOwner = () => {
             placeholder="Enter Owner Address "
             className="p-2 w-[350px] rounded-lg text-black"
             id="password"
-            onChange={handlechange}
             value={formData.password}
+            onChange={handlechange}
             required
           />
         </div>

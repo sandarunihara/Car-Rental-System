@@ -33,7 +33,7 @@ const CarownerSchema = new Schema({
     },
     role:{
         type:String,
-        required:true
+        required:false
     }
 });
 
