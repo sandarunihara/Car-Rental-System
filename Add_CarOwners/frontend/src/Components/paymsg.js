@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { IoMdDoneAll } from "react-icons/io";
 
 const Paymsg = ({data}) => {
   const [pay, setPay] = useState(false);
@@ -15,7 +16,7 @@ const Paymsg = ({data}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [feedbackId, setFeedbackId] = useState('');
   const [isPaid, setIsPaid] = useState(false);
-
+  
   // useEffect(() => {
   // Check if the payment has been made before
   //   let paymentStatus = localStorage.getItem(`paymentStatus-${data.Carnumber}`);
@@ -108,7 +109,7 @@ const Paymsg = ({data}) => {
         setCarnumber(Carnumber);
         setShowDetails(false);
         // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
-        navigate('/payment');
+        navigate('/payment',{state:{rentid:data._id}});
       } else {
         toast.error('Failed to update feedback');
       }
@@ -122,7 +123,7 @@ const Paymsg = ({data}) => {
     toast.success('Feedback submitted successfully')
     setShowDetails(false)
     // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
-    navigate('/payment');
+    navigate('/payment',{state:{rentid:data._id}});
   }
 
 
@@ -130,42 +131,82 @@ const Paymsg = ({data}) => {
 
   return (
     <div>
-        <div className="w-[800px] bg-white p-10 rounded-2xl shadow-2xl ml-52 mb-10 ">
-        <h2 className="text-3xl font-bold mb-6">Car Return Confirmation</h2>
-        <p className="mb-6">
-          Thank you for returning car <span>{data.Carnumber}</span>. Here are the details of your rental:
-        </p>
-        <div className="text-lg mb-4">
-          <p>Car Owner : {ownerdata.name} </p>
-          <p>Car Name  : {data.Carname}</p>
-        </div>
-        <p className="mb-6">
-          We hope you had a great experience with your rental. To complete the process, please proceed with your payment for the rental period. Thank you for choosing our service!
-        </p>
-        <div className="text-lg font-semibold mb-6">Total Amount Due: {data.price}</div>
-        <div className="flex justify-center">
-          <Button
-            gradientDuoTone="pinkToOrange"
-            className="px-8 py-3 rounded-full text-white text-lg font-medium"
-            onClick={() => setPay(true)}
-          >
-            Pay Now
-          </Button>
-          {/* {isPaid ? (
-            <Button gradientDuoTone="greenToBlue" className="px-8 py-3 rounded-full text-white text-lg font-medium" disabled>
-              Paid
-            </Button>
-          ) : (
-            <Button
-              gradientDuoTone="pinkToOrange"
-              className="px-8 py-3 rounded-full text-white text-lg font-medium"
-              onClick={() => setPay(true)}
-            >
-              Pay Now
-            </Button>
-          )} */}
-        </div>
-      </div>
+
+      {
+        data.Ownerresponce==='0'?(
+          <div className='bg-white w-[900px]  p-4 rounded-2xl shadow-2xl ml-52 mb-10 space-y-4 border-l-[20px] border-sky-300'>
+              <p className='text-3xl font-semibold '>{data.Carname}<span className='text-sm'>({data.Carnumber})</span></p>
+              <p className='text-lg font-semibold'>Quick Update:</p>
+              <p className='text-lg mb-3'>The car owner has swiftly responded to your rental request! We're pleased to inform you that the process is moving quickly. We're now finalizing the details, and you'll receive an update shortly with all the necessary information.  </p>
+          </div>
+        ):data.Ownerresponce==='1'?(
+          <div className='bg-white w-[900px]  p-4 rounded-2xl shadow-2xl ml-52 mb-10 space-y-4 border-l-[20px] border-green-500'>
+              <p className='text-xl'><span className='font-semibold'>Great news! </span>The car owner has accepted your request for <span className='font-semibold'>{data.Carname}</span>.</p>
+              <p className='text-xl'>Here are the details:</p>
+              <div className="text-lg mb-4">
+                <p>Car Owner : {ownerdata.name} </p>
+                <p>Car Number  : {data.Carnumber}</p>
+              </div>
+              <p className='text-xl font-semibold'>Next Steps:</p>
+              <p className='text-xl '>1.Confirm pickup details with the car owner.</p>
+              <p className='text-xl '>2.Contact the car owner directly at <span className='font-semibold'>{ownerdata.email}</span>.</p>
+          </div>
+        ):data.Ownerresponce==='2'?(
+          <div className='bg-white w-[900px]  p-4 rounded-2xl shadow-2xl ml-52 mb-10 space-y-4 border-l-[20px] border-red-600'>
+              <p className='text-3xl font-semibold '>{data.Carname}<span className='text-sm'>({data.Carnumber})</span></p>
+              <p className='text-lg mb-3'>We are sorry, but the car owner has unfortunately declined your rental request for that car.Please review other available options or consider submitting a new request. If you need assistance, feel free to contact us.</p>
+          </div>
+        ):data.Ownerresponce==='3'?(
+          <div className="w-[800px] bg-white p-10 rounded-2xl shadow-2xl ml-52 mb-10 border-l-[20px] border-orange-400">
+            <h2 className="text-3xl font-bold mb-6">Car Payment</h2>
+            <p className="mb-6">
+              Thank you for returning car <span>{data.Carnumber}</span>. Here are the details of your rental:
+            </p>
+            <div className="text-lg mb-4">
+              <p>Car Owner : {ownerdata.name} </p>
+              <p>Car Name  : {data.Carname}</p>
+            </div>
+            <p className="mb-6">
+              We hope you had a great experience with your rental. To complete the process, please proceed with your payment for the rental period. Thank you for choosing our service!
+            </p>
+            <div className="text-lg font-semibold mb-6">Total Amount Due: {data.price}</div>
+            <div className="flex justify-center">
+              <Button
+                gradientDuoTone="pinkToOrange"
+                className="px-8 py-3 rounded-full text-white text-lg font-medium"
+                onClick={() => setPay(true)}
+              >
+                Pay Now
+              </Button>
+            </div>
+          </div>
+        ):(
+          <div className="w-[800px] bg-white p-10 rounded-2xl shadow-2xl ml-52 mb-10 border-l-[20px] border-indigo-500">
+            <h2 className="text-3xl font-bold mb-6">Car Payment</h2>
+            <p className="mb-6">
+              Thank you for returning car <span>{data.Carnumber}</span>. Here are the details of your rental:
+            </p>
+            <div className="text-lg mb-4">
+              <p>Car Owner : {ownerdata.name} </p>
+              <p>Car Name  : {data.Carname}</p>
+            </div>
+            <p className="mb-6">
+              We hope you had a great experience with your rental. To complete the process, please proceed with your payment for the rental period. Thank you for choosing our service!
+            </p>
+            <div className="text-lg font-semibold mb-6">Total Amount Due: {data.price}</div>
+            <div className="flex justify-center">
+              {/* <Button
+                gradientDuoTone="pinkToOrange"
+                className="px-8 py-3 rounded-full text-white text-lg font-medium"
+                onClick={() => setPay(true)}
+              >
+                Paid
+              </Button> */}
+              <div className="flex items-center px-8 py-3 rounded-2xl bg-gradient-to-r from-green-300 to-green-800 text-lg font-medium">Paid<IoMdDoneAll className='ml-3'/></div>
+            </div>
+          </div>
+        )
+      }
 
       <Modal show={pay} size="md" onClose={() => setPay(false)} popup>
         <Modal.Header />
@@ -331,3 +372,20 @@ const Paymsg = ({data}) => {
 }
 
 export default Paymsg
+
+
+
+
+{/* {isPaid ? (
+            <Button gradientDuoTone="greenToBlue" className="px-8 py-3 rounded-full text-white text-lg font-medium" disabled>
+              Paid
+            </Button>
+          ) : (
+            <Button
+              gradientDuoTone="pinkToOrange"
+              className="px-8 py-3 rounded-full text-white text-lg font-medium"
+              onClick={() => setPay(true)}
+            >
+              Pay Now
+            </Button>
+          )} */}
