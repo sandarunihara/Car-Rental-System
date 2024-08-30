@@ -33,7 +33,6 @@ const Usermsg = () => {
   useEffect(()=>{
     fetchdata()
   },[])
-  console.log(rentdata);
   
   
   
@@ -46,9 +45,10 @@ const Usermsg = () => {
       <div className='ml-72'>
       {
          rentdata.map(car=>(
+            
            <Paymsg data={car}/>
          ))
-      }
+      } 
       </div>
     </div>
   );

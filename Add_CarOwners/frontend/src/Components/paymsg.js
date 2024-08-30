@@ -16,13 +16,12 @@ const Paymsg = ({data}) => {
   const [isPaid, setIsPaid] = useState(false);
 
   // useEffect(() => {
-  //   // Check if the payment has been made before
+  // Check if the payment has been made before
   //   let paymentStatus = localStorage.getItem(`paymentStatus-${data.Carnumber}`);
   //   if (paymentStatus === 'true') {
   //     setIsPaid(true);
   //   }
   // }, );
-
 
   const navigate=useNavigate()
   const [ownerdata,setownerdata]=useState({})
