@@ -26,8 +26,8 @@ export async function rentcarController(req, res) {
         }
 
         const payload = {
-            ...req.body
-            // pin: pin
+            ...req.body,
+            Ownerresponce:"0"
         };
         
 
@@ -78,17 +78,18 @@ export async function carDetailscontroller(req, res) {
 // Update
 export async function updaterentcar(req, res) {
     try {
-        const { _id,name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId } = req.body;
+        const { _id,name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId,Ownerresponce } = req.body;
 
         const updaterentdetails = {
-            name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId
+            name, nic, mobile, email, rent_date,price,Carnumber,Carname,OwnerId,userId,Ownerresponce
           };
 
         const updaterent = await carrentmodel.findByIdAndUpdate(_id, updaterentdetails);
+        const newdata=await carrentmodel.findById(_id)
 
         res.status(200).json({
             message: "Rent updated successfully",
-            data: updaterent,
+            data: newdata,
             success: true,
             error: false
         });
