@@ -4,6 +4,7 @@ import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Paymsg = ({data}) => {
   const [pay, setPay] = useState(false);
@@ -76,14 +77,14 @@ const Paymsg = ({data}) => {
         data: { id: feedbackId }, // Use the feedbackId for deletion
       });
       if (response.data.success) {
-        alert('Feedback deleted successfully');
+        toast.success('Feedback deleted successfully');
         setShowDetails(false); // Close the details modal
         // Clear the form fields
         setName(name);
         setFeedback('');
         setCarnumber(Carnumber);
       } else {
-        alert('Failed to delete feedback');
+        toast.error('Failed to delete feedback');
       }
     } catch (error) {
       console.error('Error deleting feedback:', error);
@@ -101,7 +102,7 @@ const Paymsg = ({data}) => {
         Carnumber,
       });
       if (response.data.success) {
-        alert('Feedback updated successfully');
+        toast.success('Feedback updated successfully')
         setIsEditing(false); // Switch back to view mode
         setName(name);
         setFeedback(feedback);
@@ -110,7 +111,7 @@ const Paymsg = ({data}) => {
         // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
         navigate('/payment');
       } else {
-        alert('Failed to update feedback');
+        toast.error('Failed to update feedback');
       }
     } catch (error) {
       console.error('Error updating feedback:', error);
@@ -119,6 +120,7 @@ const Paymsg = ({data}) => {
   };
 
   const handlesubmit2=()=>{
+    toast.success('Feedback submitted successfully')
     setShowDetails(false)
     // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
     navigate('/payment');
