@@ -55,7 +55,7 @@ function AddOwner() {
 
   return (
     <div className="flex-grow bg-black p-6 sm:p-8 md:p-12 text-white h-screen flex justify-center items-center overflow-auto">
-      <form className="flex flex-col w-full max-w-md mt-10" onSubmit={handlesubmit}>
+      <form className="flex flex-col w-full max-w-md mt-10 ml-72" onSubmit={handlesubmit}>
         <label className="mb-1.5 text-lg">Name</label>
         <input 
           type="text" 

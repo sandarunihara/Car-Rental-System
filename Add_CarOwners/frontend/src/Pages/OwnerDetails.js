@@ -60,7 +60,7 @@ function OwnerDetails() {
  
   return (
     <div className=" h-3/4 bg-slate-300 ml-3 mr-3 mb-10">
-      <div className="content ml-5 mr-5 mt-10 p-5">
+      <div className="content ml-80 mr-5 mt-10 p-5">
         <table className="w-full ">
           <thead className="bg-gray-50 border-b-2 border-gray-200">
             <tr>
