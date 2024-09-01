@@ -34,6 +34,7 @@ import {
 } from "../Controllers/AddcarController.js";
 
 import { searchcarController } from "../Controllers/SearchCarController.js";
+import { RentcarDetailscontroller } from "../Controllers/MessageController.js";
 
 const router = express.Router();
 
@@ -70,5 +71,8 @@ router.get("/fetchcar/:id", fetchcar);
 
 // Search route
 router.post("/search", searchcarController);
+
+// Rent car owner
+router.post("/OwnerInRent",RentcarDetailscontroller);
 
 export default router;
