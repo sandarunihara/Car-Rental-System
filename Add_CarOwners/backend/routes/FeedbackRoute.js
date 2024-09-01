@@ -35,6 +35,7 @@ import {
 
 import { searchcarController } from "../Controllers/SearchCarController.js";
 import { RentcarDetailscontroller } from "../Controllers/MessageController.js";
+import { deleteCustomer, updateCustomerProfile, viewProfile } from "../Controllers/customerontroller.js";
 
 const router = express.Router();
 
@@ -58,9 +59,12 @@ router.put("/updateowner/:id", updateCarowner);
 router.delete("/deleteowner/:id", deleteCarOwner);
 router.get("/fetchowner/:id", fetchCarOwner);
 
-// AddCustomer routes
+// Customer routes
 router.post("/signup", signup);
 router.post("/signin", signin);
+router.get("/getcustomer/:id",viewProfile);
+router.post("/updatecustomer/:id",updateCustomerProfile);
+router.delete("/deletecustomer/:id",deleteCustomer);
 
 // Car routes
 router.post("/createcar", Addcars);

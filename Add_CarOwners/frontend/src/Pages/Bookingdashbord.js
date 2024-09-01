@@ -4,10 +4,10 @@ import { AuthContext } from '../Context/AuthContext'
 
 const Bookingdashbord = () => {
 
-  let nic=''
+  let userId=''
   const {authState} =useContext(AuthContext)
   if(authState.user){
-    nic=authState.user.nic
+    userId=authState.user._id
   }
    
   const [rentdata,setrentdata]=useState([])
@@ -18,7 +18,7 @@ const Bookingdashbord = () => {
       headers:{
         "content-type": "application/json"
       },
-      body:JSON.stringify({ nic }) 
+      body:JSON.stringify({ userId }) 
     })
     const responsedata=await response.json()
     if(responsedata.success){
@@ -36,7 +36,7 @@ const Bookingdashbord = () => {
         {
           Array.isArray(rentdata) && rentdata.length > 0 ? (
             rentdata.map((data, index) => (
-              <Bookingmsg key={index} data={data} callfun={fetchdata} />
+              <Bookingmsg key={index} data={data}  />
             ))
           ) : (
             <p className='text-center'>No bookings available.</p> 

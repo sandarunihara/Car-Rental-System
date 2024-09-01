@@ -16,17 +16,8 @@ const Paymsg = ({data}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [feedbackId, setFeedbackId] = useState('');
   const [isPaid, setIsPaid] = useState(false);
-  
-  // useEffect(() => {
-  // Check if the payment has been made before
-  //   let paymentStatus = localStorage.getItem(`paymentStatus-${data.Carnumber}`);
-  //   if (paymentStatus === 'true') {
-  //     setIsPaid(true);
-  //   }
-  // }, );
-
-  const navigate=useNavigate()
   const [ownerdata,setownerdata]=useState({})
+  const navigate=useNavigate()
 
   const fetchdata=async()=>{
     const response=await fetch(`http://localhost:8050/api/fetchowner/${data.OwnerId}`,{
@@ -122,7 +113,6 @@ const Paymsg = ({data}) => {
   const handlesubmit2=()=>{
     toast.success('Feedback submitted successfully')
     setShowDetails(false)
-    // localStorage.setItem(`paymentStatus-${data.Carnumber}`, 'true');
     navigate('/payment',{state:{rentid:data._id}});
   }
 
@@ -141,7 +131,7 @@ const Paymsg = ({data}) => {
           </div>
         ):data.Ownerresponce==='1'?(
           <div className='bg-white w-[900px]  p-4 rounded-2xl shadow-2xl ml-52 mb-10 space-y-4 border-l-[20px] border-green-500'>
-              <p className='text-xl'><span className='font-semibold'>Great news! </span>The car owner has accepted your request for <span className='font-semibold'>{data.Carname}</span>.</p>
+              <p className='text-xl'><span className='font-semibold'>🎊Great news! </span>The car owner has accepted your request for <span className='font-semibold'>{data.Carname}</span>.</p>
               <p className='text-xl'>Here are the details:</p>
               <div className="text-lg mb-4">
                 <p>Car Owner : {ownerdata.name} </p>

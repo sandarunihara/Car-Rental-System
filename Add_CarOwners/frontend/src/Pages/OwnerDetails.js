@@ -59,9 +59,9 @@ function OwnerDetails() {
   };
  
   return (
-    <div className=" h-3/4 bg-slate-300 ml-3 mr-3 mb-10">
-      <div className="content ml-80 mr-5 mt-10 p-5">
-        <table className="w-full ">
+    <div className=" h-screen bg-gradient-to-r from-gray-200 to-blue-200 ml-3 ">
+      <div className="content ml-80 mr-5  p-5">
+        <table className="w-full mt-10">
           <thead className="bg-gray-50 border-b-2 border-gray-200">
             <tr>
               <th className="p-3 text-sm font-semibold tracking-wide text-left">

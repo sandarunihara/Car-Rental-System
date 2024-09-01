@@ -1,6 +1,7 @@
 import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function AddOwner() {
 
@@ -13,6 +14,7 @@ function AddOwner() {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
     
   };
+  
 
   const handlesubmit = async (e)=>{
     e.preventDefault();
@@ -23,8 +25,7 @@ function AddOwner() {
       !formData.age ||
       !formData.gender ||
       !formData.address ||
-      !formData.email ||
-      !formData.password 
+      !formData.email 
       
     ) {
       setErrorMessage("All fields required");
@@ -45,9 +46,8 @@ function AddOwner() {
         return setErrorMessage(data.message);
       }
       if (res.ok) {
-        console.log(formData);
-
         navigate("/admin/owner-details");
+        toast.success("Add Car Owner Succesfully")
       }
     } catch (error) {
       setErrorMessage("An error Occured.please try again");
@@ -55,79 +55,86 @@ function AddOwner() {
   }
 
   return (
-    <div className="flex-grow bg-black p-6 sm:p-8 md:p-12 text-white h-screen flex justify-center items-center overflow-auto">
-      <form className="flex flex-col w-full max-w-md mt-10 ml-72" onSubmit={handlesubmit}>
-        <label className="mb-1.5 text-lg">Name</label>
-        <input 
-          type="text" 
-          id='name'
-          placeholder="Enter your Name" 
-          className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-          onChange={handlechange}
-        />
-
-        <label className="mb-1.5 text-lg">NIC</label>
-        <input 
-          type="text" 
-          id='nic'
-          placeholder="Enter Your NIC" 
-          className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-          onChange={handlechange}
-        />
-
-        <label className="mb-1.5 text-lg">Age</label>
-        <input 
-          type="text" 
-          id='age'
-          placeholder="Enter your Age" 
-          className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-          onChange={handlechange}
-        />
-
-        <label className="mb-1.5 text-lg">Gender</label>
-        <input 
-          type="text" 
-          id='gender'
-          placeholder="Enter your Gender" 
-          className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-          onChange={handlechange}
-        />
-
-        <label className="mb-1.5 text-lg">Address</label>
-        <input 
-          type="text" 
-          id='address'
-          placeholder="Enter your Address" 
-          className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-          onChange={handlechange}
-        />
-
-          <label className="mb-1.5 text-lg">Email</label>
-                    <input 
-                      type="email" 
-                      id='email'
-                      placeholder="Enter your Email" 
-                      className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-                      onChange={handlechange}
-                    />
-
-              <label className="mb-1.5 text-lg">Password</label>
-                      <input 
-                        type="password" 
-                        id='password'
-                        placeholder="Enter your Password" 
-                        className="p-2.5 mb-5 text-base border border-gray-300 rounded-md text-black"
-                        onChange={handlechange}
-                      />       
-
+    <div className="flex-grow h-screen w-full overflow-auto bg-gradient-to-r from-gray-200 to-blue-200 p-6 sm:p-8 md:p-12 text-white  flex justify-center items-center">
+      <div className=" p-10 mt-12 ml-72   bg-black rounded-lg absolute bg-opacity-95">
+      <form className="flex flex-col w-[500px] ">
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Owner Name</label>
+            <input
+              type="text"
+              placeholder="Enter Car Owner Name"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="name"
+              onChange={handlechange}
+              required
+            />
+          </div>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">NIC</label>
+            <input
+              type="text"
+              placeholder="Enter Car Owner NIC"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="nic"
+              onChange={handlechange}
+              required
+            />
+          </div>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Age</label>
+            <input
+              type="text"
+              placeholder="Enter Car Owner Age"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="age"
+              onChange={handlechange}
+              required
+            />
+          </div>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Gender</label>
+            <input
+              type="text"
+              placeholder="Enter Car Owner Gender"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="gender"
+              onChange={handlechange}
+              required
+            />
+          </div>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Address</label>
+            <input
+              type="text"
+              placeholder="Enter Car Owner Address"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="address"
+              onChange={handlechange}
+              required
+            />
+          </div>
+          <div className="flex justify-between gap-10 mb-8">
+            <label className="font-semibold">Email</label>
+            <input
+              type="email"
+              placeholder="Enter Car Owner Email"
+              className="p-2 w-[350px] rounded-lg text-black"
+              id="email"
+              onChange={handlechange}
+              required
+            />
+          </div>
+        
         <Button
           type="submit" 
+          onClick={handlesubmit}
           gradientMonochrome="success"
           className="p-2.5 bg-white text-black text-lg border-none rounded-md cursor-pointer hover:bg-gray-300"
         >
           Add Owner
         </Button>
       </form>
+      </div>
     </div>
   );
 }
