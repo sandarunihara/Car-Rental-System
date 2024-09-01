@@ -43,7 +43,7 @@ const AddVehicle = () => {
       console.log(formData);
     }
     try {
-      await handleUploadImage();
+      //await handleUploadImage();
 
       setErrorMessage(null);
       const res = await fetch("http://localhost:8050/api/createcar", {
@@ -120,6 +120,49 @@ const AddVehicle = () => {
       <div className=" p-10 mt-12 ml-72  bg-black rounded-lg absolute bg-opacity-95">
         <form className="mt-4 text-white" onSubmit={handlesubmit} encType="multipart/form-data">
           <div className="flex justify-between">
+          <div className="  text-center w-[600px]">
+            <div className=" flex justify-around">
+            <label className="font-semibold">Car Image</label>
+            <div className="group">
+            <input
+              type="file"
+              className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
+              id="CarImage"
+              accept="image/*"
+              multiple
+              onChange={(e) => setfile(e.target.files[0])}
+              required
+            />
+            <button
+              className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
+                imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress > 0}
+            >
+              {imageUploadProgress ? (
+                <div className="">
+                  <CircularProgressbar
+                    value={imageUploadProgress}
+                    text={`${imageUploadProgress || 0}%`}
+                  />
+                </div>
+              ) : (
+                "Upload"
+              )}
+            </button>
+            </div>
+            </div>
+            {formData.CarImage && (
+              <img
+                src={formData.CarImage}
+                className="w-[100px] h-[100px] mx-auto mt-5"
+                alt="Car"
+              />
+            )}
+
+            
+          </div>
           <div>
           <div className="flex justify-between gap-10 mb-8">
             <label className="font-semibold">Car Name</label>
@@ -201,49 +244,7 @@ const AddVehicle = () => {
           
           
           </div>
-          <div className="  text-center w-[600px]">
-            <div className=" flex justify-around">
-            <label className="font-semibold">Car Image</label>
-            <div className="group">
-            <input
-              type="file"
-              className=" ml-4 mt-1 rounded-l-xl text-white bg-gradient-to-r from-gray-400 to-gray-700"
-              id="CarImage"
-              accept="image/*"
-              multiple
-              onChange={(e) => setfile(e.target.files[0])}
-              required
-            />
-            <button
-              className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
-                imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleUploadImage}
-              disabled={imageUploadProgress > 0}
-            >
-              {imageUploadProgress ? (
-                <div className="">
-                  <CircularProgressbar
-                    value={imageUploadProgress}
-                    text={`${imageUploadProgress || 0}%`}
-                  />
-                </div>
-              ) : (
-                "Upload"
-              )}
-            </button>
-            </div>
-            </div>
-            {formData.CarImage && (
-              <img
-                src={formData.CarImage}
-                className="w-[100px] h-[100px] mx-auto mt-5"
-                alt="Car"
-              />
-            )}
-
-            
-          </div>
+          
           </div>
             <Button
               gradientMonochrome="success"

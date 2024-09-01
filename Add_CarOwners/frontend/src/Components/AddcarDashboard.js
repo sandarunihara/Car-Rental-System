@@ -29,7 +29,7 @@ const AddcarDashboard = () => {
                   <Link to="/Addcar/add-vehicle" className={`text-xl ${clickedButton === 'AddVehicle' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-24 rounded-lg font-semibold`} onClick={() => handleClick('AddVehicle')}>Add vehicle</Link>
                 </div>
                 <div className='text-center mt-10'>
-                  <Link to="/Addcar/message" className={`text-xl ${clickedButton === 'Message' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-24 rounded-lg font-semibold`} onClick={() => handleClick('Message')}>Message</Link>
+                  <Link to="/Addcar/message" className={`text-xl ${clickedButton === 'Message' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-[110px] rounded-lg font-semibold`} onClick={() => handleClick('Message')}>Message</Link>
                 </div>
               </div>
             

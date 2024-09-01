@@ -1,3 +1,4 @@
+import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -119,12 +120,13 @@ function AddOwner() {
                         onChange={handlechange}
                       />       
 
-        <button 
+        <Button
           type="submit" 
+          gradientMonochrome="success"
           className="p-2.5 bg-white text-black text-lg border-none rounded-md cursor-pointer hover:bg-gray-300"
         >
           Add Owner
-        </button>
+        </Button>
       </form>
     </div>
   );
