@@ -1,12 +1,12 @@
-import Customer from '../models/customerModel.js';
+import User from '../models/UserModel.js';
+import { errorHandler } from '../utills/error.js';
 //import bcryptjs from 'bcryptjs'
-import { errorHandler } from '../utils/error.js'
 
 export const viewProfile = async (req, res, next) => {
     const id = req.params.id;
 
     try{
-        const customer = await Customer.findById(id).select('-password');
+        const customer = await User.findById(id);
         if(!customer){
             return next(errorHandler(404,'Customer not found'));
         }
@@ -19,13 +19,13 @@ export const viewProfile = async (req, res, next) => {
 
 export const updateCustomerProfile = async (req, res, next) => {
     const id = req.params.id;
-    const { username, firstName, lastName, email, mobile, nic, age } = req.body;
+    const { username, email, mobile, nic} = req.body;
     
     try {
-        const updatedCustomer = await Customer.findByIdAndUpdate(
+        const updatedCustomer = await User.findByIdAndUpdate(
             id,
-            { username, firstName, lastName, email, mobile, nic, age },
-        ).select('-password');
+            { username,email, mobile, nic},
+        );
 
         if(!updatedCustomer){
             return next(errorHandler(404,'Customer not found'));
@@ -38,10 +38,10 @@ export const updateCustomerProfile = async (req, res, next) => {
 };
 
 export const deleteCustomer = async (req, res, next) => {
-    const id = req.user.id;
+    const id = req.params.id;
     
     try{
-        const deletedCustomer = await Customer.findByIdAndDelete(req.user.id);
+        const deletedCustomer = await User.findByIdAndDelete(id);
         if(!deletedCustomer){
             return next(errorHandler(404, 'Customer not found'));
         }

@@ -60,9 +60,7 @@ const CarRentPage = () => {
     const [ImgIndex,setImgIndex]=useState(0)
 
     const images=[
-        cardata.carimage,
-        'img/2.jpg',
-        'img/3.jpg'
+        cardata.carimage
     ]
 
     const handleNext=()=>{

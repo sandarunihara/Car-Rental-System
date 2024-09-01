@@ -25,6 +25,8 @@ import UserDashboard from "./Pages/UserDashboard";
 import { UpdateOwner } from "./Pages/UpdateOwner";
 import Paymentpage from "./Pages/Paymentpage";
 import Userdetail from "./Pages/Userdetail";
+import OwnerDashboard from "./Pages/OwnerDashboard";
+import Updateuserdetails from "./Pages/Updateuserdetails";
 
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
         <Route path="/payment" element={<Paymentpage />} />
         <Route path="/userpro" element={<Userdetail />} />
+        <Route path="/userpro/upd" element={<Updateuserdetails />} />
       </Routes>
     </Router>
   );
@@ -61,6 +64,7 @@ function AdminLayout() {
           <Route path="owner-details" element={<OwnerDetails />} />
           <Route path="view-feedback" element={<ViewFeedback />} />
           <Route path="update-owner/:id" element={<UpdateOwner/>} />
+          <Route path="/" element={<OwnerDashboard/>} />
         </Routes>
       </div>
     </div>

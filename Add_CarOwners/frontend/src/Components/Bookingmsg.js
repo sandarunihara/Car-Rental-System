@@ -3,8 +3,11 @@ import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Button, Label, Modal, TextInput } from "flowbite-react";
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-const Bookingmsg = (data,{callfun}) => {
+const Bookingmsg = (data) => {
+  const navigate=useNavigate()
     const rentdata=data.data
     const _id=rentdata._id
     
@@ -24,6 +27,8 @@ const Bookingmsg = (data,{callfun}) => {
 
         if (responsedata.success) {
           setShowModal(false)
+          toast.success(responsedata.message)
+          navigate('/userdashbord/dash')
         }
     }
 
@@ -64,12 +69,17 @@ const Bookingmsg = (data,{callfun}) => {
         body:JSON.stringify(rento)
       })
       const responsedata=await response.json()
+      if(responsedata.success){
+        toast.success(responsedata.message)
+        navigate('/userdashbord/dash')
+      }
     }
 
     const handlesubmit=(e)=>{
       e.preventDefault()
-      updatedata()
       seteditrent(false)
+      updatedata()
+      
     }
 
     

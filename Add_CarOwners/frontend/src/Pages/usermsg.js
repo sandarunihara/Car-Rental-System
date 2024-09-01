@@ -9,9 +9,9 @@ const Usermsg = () => {
   
 
   // get rent details
-  let nic=''
+  let userId=''
   if(authState.user){
-    nic=authState.user.nic
+    userId=authState.user._id
   }
    
   const [rentdata,setrentdata]=useState([])
@@ -22,7 +22,7 @@ const Usermsg = () => {
       headers:{
         "content-type": "application/json"
       },
-      body:JSON.stringify({ nic }) 
+      body:JSON.stringify({ userId }) 
     })
     const responsedata=await response.json()
     if(responsedata.success){

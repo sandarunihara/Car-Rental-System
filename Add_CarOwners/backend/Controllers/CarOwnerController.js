@@ -51,8 +51,6 @@ export async function getCarOwner(req, res, next) {
             totalowners,
             lastMonthowners
         });
-        
-        
     } catch (err) {
         next(errorHandler(500, err.message));
     }
@@ -67,10 +65,12 @@ export async function updateCarowner(req, res, next) {
 
     try {
         await Carowner.findByIdAndUpdate(userId, updateCarowner);
-        res.status(200).send({ status: "user updated" });
+        res.status(200).send({ status: "Owner profile updated successfully" });
     } catch (err) {
         next(errorHandler(500, err.message));
     }
+
+
 }
 
 // Delete car owner
@@ -79,7 +79,7 @@ export async function deleteCarOwner(req, res, next) {
 
     try {
         await Carowner.findByIdAndDelete(userId);
-        res.status(200).send({ status: "user deleted" });
+        res.status(200).send({ status: "Profile deleted successfully" });
     } catch (err) {
         next(errorHandler(500, err.message));
     }

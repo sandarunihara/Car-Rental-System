@@ -53,8 +53,8 @@ export async function rentcarController(req, res) {
 // Read
 export async function carDetailscontroller(req, res) {
     try {
-        const  nic  = req.body;
-        const user = await carrentmodel.find(nic);
+        const  userId= req.body;
+        const user = await carrentmodel.find(userId);
 
         if (user.length===0) {
             throw new Error("No rent");

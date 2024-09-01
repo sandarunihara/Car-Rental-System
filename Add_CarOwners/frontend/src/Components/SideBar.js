@@ -27,9 +27,6 @@ const SideBar = () => {
                 <div className='text-center mt-10'>
                   <Link to="/admin/add-owner" className={`text-xl ${clickedButton === 'AddOwner' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-24 rounded-lg font-semibold`} onClick={() => handleClick('AddOwner')}>Add Owner</Link>
                 </div>
-                <div className='text-center mt-10'>
-                  <Link to="/admin/view-feedback" className={`text-xl ${clickedButton === 'Feedback' ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white' : 'hover:bg-gradient-to-r from-purple-500 to-blue-500'} py-3 px-20 rounded-lg font-semibold`} onClick={() => handleClick('Feedback')}>view Feedback</Link>
-                </div>
               </div>
             
             
