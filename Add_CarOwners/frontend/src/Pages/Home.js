@@ -92,10 +92,10 @@ const Home = () => {
       <video autoPlay  muted className="background-video">
                 <source src={`${process.env.PUBLIC_URL}/1.mp4`} type="video/mp4" />
             </video>
-      <div className='pt-16 md:pt-56 pl-4 md:pl-9 ml-0 md:ml-9 flex flex-col md:flex-row z-10 relative'>
+      <div className='pt-24  md:pt-56 pl-4 md:pl-9 ml-0 md:ml-9 flex flex-col md:flex-row z-10 relative'>
       <div className='text-white'>
-        <h1 className='text-4xl md:text-8xl font-bold'>Rent Cars <br/>Travel Easy</h1>
-        <p className='text-lg md:text-2xl mt-5 md:mt-7 w-full md:w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
+        <h1 className='text-4xl md:text-8xl mx-auto font-bold'>Rent Cars <br/>Travel Easy</h1>
+        <p className='text-lg md:text-2xl mt-5 mx-auto md:mt-7 w-full md:w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
         </div>
       {/* *****************search car*********************  */}
       {
