@@ -17,8 +17,6 @@ const Userdetail = () => {
   const userrole = authState.user?.role;
   const [user, setUser] = useState({});
 
-  console.log(userrole);
-
   const userdetails = async () => {
     try {
       let response;
@@ -52,7 +50,6 @@ const Userdetail = () => {
           setUser(responsedata);
         } else if (userrole === "CarOwner") {
           setUser(responsedata.carowner || {});
-          console.log(user);
         }
       } else {
         console.error("Failed to fetch user details");
