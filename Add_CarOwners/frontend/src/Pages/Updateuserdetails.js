@@ -24,7 +24,7 @@ const Updateuserdetails = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       let response;
-      if (userrole === "User" || 'Admin') {
+      if (userrole === "User" || userrole === 'Admin') {
         response = await fetch(`http://localhost:8050/api/getcustomer/${userid}`, {
           method: "GET",
           headers: {
@@ -40,7 +40,7 @@ const Updateuserdetails = () => {
         });
       }
       const responseData = await response.json();
-      if (userrole === "User" || 'Admin') {
+      if (userrole === "User" ||userrole ===  'Admin') {
         setUser(responseData);
       } else if (userrole === "CarOwner") {
         setUser(responseData.carowner);
@@ -60,7 +60,7 @@ const Updateuserdetails = () => {
 
   const handleUpdate = async () => {
     let response;
-    if (userrole === "User" || 'Admin') {
+    if (userrole === "User" ||userrole ===  'Admin') {
       response = await fetch(`http://localhost:8050/api/updatecustomer/${userid}`, {
         method: "POST",
         headers: {
