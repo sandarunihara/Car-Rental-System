@@ -89,19 +89,19 @@ const Message = () => {
   };
 
   return (
-    <>
+    <div className=' h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex pt-8 overflow-auto'>
       {ownerdata.length > 0 ? (
         ownerdata.map((showdata, i) => (
           showdata.Ownerresponce === '0' ? (
-            <div key={i} className='w-3/4 ml-80 h-[300px] bg-gray-300 mx-auto mt-20 rounded-xl bg-gradient-to-r from-gray-300 to-blue-200 overflow-auto'>
+            <div key={i} className='w-3/4 ml-80 h-[300px] bg-white mx-auto mt-20 rounded-xl  overflow-auto shadow-2xl'>
               <div className='ml-5 mr-5 pt-5'>
-                <p>
+                <p className='text-xl'>
                   You have received a new request for your car, <span>{showdata?.Carnumber}</span>. Please review the details below and let us know if you would like to accept or decline this request.
                 </p>
               </div>
-              <div className='mt-10 ml-10'>
-                <span>Customer Name: {showdata?.name}</span><br />
-                <span>Request Date: {showdata?.rent_date}</span><br />
+              <div className='mt-10 ml-10 text-2xl '>
+                <span>Customer Name: <span className='font-semibold'>{showdata?.name}</span></span><br />
+                <span>Request Date: <span className='font-semibold'>{showdata?.rent_date}</span></span><br />
               </div>
               <div className='flex justify-end mt-14 mr-10'>
                 <button
@@ -120,27 +120,38 @@ const Message = () => {
             </div>
           ) : showdata.Ownerresponce === '1' ?(
             
-            <div key={i} className='w-3/4 ml-80 h-auto bg-gray-200 mx-auto mt-10 rounded-xl flex flex-col items-center justify-center p-4'>
-                      <p>
-                        Request for car <span className="font-bold">{showdata?.Carnumber}</span> has already been<span className='text-green-700'> Accepted</span>
+            <div key={i} className='w-[900px] ml-80 h-fit bg-white mx-auto mt-20 rounded-xl overflow-auto shadow-2xl p-4'>
+                      <p className='flex justify-center'>
+                        You have successfully accepted a rental request for your car with  <span className="font-bold">{showdata?.Carnumber}</span>. Here are the details of the request:
                       </p>
-                    <div className="w-full text-left mt-2 ml-10">
-                      <span>Customer Name: {showdata.name}</span><br />
-                      <span>Request Date: {showdata.rent_date}</span>
+                    <div className=" text-left mt-2 ml-10 ">
+                      <span >Customer Name: <span className='font-semibold'>{showdata.name}</span></span><br />
+                      <span>Request Date:  <span className='font-semibold'>{showdata.rent_date}</span></span>
                     </div>
-                  <button className='mt-4 bg-green-700 text-white font-semibold border-r-[25px] border-l-[25px] border-green-700 rounded-xl' onClick={() => handleAccessPay(i)}>
+                    <div className='ml-10 mt-4'>
+                      <p className='text-xl font-semibold'>Next Steps:</p>
+                      <p className='text-lg '>1.Please contact the customer directly to discuss and finalize the rental arrangements.</p>
+                      <p className='text-lg '>2.Ensure that you go over the rental terms and conditions with the customer.</p>
+                    </div>
+                    <div className='flex justify-center'>
+                  <Button gradientMonochrome="success" className='mt-4  text-white font-semibold py-4 px-7  rounded-xl' onClick={() => handleAccessPay(i)}>
                     Access to Pay
-                  </button>
+                  </Button>
+                  </div>
               </div>
 
           ):showdata.Ownerresponce === '2' ?(
-            <div key={i} className='w-3/4 ml-80 h-[150px] bg-gray-200 mx-auto mt-10 rounded-xl flex items-center justify-center'>
-              <p>
-                Request for car <span className="font-bold">{showdata?.Carnumber}</span> has already been<span className='text-red-700'> Declined</span>
+            <div key={i} className='w-3/4 ml-80 h-[150px] bg-white shadow-2xl mx-auto mt-10 rounded-xl p-4'>
+              <p className='flex  items-center justify-center'>
+                You have successfully <span className='text-red-600 font-semibold'>declined</span> the rental request for your car with  <span className="font-bold">{showdata?.Carnumber}</span>. Here are the details of the request:
               </p>
+              <div className=" text-left mt-2 ml-10 ">
+                      <span className='flex justify-center'>Customer Name: <span className='font-semibold'>{showdata.name}</span></span><br />
+                      <span className='flex justify-center'>Request Date:  <span className='font-semibold'>{showdata.rent_date}</span></span>
+                    </div>
             </div>
           ):showdata.Ownerresponce === '3' ?(
-            <div key={i} className='w-3/4 ml-80 h-[150px] bg-gray-200 mx-auto mt-10 rounded-xl flex items-center justify-center'>
+            <div key={i} className='w-3/4 ml-80 h-[150px] bg-white mx-auto mt-10 rounded-xl flex items-center justify-center'>
               <p>
                 <span className='font-bold'>{showdata?.name}</span> Pending to Pay in  <span className='font-bold'>{showdata?.Carnumber}</span>
               </p>
@@ -148,7 +159,7 @@ const Message = () => {
           ):(
             <div key={i} className='w-3/4 ml-80 h-[150px] bg-gray-200 mx-auto mt-10 rounded-xl flex items-center justify-center'>
               <p>
-                <span className='font-bold'>{showdata?.name}</span> is Pay to  <span className='font-bold'>{showdata?.Carnumber}</span>
+                <span className='font-bold'>{showdata?.name}</span> is Paid to  <span className='font-bold'>{showdata?.Carnumber}</span>
               </p>
             </div>
           )
@@ -156,7 +167,7 @@ const Message = () => {
       ) : (
         <p>No data available</p>
       )}
-    </>
+    </div>
   );
 };
 

@@ -22,7 +22,7 @@ function AddOwner() {
     if (
       !formData.name ||
       !formData.nic ||
-      !formData.age ||
+      !formData.mobile ||
       !formData.gender ||
       !formData.address ||
       !formData.email 
@@ -40,10 +40,9 @@ function AddOwner() {
         body: JSON.stringify(formData),
       })
       const data = await res.json();
-      console.log({data});
       
       if (data.success === false) {
-        return setErrorMessage(data.message);
+        toast.error(data.message)
       }
       if (res.ok) {
         navigate("/admin/owner-details");
@@ -81,12 +80,12 @@ function AddOwner() {
             />
           </div>
           <div className="flex justify-between gap-10 mb-8">
-            <label className="font-semibold">Age</label>
+            <label className="font-semibold">Mobile</label>
             <input
               type="text"
-              placeholder="Enter Car Owner Age"
+              placeholder="Enter Car Owner mobile"
               className="p-2 w-[350px] rounded-lg text-black"
-              id="age"
+              id="mobile"
               onChange={handlechange}
               required
             />

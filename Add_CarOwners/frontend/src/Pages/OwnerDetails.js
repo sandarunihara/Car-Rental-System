@@ -71,7 +71,7 @@ function OwnerDetails() {
                 NIC
               </th>
               <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                Age
+                Mobile
               </th>
               <th className="p-3 text-sm font-semibold tracking-wide text-left">
                 Gender
@@ -97,7 +97,7 @@ function OwnerDetails() {
                   {ownerData.nic}
                 </td>
                 <td className="p-3 text-sm font-semibold tracking-wide text-left">
-                  {ownerData.age}
+                  {ownerData.mobile}
                 </td>
                 <td className="p-3 text-sm font-semibold tracking-wide text-left">
                   {ownerData.gender}

@@ -113,7 +113,7 @@ const Paymsg = ({data}) => {
   const handlesubmit2=()=>{
     toast.success('Feedback submitted successfully')
     setShowDetails(false)
-    navigate('/payment',{state:{rentid:data._id}});
+    
   }
 
 
@@ -139,7 +139,7 @@ const Paymsg = ({data}) => {
               </div>
               <p className='text-xl font-semibold'>Next Steps:</p>
               <p className='text-xl '>1.Confirm pickup details with the car owner.</p>
-              <p className='text-xl '>2.Contact the car owner directly at <span className='font-semibold'>{ownerdata.email}</span>.</p>
+              <p className='text-xl '>2.Contact the car owner directly at <span className='font-semibold'>{ownerdata.mobile}</span>.</p>
           </div>
         ):data.Ownerresponce==='2'?(
           <div className='bg-white w-[900px]  p-4 rounded-2xl shadow-2xl ml-52 mb-10 space-y-4 border-l-[20px] border-red-600'>
@@ -164,7 +164,7 @@ const Paymsg = ({data}) => {
               <Button
                 gradientDuoTone="pinkToOrange"
                 className="px-8 py-3 rounded-full text-white text-lg font-medium"
-                onClick={() => setPay(true)}
+                onClick={() => navigate('/payment',{state:{rentid:data._id}})}
               >
                 Pay Now
               </Button>
