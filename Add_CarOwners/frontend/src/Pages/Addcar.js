@@ -61,7 +61,7 @@ const Addcar = () => {
             <HiOutlineUserGroup className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
-            <span className='text-green-500 flex items-center'>
+            <span className='text-green-500 flex items-center '>
               <HiArrowNarrowUp />
               {lastmonthowners}
             </span>
