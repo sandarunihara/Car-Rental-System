@@ -15,7 +15,7 @@ import { AuthContext } from "../Context/AuthContext";
 const AddVehicle = () => {
   const {authState}=useContext(AuthContext)
 
-  const [formData, setformData] = useState({OwnerId:authState.user._id});
+  const [formData, setformData] = useState({OwnerId:authState.user?._id});
   const [errorMessage, setErrorMessage] = useState(null);
   const [file, setfile] = useState();
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
@@ -137,7 +137,10 @@ const AddVehicle = () => {
               className={`bg-gradient-to-r from-green-300 to-green-800 px-5 pt-[8px] pb-[9px] rounded-r-xl  text-black border-white hover:bg-green-800 ${
                 imageUploadProgress ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={handleUploadImage}
+              onClick={(e)=>{
+                e.preventDefault();
+                handleUploadImage();
+              }}
               disabled={imageUploadProgress > 0}
             >
               {imageUploadProgress ? (
