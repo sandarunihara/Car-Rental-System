@@ -16,7 +16,7 @@ const CarownerSchema = new Schema({
         type: String,
         required: true
     },
-    age: {
+    mobile: {
         type: Number,
         required: true
     },

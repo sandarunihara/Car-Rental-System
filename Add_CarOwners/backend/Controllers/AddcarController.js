@@ -3,7 +3,6 @@ import Addcar from "../models/AddcarModel.js";
 
 // Add new car
 export async function Addcars(req, res, next) {
-  console.log(req.body);
   const {
     Carname,
     Fueltype,

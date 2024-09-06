@@ -36,6 +36,7 @@ import {
 import { searchcarController } from "../Controllers/SearchCarController.js";
 import { RentcarDetailscontroller } from "../Controllers/MessageController.js";
 import { deleteCustomer, updateCustomerProfile, viewProfile } from "../Controllers/customerontroller.js";
+import { addcontactuscontroller, displaycontactmsgcontroller } from "../Controllers/ContactController.js";
 
 const router = express.Router();
 
@@ -75,6 +76,10 @@ router.get("/fetchcar/:id", fetchcar);
 
 // Search route
 router.post("/search", searchcarController);
+
+// ContactUs
+router.post("/contact",addcontactuscontroller)
+router.post('/diplayconactmsg',displaycontactmsgcontroller)
 
 // Rent car owner
 router.post("/OwnerInRent",RentcarDetailscontroller);
