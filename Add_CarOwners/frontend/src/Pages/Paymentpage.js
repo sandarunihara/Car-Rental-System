@@ -26,7 +26,6 @@ const Paymentpage = () => {
         expyear:"",
         cvv:""
     })
-    console.log(paydetails.cardnumber);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,13 +47,17 @@ const Paymentpage = () => {
         body:JSON.stringify(data1)
       })
       const responsedata=await response.json()
-
-        setpaydetails({
-            name:"",email:"",address:"",city:"",province:"",postalcode:"",nameoncard:"",cardnumber:"",expmonth:"", expyear:"",cvv:""
-        })
-        toast.success("Payment Succesfull")
-        toast.success("Car Rent is Succesfull")
-        navigate('/userdashbord/usermsg')
+        if(responsedata.success){
+          setpaydetails({
+              name:"",email:"",address:"",city:"",province:"",postalcode:"",nameoncard:"",cardnumber:"",expmonth:"", expyear:"",cvv:""
+          })
+          toast.success("Payment Succesfull")
+          toast.success("Car Rent is Succesfull")
+          navigate('/userdashbord/usermsg')
+        }else{
+          toast.error(responsedata.message)
+        }
+        
     }
 
   return (

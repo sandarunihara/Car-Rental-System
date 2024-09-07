@@ -32,7 +32,7 @@ const Bookingdashbord = () => {
 
   return (
     <div className='h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex pt-8 overflow-auto'>
-        <div className='ml-96'>
+        <div className='lg:ml-96 ml-48 '>
         {
           Array.isArray(rentdata) && rentdata.length > 0 ? (
             rentdata.map((data, index) => (
