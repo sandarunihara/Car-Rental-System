@@ -28,6 +28,8 @@ import Userdetail from "./Pages/Userdetail";
 import OwnerDashboard from "./Pages/OwnerDashboard";
 import Updateuserdetails from "./Pages/Updateuserdetails";
 import Contact from "./Pages/Contact";
+import Privacy from "./Pages/Privacy";
+import Termsandconditions from "./Pages/Termsandconditions";
 
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
         <Route path="/displayfeedback" element={<DisplayFeedback />} />
         <Route path="/payment" element={<Paymentpage />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacypolicy" element={<Privacy/>} />
+        <Route path="/termsncondition" element={<Termsandconditions/>} />
         <Route path="/userpro" element={<Userdetail />} />
         <Route path="/userpro/upd" element={<Updateuserdetails />} />
       </Routes>
