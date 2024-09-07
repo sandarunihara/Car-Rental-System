@@ -19,7 +19,7 @@ const Footer = () => {
   <div className='flex flex-col md:flex-row items-center justify-between p-4 md:mt-5'>
     <div className='flex flex-col md:flex-row items-center'>
       <div className='my-auto md:ml-32 text-center md:text-left'>
-        <p className='mt-2 md:mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
+        <p onClick={()=>{navigate('/aboutus')}} className='mt-2 md:mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
         <p className='flex items-center justify-center md:justify-start font-thin text-sm'><PiCopyright className='mr-1' />2024 SI</p>
       </div>
       <p onClick={()=>{navigate('/termsncondition')}} className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Terms and Conditions</p>
