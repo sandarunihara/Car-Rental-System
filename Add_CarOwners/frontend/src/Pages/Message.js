@@ -89,7 +89,7 @@ const Message = () => {
   };
 
   return (
-    <div className=' h-screen bg-gradient-to-r from-gray-200 to-blue-200 flex pt-8 overflow-auto'>
+    <div className=' h-screen bg-gradient-to-r from-gray-200 to-blue-200 pt-8 overflow-auto'>
       {ownerdata.length > 0 ? (
         ownerdata.map((showdata, i) => (
           showdata.Ownerresponce === '0' ? (
