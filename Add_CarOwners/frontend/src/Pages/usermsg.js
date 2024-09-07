@@ -1,6 +1,4 @@
-import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import Paymsg from '../Components/paymsg';
 
@@ -33,11 +31,6 @@ const Usermsg = () => {
   useEffect(()=>{
     fetchdata()
   },[])
-  
-  console.log(rentdata);
-  
-  
-
  
 
   return (

@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
   const [formData, setformData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
+  const [passwordshow,setpasswordshow]=useState(false)
   const navigate = useNavigate();
 
   const handlechange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
-    console.log(formData);
   };
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     if (
       !formData.username ||
       !formData.email ||
@@ -35,7 +36,6 @@ const SignUp = () => {
       const data = await res.json();
       if (data.success === false) {
         return setErrorMessage(data.message);
-        toast.error(errorMessage)
       }
       if (res.ok) {
         navigate("/Login");
@@ -99,26 +99,36 @@ const SignUp = () => {
               <div className="relative my-4 mt-10">
                 <input
                   type="email"
-                  className="block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer"
+                  className="block w-3/4 py-2.3 px-0 text-sm  border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer"
                   placeholder="Email *"
                   required
                   id="email"
                   onChange={handlechange}
                 />
               </div>
-              <div className="relative my-4 mt-10">
+              <div className="relative my-4 mt-10 flex items-center">
                 <input
-                  type="password"
-                  className="block w-3/4 py-2.3 px-0 text-sm text-white border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer"
+                  type={passwordshow? "text":"password"}
+                  className="block w-3/4 py-2.3 px-0 text-sm  border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer"
                   placeholder="Password *"
                   required
                   id="password"
                   onChange={handlechange}
                 />
+                <div className="absolute right-28 cursor-pointer" onClick={()=>setpasswordshow((preve)=>!preve)}>
+                    {
+                      passwordshow? (
+                        <FaEyeSlash/>
+                      ):
+                      (
+                        <FaEye/>
+                      )
+                    }
+                </div>
               </div>
               <div>
                 <label className="">
-                  <input type="checkbox" className="w-3 h-3 mr-3 " />I Agree
+                  <input type="checkbox" required className="w-3 h-3 mr-3 " />I Agree
                   to the{" "}
                   <span className="text-orange-500">Terms and Conditions</span>
                 </label>
