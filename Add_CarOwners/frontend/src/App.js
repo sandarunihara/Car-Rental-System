@@ -28,8 +28,10 @@ import Userdetail from "./Pages/Userdetail";
 import OwnerDashboard from "./Pages/OwnerDashboard";
 import Updateuserdetails from "./Pages/Updateuserdetails";
 import Contact from "./Pages/Contact";
+import AboutUspage from "./Pages/AboutUspage";
 import Privacy from "./Pages/Privacy";
 import Termsandconditions from "./Pages/Termsandconditions";
+
 
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
         <Route path="/termsncondition" element={<Termsandconditions/>} />
         <Route path="/userpro" element={<Userdetail />} />
         <Route path="/userpro/upd" element={<Updateuserdetails />} />
+        <Route path="/aboutus" element={<AboutUspage />} />
+        
       </Routes>
     </Router>
   );
