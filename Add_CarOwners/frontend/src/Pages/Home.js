@@ -80,7 +80,12 @@ const Home = () => {
   },[])
 
   
-
+  const handlehomeClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div className='bg-black cursor-default'>
@@ -143,10 +148,9 @@ const Home = () => {
         </div>
       </div>
         ):(
-          <div className='mx-auto'>
-            <iframe src="https://lottie.host/embed/54770a8b-cd0b-4fbd-b3ee-f6691531f713/fCh8LioHgT.json" className='h-[200px] w-[250px]'></iframe>
-            <Link to={'/Login'} className=' flex bg-gradient-to-b from-transparent to-green-500 text-black font-bold py-3 px-6 md:px-12 rounded hover:text-white hover:bg-gradient-to-b hover:from-green-500 hover:to-transparent transition-all duration-1000 '>
-            Explore More <GrLinkNext className='mt-1 ml-2 md:ml-5 text-lg md:text-xl' />
+          <div className='mx-auto mt-36 ml-[500px]'>
+            <Link to={'/Login'} className='flex items-center bg-gradient-to-b from-transparent to-custom-yellow text-black text-2xl  font-mono font-bold py-3 px-6 md:px-12 rounded hover:text-white hover:bg-gradient-to-b hover:from-custom-yellow hover:to-transparent transition-all duration-1000 '>
+            Join Us <iframe src="https://lottie.host/embed/cafd0630-3de8-4461-b805-d6c8e170ab3c/eCMZVlgJDh.json" className='h-[50px] w-[50px]'></iframe>
             </Link>
           </div>
         )
@@ -180,7 +184,7 @@ const Home = () => {
         <div className='text-center pt-10' ref={rentRef}>
           <h2 className='text-3xl md:text-6xl font-bold mt-10 md:mt-20'>Ride of the day</h2>
           <div className=' md:justify-between p-4 md:p-10'>
-            <div>
+            <div className='flex flex-col'>
             <div className='flex flex-wrap justify-between m-2' >
             {cardata.slice(0, 4).map((car, index) => (
                 <Carcard 
@@ -196,6 +200,7 @@ const Home = () => {
               ))}
 
             </div>
+            <div onClick={handlehomeClick} className='left-0  absolute w-full h-[500px]'> </div>
             </div>
           </div>
         </div>
