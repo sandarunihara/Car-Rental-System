@@ -95,7 +95,7 @@ const Paymsg = ({ data }) => {
         setFeedback(feedback);
         setCarnumber(Carnumber);
         setShowDetails(false);
-        navigate('/payment', { state: { rentid: data._id } });
+        navigate('/userdashbord/usermsg');
       } else {
         toast.error('Failed to update feedback');
       }
