@@ -100,7 +100,7 @@ const Home = () => {
       <div className='pt-24  md:pt-56 pl-4 md:pl-9 ml-0 md:ml-9 flex flex-col md:flex-row z-10 relative'>
       <div className='text-white'>
         <h1 className='text-4xl md:text-8xl mx-auto font-bold'>Rent Cars <br/>Travel Easy</h1>
-        <p className='text-lg md:text-2xl mt-5 mx-auto md:mt-7 w-full md:w-[500px]'>A car rental, hire car, or car hire agency is a company <br/> that rents automobiles for short periods of time,<br/> generally ranging from a few hours to a few weeks</p>
+        <p className='text-lg md:text-2xl mt-5 mx-auto md:mt-7 w-full md:w-[500px]'>Our car rental service offers flexible short-term rentals,<br/> perfect for both quick trips and extended stays,<br/> with a wide selection of vehicles to suit your needs.</p>
         </div>
       {/* *****************search car*********************  */}
       {

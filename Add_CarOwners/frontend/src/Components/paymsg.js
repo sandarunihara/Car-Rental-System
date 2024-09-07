@@ -142,7 +142,8 @@ const Paymsg = ({ data }) => {
             {data.Carname}
             <span className="text-sm">({data.Carnumber})</span>
           </p>
-          <p className="text-sm sm:text-lg mt-2 mb-3">We are sorry, but the car owner has unfortunately declined your rental request for that car. Please review other available options or consider submitting a new request. If you need assistance, feel free to contact us.</p>
+          <p className="text-sm sm:text-lg mt-2 mb-3">We are sorry, but the car owner has unfortunately declined your rental request for that car. Please review other available options or consider submitting a new request. If you need assistance, feel free to <a href='/contact' className='text-red-700 font-bold cursor-pointer hover:underline
+          '>contact us</a>.</p>
         </div>
       ) : data.Ownerresponce === '3' ? (
         <div className="bg-white p-6 rounded-2xl shadow-2xl mb-10 border-l-[20px] border-orange-400">
