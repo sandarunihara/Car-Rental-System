@@ -151,13 +151,13 @@ const Message = () => {
                     </div>
             </div>
           ):showdata.Ownerresponce === '3' ?(
-            <div key={i} className='w-3/4 ml-80 h-[150px] bg-white mx-auto mt-10 rounded-xl flex items-center justify-center'>
+            <div key={i} className='w-3/4 ml-80 h-[150px] bg-white shadow-2xl mx-auto mt-10 rounded-xl flex items-center justify-center'>
               <p>
                 <span className='font-bold'>{showdata?.name}</span> Pending to Pay in  <span className='font-bold'>{showdata?.Carnumber}</span>
               </p>
             </div>
           ):(
-            <div key={i} className='w-3/4 ml-80 h-[150px] bg-gray-200 mx-auto mt-10 rounded-xl flex items-center justify-center'>
+            <div key={i} className='w-3/4 ml-80 h-[150px] bg-white shadow-2xl mx-auto mt-10 rounded-xl flex items-center justify-center'>
               <p>
                 <span className='font-bold'>{showdata?.name}</span> is Paid to  <span className='font-bold'>{showdata?.Carnumber}</span>
               </p>
