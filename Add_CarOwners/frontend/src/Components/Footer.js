@@ -22,8 +22,8 @@ const Footer = () => {
         <p className='mt-2 md:mt-6 font-semibold hover:text-yellow-500 cursor-pointer'>About Us</p>
         <p className='flex items-center justify-center md:justify-start font-thin text-sm'><PiCopyright className='mr-1' />2024 SI</p>
       </div>
-      <p className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Terms and Conditions</p>
-      <p className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Privacy Policy</p>
+      <p onClick={()=>{navigate('/termsncondition')}} className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Terms and Conditions</p>
+      <p onClick={()=>{navigate('/privacypolicy')}} className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Privacy Policy</p>
       <p onClick={handleonclick} className='mt-4 md:mt-0 md:ml-20 font-semibold hover:text-yellow-500 cursor-pointer'>Contact Us</p>
     </div>
     <div className='flex flex-col items-center md:flex-row'>
