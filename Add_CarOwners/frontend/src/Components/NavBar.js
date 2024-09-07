@@ -72,7 +72,7 @@ const NavBar = ({ scrollToBottom, scrollToabout, scrollTorent }) => {
     <div className='fixed w-full z-20'>
       <header className={`h-[90px] ${bgColor} shadow-2xl transition-colors duration-300`}>
         <div className='text-white h-full container mx-auto flex items-center justify-between px-4 md:px-9'>
-          <div className='w-24 mb-5'>
+          <div className='w-24 mb-5 cursor-pointer' onClick={()=>{navigate('/')}}>
             <img src={logo} alt='Logo' />
           </div>
           {location.pathname === '/' && (
@@ -87,7 +87,7 @@ const NavBar = ({ scrollToBottom, scrollToabout, scrollTorent }) => {
               {role === 'CarOwner' && (
                 <Link to='/Addcar' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>Dashboard</Link>
               )}
-              {role === 'User' && (
+              {authState.user && (
                 <Link to='/userdashbord/dash' className='font-bold text-lg cursor-pointer px-4 py-1 rounded-full hover:text-black hover:bg-white transition-all duration-300'>My Rents</Link>
               )}
             </div>
