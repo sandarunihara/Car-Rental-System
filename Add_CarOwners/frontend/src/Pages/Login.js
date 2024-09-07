@@ -3,22 +3,22 @@ import NavBar from "../Components/NavBar";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import { toast } from 'react-toastify';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const {login}=useContext(AuthContext)
   const [formData, setformData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState(null);
+  const [passwordshow,setpasswordshow]=useState(false)
   const navigate = useNavigate();
 
   const handlechange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value.trim() });
-    // console.log(formData);
   };
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    // console.log(formData);
-    // return;
     if (!formData.email || !formData.password) {
       setErrorMessage("Please fill out all fields");
       toast.error(errorMessage)
@@ -32,7 +32,6 @@ const Login = () => {
       });
       const data = await res.json();
       if (data.success) {
-        console.log(data);
         navigate("/");
         login(data.token,data.data)
         toast.success(data.message)
@@ -63,9 +62,9 @@ const Login = () => {
                   onChange={handlechange}
                 />
               </div>
-              <div className="relative  mt-10">
+              <div className="relative  mt-10 flex items-center">
                 <input
-                  type="password"
+                  type={passwordshow? "text":"password"}
                   className="block w-3/4 py-2.3 px-0 text-sm text-black border-0 border-b-2 border-gray-300 appearance-none dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black focus:border-blue-600 peer"
                   id="password"
                   placeholder="Password *"
@@ -74,6 +73,16 @@ const Login = () => {
                   name="password"
                   onChange={handlechange}
                 />
+                <div className="absolute right-28 cursor-pointer" onClick={()=>setpasswordshow((preve)=>!preve)}>
+                    {
+                      passwordshow? (
+                        <FaEyeSlash/>
+                      ):
+                      (
+                        <FaEye/>
+                      )
+                    }
+                </div>
               </div>
               <button
                 className="w-3/4 text-white h-10 bg-orange-500 mt-10 mb-5"
