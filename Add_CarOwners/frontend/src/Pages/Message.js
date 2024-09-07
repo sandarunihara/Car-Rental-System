@@ -164,6 +164,7 @@ const Message = () => {
             </div>
           )
         ))
+        
       ) : (
         <p>No data available</p>
       )}
