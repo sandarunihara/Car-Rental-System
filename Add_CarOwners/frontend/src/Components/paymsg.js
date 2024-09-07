@@ -362,16 +362,3 @@ export default Paymsg
 
 
 
-{/* {isPaid ? (
-            <Button gradientDuoTone="greenToBlue" className="px-8 py-3 rounded-full text-white text-lg font-medium" disabled>
-              Paid
-            </Button>
-          ) : (
-            <Button
-              gradientDuoTone="pinkToOrange"
-              className="px-8 py-3 rounded-full text-white text-lg font-medium"
-              onClick={() => setPay(true)}
-            >
-              Pay Now
-            </Button>
-          )} */}
