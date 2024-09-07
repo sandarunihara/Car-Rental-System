@@ -28,6 +28,7 @@ import Userdetail from "./Pages/Userdetail";
 import OwnerDashboard from "./Pages/OwnerDashboard";
 import Updateuserdetails from "./Pages/Updateuserdetails";
 import Contact from "./Pages/Contact";
+import AboutUspage from "./Pages/AboutUspage";
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/userpro" element={<Userdetail />} />
         <Route path="/userpro/upd" element={<Updateuserdetails />} />
+        <Route path="/aboutus" element={<AboutUspage />} />
+        
       </Routes>
     </Router>
   );
