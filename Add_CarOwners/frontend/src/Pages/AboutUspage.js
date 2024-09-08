@@ -1,7 +1,7 @@
 import React from 'react'
 import Member1 from '../img/ashan2.jpeg'
-import Member2 from '../img/sadaru.jpeg'
-import Member3 from '../img/imandi.jpg'
+import Member2 from '../img/sandaru2.jpg'
+import Member3 from '../img/imandi3.jpg'
 import Member4 from '../img/malin.jpeg'
 import Member5 from '../img/sushmitha.jpeg'
 import { MdCloseFullscreen } from 'react-icons/md'
@@ -26,11 +26,11 @@ const AboutUspage = () => {
                     <span className='text-2xl ml-16 '>Ashan</span>
                 </div>
                 <div>
-                    <img src={Member2}  className='w-[220px] h-[220px] object-cover rounded-full'/>
+                    <img src={Member2}  className='w-[220px] h-[220px] object-fill rounded-full'/>
                     <span className='text-2xl ml-16'>Sandaru</span>
                 </div>
                 <div>
-                    <img src={Member3}  className='w-[220px] h-[220px] object-cover rounded-full'/>
+                    <img src={Member3}  className='w-[220px] h-[220px] object-fill rounded-full'/>
                     <span className='text-2xl ml-16'>Imandi</span>
                 </div>
                 <div>
