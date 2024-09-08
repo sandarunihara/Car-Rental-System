@@ -177,7 +177,8 @@ const Paymsg = ({ data }) => {
             <p>Car Owner: {ownerdata.name}</p>
             <p>Car Name: {data.Carname}</p>
           </div>
-          <p className="text-sm sm:text-lg mb-4">We appreciate your prompt payment. We hope you enjoyed your rental experience. If you have any questions or need further assistance, feel free to contact us.</p>
+          <p className="text-sm sm:text-lg mb-4">We appreciate your prompt payment. We hope you enjoyed your rental experience. If you have any questions or need further assistance, feel free to <a href='/contact' className='text-red-700 font-bold cursor-pointer hover:underline
+          '>contact us</a>.</p>
           <div className="text-lg font-semibold mb-4">Thank you for choosing our service!😊</div>
           <div className="text-center">
             <div className="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-green-300 to-green-800 text-lg font-medium text-white">
