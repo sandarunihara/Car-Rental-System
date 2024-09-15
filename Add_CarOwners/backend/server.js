@@ -3,9 +3,13 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import router from "./routes/FeedbackRoute.js"; // Ensure the path and extension are correct
+import router from "./routes/FeedbackRoute.js"; 
+// Ensure the path and extension are correct
+import path from "path";
 
 dotenv.config();
+
+const __dirname = path.resolve();
 
 const app = express();
 const PORT = process.env.PORT || 8050;
@@ -24,6 +28,13 @@ connection.once("open", () => {
 });
 
 app.use("/api", router);
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) =>{
+  req.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+}
+);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
