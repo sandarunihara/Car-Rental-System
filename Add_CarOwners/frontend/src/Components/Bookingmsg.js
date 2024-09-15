@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 const Bookingmsg = (data) => {
+  const {backendDomain}=useContext(AuthContext);
   const navigate = useNavigate();
   const rentdata = data.data;
   const _id = rentdata._id;
@@ -14,7 +16,7 @@ const Bookingmsg = (data) => {
   const [editrent, setEditRent] = useState(false);
 
   const deletedata = async () => {
-    const response = await fetch('http://localhost:8050/api/deleterent', {
+    const response = await fetch(`${backendDomain}/api/deleterent`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',
@@ -55,7 +57,7 @@ const Bookingmsg = (data) => {
 
   // Update database
   const updatedata = async () => {
-    const response = await fetch('http://localhost:8050/api/updaterent', {
+    const response = await fetch(`${backendDomain}/api/updaterent`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',

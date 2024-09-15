@@ -7,6 +7,8 @@ export const AuthProvider = ({ children }) => {
     user: null,
   });
 
+  const backendDomain="http://localhost:8050"
+
   //  const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authState, login, logout}}>
+    <AuthContext.Provider value={{ authState,backendDomain, login, logout}}>
       {children}
     </AuthContext.Provider>
   );

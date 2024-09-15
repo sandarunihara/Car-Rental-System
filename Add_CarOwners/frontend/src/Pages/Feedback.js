@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { Button } from "flowbite-react";
 import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
 
 
 
 const Feedback = () => {
+  const {backendDomain}=useContext(AuthContext)
   const [name, setName] = useState('');
   const [feedback, setFeedback] = useState('');
   const [carNo, setCarNo] = useState('');
@@ -14,7 +16,7 @@ const Feedback = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8050/api/addfeedback', {
+      const response = await axios.post(`${backendDomain}/api/addfeedback`, {
         name,
         comment: feedback,
         carNo

@@ -3,7 +3,7 @@ import { AuthContext } from '../Context/AuthContext';
 import Paymsg from '../Components/paymsg';
 
 const Usermsg = () => {
-  const {authState}=useContext(AuthContext)
+  const {authState,backendDomain}=useContext(AuthContext)
   
 
   // get rent details
@@ -15,7 +15,7 @@ const Usermsg = () => {
   const [rentdata,setrentdata]=useState([])
 
   const fetchdata=async()=>{
-    const response=await fetch('http://localhost:8050/api/displayrent',{
+  const response=await fetch(`${backendDomain}/api/displayrent`,{
       method:'post',
       headers:{
         "content-type": "application/json"

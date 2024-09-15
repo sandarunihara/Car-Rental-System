@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const {login}=useContext(AuthContext)
+  const {login,backendDomain}=useContext(AuthContext)
   const [formData, setformData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState(null);
   const [passwordshow,setpasswordshow]=useState(false)
@@ -25,7 +25,7 @@ const Login = () => {
     }
     try {
       setErrorMessage(null);
-      const res = await fetch("http://localhost:8050/api/signin", {
+      const res = await fetch(`${backendDomain}/api/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

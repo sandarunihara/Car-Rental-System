@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaLocationDot } from "react-icons/fa6";
@@ -7,17 +7,18 @@ import { MdAlternateEmail } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { Button } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 const ContactUs = () => {
     const navigate=useNavigate()
-
+    const {backendDomain}=useContext(AuthContext)
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [message, setmessage] = useState("");
 
     const handleonSubmit=async(e)=>{
         e.preventDefault()
-        const response=await fetch('http://localhost:8050/api/contact',{
+        const response=await fetch(`${backendDomain}/api/contact`,{
             method:'post',
             headers:{
               "content-type": "application/json"

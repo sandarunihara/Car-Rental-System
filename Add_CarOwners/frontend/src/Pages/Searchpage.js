@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavBar from '../Components/NavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Carcard from '../Components/Carcard';
 import Footer from '../Components/Footer';
 import { IoChevronBackOutline } from "react-icons/io5";
+import { AuthContext } from '../Context/AuthContext';
 
 const Searchpage = () => {
+    const {backendDomain}=useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
     const { searchResults, searchDetails } = location.state;

@@ -6,7 +6,7 @@ import { useFetchData } from "../hooks/useFetchData";
 import { AuthContext } from "../Context/AuthContext";
 
 const VehicleDetails = () => {
-  const {authState}=useContext(AuthContext)
+  const {authState,backendDomain}=useContext(AuthContext)
   const { data: carsData, loading } = useFetchData("/getcars");
   const [showAll, setShowAll] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -41,7 +41,7 @@ const VehicleDetails = () => {
 
   const handleToDelete = async (id) => {
     try {
-      const res = await fetch("http://localhost:8050/api/deletecar/" + id, {
+      const res = await fetch(`${backendDomain}/api/deletecar/` + id, {
         method: "DELETE",
       });
       const data = await res.json();

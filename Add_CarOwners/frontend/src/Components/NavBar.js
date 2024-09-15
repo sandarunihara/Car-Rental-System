@@ -7,7 +7,7 @@ import { AuthContext } from '../Context/AuthContext';
 const NavBar = ({ scrollToBottom, scrollToabout, scrollTorent }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { authState, logout } = useContext(AuthContext);
+  const { authState, logout,backendDomain } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [bgColor, setBgColor] = useState('bg-transparent');
@@ -41,7 +41,7 @@ const NavBar = ({ scrollToBottom, scrollToabout, scrollTorent }) => {
     const userdetails = async () => {
       if (role && Id) {
         if (role === 'User' || role === 'Admin') {
-          const response = await fetch(`http://localhost:8050/api/getcustomer/${Id}`, {
+          const response = await fetch(`${backendDomain}/api/getcustomer/${Id}`, {
             method: 'get',
             headers: {
               "content-type": "application/json",
@@ -50,7 +50,7 @@ const NavBar = ({ scrollToBottom, scrollToabout, scrollTorent }) => {
           const responsedata = await response.json();
           setUser(responsedata);
         } else if (role === 'CarOwner') {
-          const response = await fetch(`http://localhost:8050/api/fetchowner/${Id}`, {
+          const response = await fetch(`${backendDomain}/api/fetchowner/${Id}`, {
             method: 'get',
             headers: {
               "content-type": "application/json",

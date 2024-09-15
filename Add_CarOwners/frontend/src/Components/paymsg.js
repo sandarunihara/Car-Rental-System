@@ -2,11 +2,13 @@ import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import axios from 'axios';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
 import { IoMdDoneAll } from 'react-icons/io';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../Context/AuthContext';
 
 const Paymsg = ({ data }) => {
+  const {backendDomain}=useContext(AuthContext);
   const [pay, setPay] = useState(false);
   const [name, setName] = useState(data.name);
   const [feedback, setFeedback] = useState('');
@@ -18,7 +20,7 @@ const Paymsg = ({ data }) => {
   const navigate = useNavigate();
 
   const fetchdata = async () => {
-    const response = await fetch(`http://localhost:8050/api/fetchowner/${data.OwnerId}`, {
+    const response = await fetch(`${backendDomain}/api/fetchowner/${data.OwnerId}`, {
       method: 'get',
       headers: {
         'content-type': 'application/json',
@@ -37,7 +39,7 @@ const Paymsg = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8050/api/addfeedback', {
+      const response = await axios.post(`${backendDomain}/api/addfeedback`, {
         name,
         comment: feedback,
         Carnumber,
@@ -60,7 +62,7 @@ const Paymsg = ({ data }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete('http://localhost:8050/api/deletefeedback', {
+      const response = await axios.delete(`${backendDomain}/api/deletefeedback`, {
         data: { id: feedbackId }, // Use the feedbackId for deletion
       });
       if (response.data.success) {
@@ -82,7 +84,7 @@ const Paymsg = ({ data }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('http://localhost:8050/api/updatefeedback', {
+      const response = await axios.put(`${backendDomain}/api/updatefeedback`, {
         _id: feedbackId,
         name,
         comment: feedback,

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export const useFetchData = (endpoint = "/") => {
+  const {backendDomain}=useContext(AuthContext);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const API_URL = `http://localhost:8050/api`;
+    const API_URL = `${backendDomain}/api`;
     const fetchData = async () => {
       setLoading(true);
       try {

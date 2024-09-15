@@ -3,12 +3,12 @@ import { AuthContext } from '../Context/AuthContext';
 import { Button } from 'flowbite-react';
 
 const Message = () => {
-  const { authState } = useContext(AuthContext);
+  const { authState,backendDomain } = useContext(AuthContext);
   const [ownerdata, setownerdata] = useState([]);
 
   const fetchdata = async () => {
     try {
-      const res = await fetch('http://localhost:8050/api/OwnerInRent', {
+      const res = await fetch(`${backendDomain}/api/OwnerInRent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Message = () => {
 
   const updaterentdata = async (rentData) => {
     try {
-      const response = await fetch('http://localhost:8050/api/updaterent', {
+      const response = await fetch(`${backendDomain}/api/updaterent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

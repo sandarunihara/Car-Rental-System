@@ -1,13 +1,15 @@
 import { Button, Label, TextInput } from 'flowbite-react'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FcSimCardChip } from "react-icons/fc";
 import { SiCardano } from "react-icons/si";
 import { SiVisa } from "react-icons/si";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../Context/AuthContext';
 
 const Paymentpage = () => {
+  const {backendDomain}=useContext(AuthContext)
     const navigate=useNavigate()
     const location=useLocation()
     const rentid = location.state?.rentid;
@@ -39,7 +41,7 @@ const Paymentpage = () => {
 
     const handlesubmit=async(e)=>{
       e.preventDefault()
-      const response=await fetch('http://localhost:8050/api/updaterent',{
+      const response=await fetch(`${backendDomain}/api/updaterent`,{
         method:'post',
         headers:{
             "content-type": "application/json"

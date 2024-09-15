@@ -10,7 +10,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const Updateuserdetails = () => {
-  const { authState } = useContext(AuthContext);
+  const { authState,backendDomain } = useContext(AuthContext);
   const navigate = useNavigate();
   const userid = authState.user?._id;
   const userrole = authState.user?.role;
@@ -25,14 +25,14 @@ const Updateuserdetails = () => {
     const fetchUserDetails = async () => {
       let response;
       if (userrole === "User" || userrole === 'Admin') {
-        response = await fetch(`http://localhost:8050/api/getcustomer/${userid}`, {
+        response = await fetch(`${backendDomain}/api/getcustomer/${userid}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
       } else if (userrole === "CarOwner") {
-        response = await fetch(`http://localhost:8050/api/fetchowner/${userid}`, {
+        response = await fetch(`${backendDomain}/api/fetchowner/${userid}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Updateuserdetails = () => {
   const handleUpdate = async () => {
     let response;
     if (userrole === "User" ||userrole ===  'Admin') {
-      response = await fetch(`http://localhost:8050/api/updatecustomer/${userid}`, {
+      response = await fetch(`${backendDomain}/api/updatecustomer/${userid}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const Updateuserdetails = () => {
         body: JSON.stringify(user),
       });
     } else if (userrole === "CarOwner") {
-      response = await fetch(`http://localhost:8050/api/updateowner/${userid}`, {
+      response = await fetch(`${backendDomain}/api/updateowner/${userid}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

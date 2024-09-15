@@ -11,7 +11,7 @@ import { PiEngine } from "react-icons/pi";
 import { AuthContext } from "../Context/AuthContext";
 
 const CarRentPage = () => {
-  const { authState } = useContext(AuthContext);
+  const { authState,backendDomain } = useContext(AuthContext);
   const location = useLocation();
   const { id, rent_date } = location.state;
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const CarRentPage = () => {
   });
 
   const fetchdata = async () => {
-    const response = await fetch(`http://localhost:8050/api/fetchcar/${id}`, {
+    const response = await fetch(`${backendDomain}/api/fetchcar/${id}`, {
       method: "get",
       headers: {
         "content-type": "application/json",
@@ -133,7 +133,7 @@ const CarRentPage = () => {
   // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8050/api/rentcar", {
+    const response = await fetch(`${backendDomain}/api/rentcar`, {
       method: "post",
       headers: {
         "content-type": "application/json",

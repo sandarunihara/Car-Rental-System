@@ -1,9 +1,11 @@
 import { Button } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { AuthContext } from '../Context/AuthContext';
 
 function AddOwner() {
+  const {backendDomain}=useContext(AuthContext);
 
   const [formData,setformData] = useState();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -34,7 +36,7 @@ function AddOwner() {
     try {
       setErrorMessage(null);
       
-      const res = await fetch("http://localhost:8050/api/addowner",{
+      const res = await fetch(`${backendDomain}/api/addowner`,{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

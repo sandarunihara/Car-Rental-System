@@ -13,7 +13,7 @@ import { Button } from "flowbite-react";
 import { AuthContext } from "../Context/AuthContext";
 
 const AddVehicle = () => {
-  const {authState}=useContext(AuthContext)
+  const {authState,backendDomain}=useContext(AuthContext)
 
   const [formData, setformData] = useState({OwnerId:authState.user?._id});
   const [errorMessage, setErrorMessage] = useState(null);
@@ -46,7 +46,7 @@ const AddVehicle = () => {
       //await handleUploadImage();
 
       setErrorMessage(null);
-      const res = await fetch("http://localhost:8050/api/createcar", {
+      const res = await fetch(`${backendDomain}/api/createcar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

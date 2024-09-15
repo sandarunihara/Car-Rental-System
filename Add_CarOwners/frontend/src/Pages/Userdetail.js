@@ -9,7 +9,7 @@ import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const Userdetail = () => {
-  const { authState, logout } = useContext(AuthContext);
+  const { authState, logout,backendDomain } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -22,7 +22,7 @@ const Userdetail = () => {
       let response;
       if (userrole === "User" ||userrole ===  "Admin") {
         response = await fetch(
-          `http://localhost:8050/api/getcustomer/${userid}`,
+          `${backendDomain}/api/getcustomer/${userid}`,
           {
             method: "GET",
             headers: {
@@ -32,7 +32,7 @@ const Userdetail = () => {
         );
       } else if (userrole === "CarOwner") {
         response = await fetch(
-          `http://localhost:8050/api/fetchowner/${userid}`,
+          `${backendDomain}/api/fetchowner/${userid}`,
           {
             method: "GET",
             headers: {
@@ -72,7 +72,7 @@ const Userdetail = () => {
       let response;
       if (userrole === "User" ||userrole ===  "Admin") {
         response = await fetch(
-          `http://localhost:8050/api/deletecustomer/${user._id}`,
+          `${backendDomain}/api/deletecustomer/${user._id}`,
           {
             method: "DELETE",
             headers: {
@@ -82,7 +82,7 @@ const Userdetail = () => {
         );
       } else if (userrole === "CarOwner") {
         response = await fetch(
-          `http://localhost:8050/api/deleteowner/${user._id}`,
+          `${backendDomain}/api/deleteowner/${user._id}`,
           {
             method: "DELETE",
             headers: {
