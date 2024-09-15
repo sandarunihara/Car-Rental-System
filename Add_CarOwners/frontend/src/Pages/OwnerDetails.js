@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFetchData } from "../hooks/useFetchData";
 import { Link } from "react-router-dom";
 import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { AuthContext } from '../Context/AuthContext';
 
 function OwnerDetails() {
-
+  const {backendDomain}=useContext(AuthContext);
   const { data: ownersData, loading } = useFetchData("/getowners");
   const [formData,setformData] = useState([]);
   const [showAll, setShowAll] = useState(false);
@@ -31,7 +32,7 @@ function OwnerDetails() {
 
   const handleToDelete = async (id) => {
     try {
-      const res = await fetch("http://localhost:8050/api/deleteowner/" + id, {
+      const res = await fetch(`${backendDomain}/api/deleteowner/` + id, {
         method: "DELETE",
       });
       const data = await res.json();

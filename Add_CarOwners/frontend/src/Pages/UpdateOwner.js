@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams, } from 'react-router-dom';
 import { useFetchData } from '../hooks/useFetchData';
 import { Button } from 'flowbite-react';
+import { AuthContext } from '../Context/AuthContext';
 
 export const UpdateOwner = () => {
+  const {backendDomain}=useContext(AuthContext)
     const [formData,setformData] = useState({});
     const [errorMessage,setErrorMessage] = useState(false);
     const {id} = useParams();
@@ -35,7 +37,7 @@ export const UpdateOwner = () => {
           }
           try {
             setErrorMessage(null);
-            const res = await fetch("http://localhost:8050/api/updateowner/"+id, {
+            const res = await fetch(`${backendDomain}/api/updateowner/`+id, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(formData),

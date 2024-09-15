@@ -1,14 +1,15 @@
 
-import React, {  useEffect, useState } from 'react';
+import React, {  useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../Context/AuthContext';
 
 const ViewFeedback = () => {
   
-   
+   const {backendDomain} = useContext(AuthContext);
   const [feedback,setfeedback]=useState([])
 
   const fetchdata=async()=>{
-    const response=await fetch('http://localhost:8050/api/diplayconactmsg',{
+    const response=await fetch(`${backendDomain}/api/diplayconactmsg`,{
       method:'POST',
       headers:{
         "content-type": "application/json"

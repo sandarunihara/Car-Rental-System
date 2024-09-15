@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavBar from "../Components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../Context/AuthContext";
 
 const SignUp = () => {
+const {backendDomain}=useContext(AuthContext)
   const [formData, setformData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [passwordshow,setpasswordshow]=useState(false)
@@ -28,7 +30,7 @@ const SignUp = () => {
     }
     try {
       setErrorMessage(null);
-      const res = await fetch("http://localhost:8050/api/signup", {
+      const res = await fetch( `${backendDomain}/api/signup` , {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -8,12 +8,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 
 
+
 const Home = () => {
-  const {authState}=useContext(AuthContext)
+  const {authState,backendDomain}=useContext(AuthContext)
   const bottomRef = useRef(null);
   const aboutRef = useRef(null);
   const rentRef = useRef(null);
-  
 
   const [searchvalue,setsearchvalue]=useState({
     rent_date:"",
@@ -35,7 +35,7 @@ const Home = () => {
   }
   const handlesubmit=async(e)=>{
     e.preventDefault()
-    const response=await fetch('http://localhost:8050/api/search',{
+    const response=await fetch(`${backendDomain}/api/search`,{
       method:'post',
       headers:{
         "content-type": "application/json"
@@ -61,7 +61,7 @@ const Home = () => {
   const [cardata,setcardata]=useState([])
 
   const cardetails=async()=>{
-    const response=await fetch('http://localhost:8050/api/getcars',{
+    const response=await fetch(`${backendDomain}/api/getcars`,{
       method:'get',
       headers:{
         "content-type": "application/json"

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetchData } from "../hooks/useFetchData";
 import { Button } from "flowbite-react";
 import { app } from "../firebase";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
+import { AuthContext } from "../Context/AuthContext";
 
 export const UpdateVehicle = () => {
+  const { backendDomain } = useContext(AuthContext);
   const [formData, setformData] = useState({});
   const [errorMessage, setErrorMessage] = useState(false);
   const { id } = useParams();
@@ -37,7 +39,7 @@ export const UpdateVehicle = () => {
     }
     try {
       setErrorMessage(null);
-      const res = await fetch("http://localhost:8050/api/updatecar/" + id, {
+      const res = await fetch(`${backendDomain}/api/updatecar/` + id, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

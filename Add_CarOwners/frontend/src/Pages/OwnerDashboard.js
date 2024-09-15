@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import {  HiArrowNarrowUp, HiOutlineUserGroup } from "react-icons/hi";
 import { IoCarSport } from "react-icons/io5";
+import { AuthContext } from "../Context/AuthContext";
 
 
 
 const OwnerDashboard = () => {
+  const {backendDomain}=useContext(AuthContext);
   const [totalcars, setTotalcars] = useState(0);
   const [totalowners,setTotalowners] = useState(0);
   const [lastmonthcars,setLastmonthcars] = useState(0)

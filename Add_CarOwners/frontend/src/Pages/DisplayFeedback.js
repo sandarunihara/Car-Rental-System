@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { MdCloseFullscreen } from "react-icons/md";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthContext';
 
 export const DisplayFeedback = () => {
+  const {backendDomain}=useContext(AuthContext)
   const [feedbacks, setFeedbacks] = useState([]);
   const navigate=useNavigate()
   const location = useLocation();
   const { Carnumber } = location.state; 
   useEffect(() => {
     const fetchFeedbacks = async () => {
-      const response=await fetch('http://localhost:8050/api/displayfeedbackid',{
+      const response=await fetch(`${backendDomain}/api/displayfeedbackid`,{
         method:'post',
         headers:{
           "content-type": "application/json"
